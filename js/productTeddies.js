@@ -1,7 +1,8 @@
-//AFFICHAGE DES OURSON SUR A PAGE DES DÉTAILS
+//AFFICHAGE DES OURSON SUR LA PAGE DES DÉTAILS
 
-//Import de l'ID "descriptionTeddies"
-const descriptionTeddies = document.getElementById("descriptionTeddies");
+ function detailTeddies(){
+    const queryString = windows.location.search;
+    console.log(queryString)
 
 
-
+}
