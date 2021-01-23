@@ -2,10 +2,12 @@
 
 
 // Import de l'Id "listTeddies"
+
 const listTeddies = document.getElementById('listTeddies');
 
 
-//Requete XMLHttpRequest pour récupérer l' API des oursons
+//Requete XMLHttpRequest pour récupérer l'API des oursons
+
 var request = new XMLHttpRequest();
 request.onreadystatechange = function(){
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
@@ -21,10 +23,12 @@ request.send();
 
 
 //Création d'une fonction pour mettre en place les donnée récupérées de l'API 
+
 function teddies (data) {
 
 
 //Création des balises sous forme de cards 
+
     let masterContainer = document.createElement ("div"); 
 
     let bodyContainer = document.createElement ("div");
@@ -47,6 +51,7 @@ function teddies (data) {
 
 
 //Ajout des attributs au balises pour la création du style
+
     masterContainer.setAttribute("class", "card") ;
 
     bodyContainer.setAttribute("class", "card-body");
@@ -68,14 +73,11 @@ function teddies (data) {
     btnContainer.setAttribute("class" , "cards__item--button");
 
     btnProduct.setAttribute("class" , "btn btn-primary");
-    btnProduct.setAttribute("href" , "./product.html?id="+ listTeddies._id);
+    btnProduct.setAttribute("href" , "./product.html?id="+ data._id);
    
 
 //Agencement des éléments 
-    listTeddies.appendChild(masterContainer);
-
-    masterContainer.appendChild(bodyContainer);
-
+    
     bodyContainer.appendChild(pictureTeddies);
 
     bodyContainer.appendChild(titlePicture);
@@ -92,8 +94,12 @@ function teddies (data) {
 
     btnContainer.appendChild(btnProduct);
 
+    listTeddies.appendChild(masterContainer);
+
+    masterContainer.appendChild(bodyContainer);
     
 //Contenu des balises 
+
     titlePicture.textContent = data.name;
 
     nameTeddies.textContent = "Nom: " + data.name;
