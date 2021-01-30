@@ -5,7 +5,6 @@
 
 const listTeddies = document.getElementById('listTeddies');
 
-
 //Requete XMLHttpRequest pour récupérer l'API des oursons
 
 var request = new XMLHttpRequest();
@@ -33,21 +32,21 @@ function teddies (data) {
 
     let bodyContainer = document.createElement ("div");
 
-    let pictureTeddies = document.createElement ("img");
+    let pictureIndexTeddies = document.createElement ("img");
 
-    let titlePicture = document.createElement ("h3");
+    let titleIndexPicture = document.createElement ("h3");
 
-    let nameTeddies = document.createElement ("p");
+    let nameIndexTeddies = document.createElement ("p");
 
-    let colorsTeddies = document.createElement ("p");
+    let colorsIndexTeddies = document.createElement ("p");
 
-    let descriptionTeddies = document.createElement ("p");
+    let descriptionIndexTeddies = document.createElement ("p");
 
-    let priceTeddies = document.createElement ("p");
+    let priceIndexTeddies = document.createElement ("p");
 
-    let btnContainer = document.createElement ("div");
+    let btnIndexContainer = document.createElement ("div");
 
-    let btnProduct = document.createElement ("a");
+    let btnIndexProduct = document.createElement ("a");
 
 
 //Ajout des attributs au balises pour la création du style
@@ -56,43 +55,43 @@ function teddies (data) {
 
     bodyContainer.setAttribute("class", "card-body");
 
-    pictureTeddies.setAttribute("src",data.imageUrl);
-    pictureTeddies.setAttribute("class","card-img-top");
-    pictureTeddies.setAttribute("alt" , "image d'un ourson en peluche");
+    pictureIndexTeddies.setAttribute("src",data.imageUrl);
+    pictureIndexTeddies.setAttribute("class","card-img-top");
+    pictureIndexTeddies.setAttribute("alt" , "image d'un ourson en peluche");
 
-    titlePicture.setAttribute("class" , "card-title");
+    titleIndexPicture.setAttribute("class" , "card-title");
 
-    nameTeddies.setAttribute("class" , "cards__item__body--name");
+    nameIndexTeddies.setAttribute("class" , "cards__item__body--name");
 
-    colorsTeddies.setAttribute("class" , "cards__item__body--colors");
+    colorsIndexTeddies.setAttribute("class" , "cards__item__body--colors");
 
-    descriptionTeddies.setAttribute("class" , "cards-text");
+    descriptionIndexTeddies.setAttribute("class" , "cards-text");
 
-    priceTeddies.setAttribute("class" , "cards__items__body--price");
+    priceIndexTeddies.setAttribute("class" , "cards__items__body--price");
 
-    btnContainer.setAttribute("class" , "cards__item--button");
+    btnIndexContainer.setAttribute("class" , "cards__item--button");
 
-    btnProduct.setAttribute("class" , "btn btn-primary");
-    btnProduct.setAttribute("href" , "./product.html?id="+ data._id);
+    btnIndexProduct.setAttribute("class" , "btn btn-primary");
+    btnIndexProduct.setAttribute("href" , "./product.html?id="+ data._id);
    
 
 //Agencement des éléments 
     
-    bodyContainer.appendChild(pictureTeddies);
+    bodyContainer.appendChild(pictureIndexTeddies);
 
-    bodyContainer.appendChild(titlePicture);
+    bodyContainer.appendChild(titleIndexPicture);
 
-    bodyContainer.appendChild(nameTeddies);
+    bodyContainer.appendChild(nameIndexTeddies);
 
-    bodyContainer.appendChild(colorsTeddies);
+    bodyContainer.appendChild(colorsIndexTeddies);
 
-    bodyContainer.appendChild(descriptionTeddies);
+    bodyContainer.appendChild(descriptionIndexTeddies);
 
-    bodyContainer.appendChild(priceTeddies);
+    bodyContainer.appendChild(priceIndexTeddies);
 
-    bodyContainer.appendChild(btnContainer);
+    bodyContainer.appendChild(btnIndexContainer);
 
-    btnContainer.appendChild(btnProduct);
+    btnIndexContainer.appendChild(btnIndexProduct);
 
     listTeddies.appendChild(masterContainer);
 
@@ -100,17 +99,17 @@ function teddies (data) {
     
 //Contenu des balises 
 
-    titlePicture.textContent = data.name;
+    titleIndexPicture.textContent = data.name;
 
-    nameTeddies.textContent = "Nom: " + data.name;
+    nameIndexTeddies.textContent = "Nom: " + data.name;
 
-    colorsTeddies.textContent = "Couleurs: " + data.colors;
+    colorsIndexTeddies.textContent = "Couleurs: " + data.colors;
 
-    descriptionTeddies.textContent = "Description: " + data.description;
+    descriptionIndexTeddies.textContent = "Description: " + data.description;
 
-    priceTeddies.textContent = "Prix: " + data.price/100 + " €";
+    priceIndexTeddies.textContent = "Prix: " + data.price/100 + " €";
 
-    btnProduct.textContent = "Voir l'ourson ";
+    btnIndexProduct.textContent = "Voir l'ourson ";
 
 };
 
