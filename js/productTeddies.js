@@ -32,7 +32,7 @@ let descriptionTeddies = document.getElementById("descriptionTeddies");
 function productTeddies(data) {
      
 
-//Création des balises sous forme de cards 
+    //Création des balises sous forme de cards 
 
     let teddiesProductContainer = document.createElement("div");
 
@@ -59,7 +59,7 @@ function productTeddies(data) {
     let detailBtn = document.createElement("button");
   
 
-//Ajout des attributs au balises pour la création du style
+    //Ajout des attributs au balises pour la création du style
 
     teddiesProductContainer.setAttribute("class" , "cards__item__thumb");
 
@@ -89,7 +89,7 @@ function productTeddies(data) {
     detailBtn.setAttribute("href","#" + data._id);
 
  
-//Agencement des éléments
+    //Agencement des éléments
 
     descriptionTeddies.appendChild(teddiesProductContainer);
 
@@ -116,7 +116,7 @@ function productTeddies(data) {
     teddiesCheckArticles.appendChild(detailBtn);
 
 
-//Contenu des balises
+    //Contenu des balises
     teddiesProductTitle.textContent = data.name;
 
     teddiesProductName.textContent = "Nom: " + data.name;
@@ -132,7 +132,7 @@ function productTeddies(data) {
     detailBtn.textContent="Ajouter à mon panier";
 
 
-//Création d'une boucle pour récupérer les couleurs des oursons
+    //Création d'une boucle pour récupérer les couleurs des oursons
 
    for (let i = 0;i < data.colors.length; i++) {
         let option = document.createElement("option");
@@ -141,47 +141,43 @@ function productTeddies(data) {
     };
 
 
-//On récupère l'ID du bouton du panier 
+    //On récupère l'ID du bouton du panier 
 
-   //let essais1 = "essais1"
-   //let essais2 = "essais2"
-   //localStorage.setItem = ("essais1" , essais1 )
-   //localStorage.setItem = ("essais2" , essais2) 
    let baskets = document.getElementById("basket");
 
+    //On écoute le bouton 
     baskets.addEventListener('click', function (event) {
         event.preventDefault();
-        
-     //let teddie = (
-      //  id : id,
-      //  nom : data.name,
-      //  description : data.description,
-      //  prix : data.price/100,
-      //  couleurs : data.colors,
-      //  quantite: 1  ] ;
-     //console.log(teddie)
-
-    //On crée un objet 
-     let selectTeddies = {id: id , quantity: 1};
-     console.log(selectTeddies);
-
-     //On récupère l'objet 
-     JSON.parse(localStorage.getItem(selectTeddies));
-
-
-     if (selectTeddies != null){
-       sessionStorage.setItem("selectTeddies" , JSON.stringify (selectTeddies));
-     };
-
-    
-
-    });
-    
-
-     
+console.log(event.preventDefault);
        
-    
-    
 
+    // 1°) On récupère l'item selectTeddies + 2°) On test si le tableau est vide 
+
+if (sessionStorage.getItem("selectTeddies") == null ){
+   
+
+    // 3°) On crée un objet selectTeddies + 3.1°) On créer le tableau et on met l' id à l'intérieur 
+
+     selectTeddies = sessionStorage.setItem("selectTeddies" , JSON.stringify ({id:id , quantity:1}));
+   
+} else {
+       
+    //4°) Si item selectTeddies est défini : 
+
+        //4.1°) On récupère le tableau 
+        JSON.parse(sessionStorage.getItem("selectTeddies"));
+};
+    //5°) On met en place une boucle pour récupérer les différents ourson ainsi que les quantité 
+
+if  (baskets.id == selectTeddies.id) {
+   
+
+
+    };
+    //6 ) On push le tableau dans le sessionstorage
+
+  
+    });
 
 };
+
