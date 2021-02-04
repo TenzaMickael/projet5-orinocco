@@ -3,33 +3,33 @@
 
 //Récupération des paramètres de l'URL sur la page courante 
 
-let params = window.location.search;
-const urlParams = new URLSearchParams(params);
-const id = urlParams.get('id');
+    let params = window.location.search;
+    const urlParams = new URLSearchParams(params);
+    const id = urlParams.get("id");
 
 
 //Requete pour récupérer l'API des oursons 
 
-var request = new XMLHttpRequest();
-request.onreadystatechange = function(){
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
-        const response = JSON.parse(this.responseText)    
-        productTeddies(response);    
-       // console.log(response);  
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
+            const response = JSON.parse(this.responseText)    
+            productTeddies(response);    
+        // console.log(response);  
+        };
     };
-};
-request.open("GET" ,"http://localhost:3000/api/teddies/"+id);
-request.send();
+    request.open("GET" ,"http://localhost:3000/api/teddies/"+id);
+    request.send();
 
 
 //Import de l'ID "descriptionTeddies"
 
-let descriptionTeddies = document.getElementById("descriptionTeddies"); 
+    let descriptionTeddies = document.getElementById("descriptionTeddies"); 
 
 
 //Création d'une fonction pour mettre en place les donnée récupérées de l'API
 
-function productTeddies(data) {
+    function productTeddies(data) {
      
 
     //Création des balises sous forme de cards 
@@ -86,7 +86,7 @@ function productTeddies(data) {
     detailBtn.setAttribute("class","btn btn-primary");
     detailBtn.setAttribute("id","basket");
     detailBtn.setAttribute("type","button");
-    detailBtn.setAttribute("href","#" + data._id);
+    detailBtn.setAttribute("href","#" + data.id);
 
  
     //Agencement des éléments
@@ -117,6 +117,7 @@ function productTeddies(data) {
 
 
     //Contenu des balises
+
     teddiesProductTitle.textContent = data.name;
 
     teddiesProductName.textContent = "Nom: " + data.name;
@@ -145,39 +146,54 @@ function productTeddies(data) {
 
    let baskets = document.getElementById("basket");
 
+
+
     //On écoute le bouton 
+
     baskets.addEventListener('click', function (event) {
-        event.preventDefault();
-console.log(event.preventDefault);
-       
+    event.preventDefault();
+        
 
-    // 1°) On récupère l'item selectTeddies + 2°) On test si le tableau est vide 
+    // 1°) On récupère l'item selectTeddies 
+    // 2°) On test si le tableau est vide 
 
-if (sessionStorage.getItem("selectTeddies") == null ){
+    if (sessionStorage.getItem("selectTeddies") == null ){
    
 
-    // 3°) On crée un objet selectTeddies + 3.1°) On créer le tableau et on met l' id à l'intérieur 
+    // 3°) On crée un objet selectTeddies 
+    //3.1°) On créer le tableau et on met l' id à l'intérieur 
 
-     selectTeddies = sessionStorage.setItem("selectTeddies" , JSON.stringify ({id:id , quantity:1}));
-   
-} else {
-       
-    //4°) Si item selectTeddies est défini : 
+      selectTeddies = sessionStorage.setItem("selectTeddies" , JSON.stringify ({id:id , quantity:1}));
+ 
 
-        //4.1°) On récupère le tableau 
+     //4°) Si item selectTeddies est défini :
+
+    //4.1°) On récupère le tableau 
+
+    }else {  
+        
         JSON.parse(sessionStorage.getItem("selectTeddies"));
-};
+        console.log(selectTeddies)
+    
     //5°) On met en place une boucle pour récupérer les différents ourson ainsi que les quantité 
 
-if  (baskets.id == selectTeddies.id) {
-   
+    //for (let quantity of sessionStorage ) {
+        //if (data.id == selectTeddies.id) ; {
+           // selectTeddies.quantity+1 ;
+           
+           for(let i = 0; i < selectTeddies.length; i++) {
+            selectTeddies[i].quantity ++
+        }
+        
 
 
-    };
-    //6 ) On push le tableau dans le sessionstorage
-
-  
-    });
-
+            //console.log(selectTeddies)
+       
+             
+     // }
+    //};
+    //6 ) On push le tableau dans le sessionstorage  
+    
 };
-
+});
+    };
