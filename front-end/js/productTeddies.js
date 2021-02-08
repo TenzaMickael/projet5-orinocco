@@ -1,7 +1,7 @@
 //AFFICHAGE DE L'OURSON SELECTIONNÉ SUR LA PAGE INDEX 
 
 //On récupère les paramètre de l'URL de la page index 
-let  indexTeddies = [];                                                 //=> On créer un array qui va contenir les oursons du panier  
+                                              //=> On créer un array qui va contenir les oursons du panier  
 
 let params = window.location.search;                                    //=> récupère l'URL courante 
 const urlParams = new URLSearchParams(params);                          //=> On créer une constante avec la nouvelle URL 
@@ -121,7 +121,7 @@ function productTeddies(data) {                                                 
     detailBtn.addEventListener('click', function (event) {                        //=> On crée un évènement au click sur le bouton 
         event.preventDefault();                                                   //=> On annule le comportement par défaut du bouton 
 
-        productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton                             
+        productBasket(event.target.dataset.idTeddie) ;                            //=> On associe l'évènement au bouton                             
                                                   
     });
 };
@@ -134,14 +134,16 @@ function productBasket (idTeddie) {
     // 2°) On test si le tableau est vide
 
     if (localStorage.getItem("selectTeddies") == undefined ){                      //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
+    let  indexTeddies = [];   
+    indexTeddies.push({id:id , quantity:1});
 
 
     // 3°) On crée un objet selectTeddies
 
         //3.1°) On créer le tableau et on met l' id à l'intérieur
 
-      localStorage.setItem("selectTeddies" , JSON.stringify ({id:id ,                   //=>  Alors on crée un tableau "selectTeddies" avec setitem avec    à l'intérieur {id:id , quantity:1} et on le stringify en une chaine de caractère
-    quantity:1}));
+      localStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));                    //=>  Alors on crée un tableau "selectTeddies" avec setitem avec    à l'intérieur {id:id , quantity:1} et on le stringify en une chaine de caractère
+    
 
 
 //4°) Si item selectTeddies est défini :
@@ -156,12 +158,12 @@ function productBasket (idTeddie) {
         console.log(teddiesTab.length);
     
        for (let index=0; index< teddiesTab.length ;index++) {       //=> On met en place une boucle qui va récupérer les différent oursons choisis pour allez dans le panier et si on as deux id identique , on incrémente leurs quantité . 
-           console.log(teddie[index].id == idteddie );
-           console.log("boucle for",teddie[index])
+           console.log(teddiesTab[index].id == idTeddie );
+           console.log("boucle for",teddiesTab[index])
 
-            if (teddie[index].id == idTeddie ){
+            if (teddiesTab[index].id == idTeddie ){
             
-                teddie[index].quantity = teddie[index].quantity+1;
+                teddiesTab[index].quantity = teddiesTab[index].quantity+1;
                 console.log("test")
                
                 indexTeddies.push(teddiesTab);             
