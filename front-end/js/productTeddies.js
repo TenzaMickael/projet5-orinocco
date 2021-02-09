@@ -170,30 +170,10 @@ function productBasket (idTeddie) {                                             
 
 };
 };
-const essais = indexTeddies.map( function addTeddies (teddiesTab){
-    console.log(essais)
 
-});
+const essais = indexTeddies.map(function(selectTeddies) { return selectTeddies.id; }).includes(idTeddie);
+console.log(essais)
 
-//function addTeddies (productBasket , idTeddie) {
-   
-   // var teddiesAdd =  JSON.parse(localStorage.getItem("selectTeddies"));
-
-   // localStorage.setItem("selectTeddies" , JSON.stringify (teddiesAdd));
-
-
-     
-     
-
-    
-
-   // if (teddiesTab[index].id != idTeddie ){
-       // teddiesTab[index].quantity = teddiesTab[index].quantity+1;
-    
-   // };
-   // localStorage.setItem("selectTeddies" , JSON.stringify (teddiesAdd)); 
-   //console.log(productBasket)
-//};
 
 
 
