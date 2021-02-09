@@ -1,14 +1,15 @@
 //AFFICHAGE DE L'OURSON SELECTIONNÉ SUR LA PAGE INDEX 
 
-//On récupère les paramètre de l'URL de la page index 
-                                              //=> On créer un array qui va contenir les oursons du panier  
+                                        /********** On récupère les paramètre de l'URL de la page index **********/
+                                              
 
-let params = window.location.search;                                    //=> récupère l'URL courante 
-const urlParams = new URLSearchParams(params);                          //=> On créer une constante avec la nouvelle URL 
-const id = urlParams.get("id");                                         //=> récupère l'ID sur la page courante 
+let params = window.location.search;                                        //=> récupère l'URL courante 
+const urlParams = new URLSearchParams(params);                              //=> On créer une constante avec la nouvelle URL 
+const id = urlParams.get("id");                                             //=> récupère l'ID sur la page courante 
                                                     
 
-//On lance une requete pour récupérer l'API des oursons 
+                                        /**********On lance une requete pour récupérer l'API des oursons **********/ 
+
 
 var request = new XMLHttpRequest();                                         //=> Lance une requete XMLHttRequest
 
@@ -24,16 +25,19 @@ request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             //=>
 request.send();                                                             //=> On donne l'ordre de lance la requete 
 
 
-//Import de l'ID descriptionTeddies présent dans le code HTML
+                                        /********** Import de l'ID descriptionTeddies présent dans le code HTML **********/
+
 
 let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=> On récupère l'élément "descriptionTeddies" qui est dans le code html
 
 
-//Création d'une fonction pour mettre en place les donnée récupérées de l'API
+                                        /********** Création d'une fonction pour mettre en place les donnée récupérées de l'API **********/
+
 
 function productTeddies(data) {                                                 //=> Fonction productTeddies avec en paramètre data qui correspond au donnée de l'API récupéré                     
 
-    //Création de balises sous forme de cards 
+                                        /********** Création de balises sous forme de cards **********/ 
+                                
 
     let teddiesProductContainer = document.createElement ("div");               //=> Création d'une balise <div> que l'on va injecter dans la balise "descriptionTeddies" du code html et qui contiendra l'image de l'ourson 
     teddiesProductContainer.setAttribute ("class" , "cards__item__thumb");      //=> On attribut une class à notre <div>
@@ -106,7 +110,7 @@ function productTeddies(data) {                                                 
     detailBtn.textContent="Ajouter à mon panier";                               //=> On lui attribut le texte "Ajouter à mon panier"  au bouton 
 
 
-    //Création d'une boucle pour récupérer les couleurs des oursons
+                                        /********** Création d'une boucle pour récupérer les couleurs des oursons **********/
 
     for (let i = 0;i < data.colors.length; i++) {                                //=> On initialise l'index à 0 et index plus petit que le tableau => data => couleurs dans ce cas , on incrémente i ; ce qui récupère les différente couleurs de l'ourson
 
@@ -116,66 +120,81 @@ function productTeddies(data) {                                                 
     };
 
 
-    //On écoute le bouton
+                                        /********** On écoute le bouton **********/
+
 
     detailBtn.addEventListener('click', function (event) {                        //=> On crée un évènement au click sur le bouton 
         event.preventDefault();                                                   //=> On annule le comportement par défaut du bouton 
 
-        productBasket(event.target.dataset.idTeddie) ;                            //=> On associe l'évènement au bouton                             
+        productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton                             
                                                   
     });
 };
 
 
-function productBasket (idTeddie) { 
+                                        /********** On créer un array vide qui va contenir les oursons **********/
 
-    
-// 1°) On récupère l'item selectTeddies
-    // 2°) On test si le tableau est vide
+
+let  indexTeddies = [];                                                            //=> On crée un tableau array vide qui va contenir les oursons sélectionnés
+
+
+function productBasket (idTeddie) {                                                //=> On créer une fonction pour créer le panier avec les oursons à l'intérieur  
+
 
     if (localStorage.getItem("selectTeddies") == undefined ){                      //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
-    let  indexTeddies = [];   
-    indexTeddies.push({id:id , quantity:1});
+     
+    indexTeddies.push({id:id , quantity:1});                                       //=> On crée un objet et on le push dans le array "indexTeddies"
 
-
-    // 3°) On crée un objet selectTeddies
-
-        //3.1°) On créer le tableau et on met l' id à l'intérieur
-
-      localStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));                    //=>  Alors on crée un tableau "selectTeddies" avec setitem avec    à l'intérieur {id:id , quantity:1} et on le stringify en une chaine de caractère
+    localStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));         //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
     
 
-
-//4°) Si item selectTeddies est défini :
-
-//4.1°) On récupère le tableau
-
-    }else {                                                                         //=> Sinon 
+    }else {                                                                         //=> Sinon si il est défini :
       var teddiesTab =  JSON.parse(localStorage.getItem("selectTeddies"));          //=> on récupère le tableau "selectTeddies" 
 
-    //5°) On met en place une boucle pour récupérer les différents ourson ainsi que les quantités
-        console.log("avant",teddiesTab)
-        console.log(teddiesTab.length);
+        //console.log("avant",teddiesTab)
+       // console.log(teddiesTab.length);
     
-       for (let index=0; index< teddiesTab.length ;index++) {       //=> On met en place une boucle qui va récupérer les différent oursons choisis pour allez dans le panier et si on as deux id identique , on incrémente leurs quantité . 
-           console.log(teddiesTab[index].id == idTeddie );
-           console.log("boucle for",teddiesTab[index])
+       for (let index=0; index< teddiesTab.length ;index++) {                       //=> On met en place une boucle dans le cas de deux id identique , puis on incrémente leurs quantité  
+          // console.log(teddiesTab[index].id == idTeddie );
+          // console.log("boucle for",teddiesTab[index])
 
-            if (teddiesTab[index].id == idTeddie ){
+            if (teddiesTab[index].id == idTeddie ){                                 //=> Si le tableau dans le localStorage est identique à l'id sélectionner 
             
-                teddiesTab[index].quantity = teddiesTab[index].quantity+1;
-                console.log("test")
-               
-                indexTeddies.push(teddiesTab);             
-            }      
+                teddiesTab[index].quantity = teddiesTab[index].quantity+1;          //=> On incrémente la quantité en +1
+               // console.log("test")
+            };             
         };                                                                  
-        console.log("apres",teddiesTab)                                                                          
-}
-//6 ) On push le tableau dans le sessionstorage
-
+       // console.log("apres",teddiesTab)  
+        localStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));        //=> On met à jour le tableau dans le localeStorage       
 
 
 };
+};
+const essais = indexTeddies.map( function addTeddies (teddiesTab){
+    console.log(essais)
+
+});
+
+//function addTeddies (productBasket , idTeddie) {
+   
+   // var teddiesAdd =  JSON.parse(localStorage.getItem("selectTeddies"));
+
+   // localStorage.setItem("selectTeddies" , JSON.stringify (teddiesAdd));
+
+
+     
+     
+
+    
+
+   // if (teddiesTab[index].id != idTeddie ){
+       // teddiesTab[index].quantity = teddiesTab[index].quantity+1;
+    
+   // };
+   // localStorage.setItem("selectTeddies" , JSON.stringify (teddiesAdd)); 
+   //console.log(productBasket)
+//};
+
 
 
                                         
