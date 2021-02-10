@@ -34,7 +34,7 @@ let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=>
                                         /********** Création d'une fonction pour mettre en place les donnée récupérées de l'API **********/
 
 
-function productTeddies(data) {                                                 //=> Fonction productTeddies avec en paramètre data qui correspond au donnée de l'API récupéré                     
+function productTeddies(data) {                                             //=> Fonction productTeddies avec en paramètre data qui correspond au donnée de l'API récupéré                     
 
                                         /********** Création de balises sous forme de cards **********/ 
                                 
@@ -74,7 +74,7 @@ function productTeddies(data) {                                                 
     teddiesProductColors.textContent = "Couleurs: " + data.colors;              //=> On lui attribut le texte "Couleurs:" avec le contenu "colors" qui se trouve dans le "data" de la requete 
 
 
-    let teddiesProductDescription = document.createElement ("p");             //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
+    let teddiesProductDescription = document.createElement ("p");               //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
     teddiesProductDescription.setAttribute("class" , "cards__items__body—description"); //=> On attribut une classe à notre <p> 
     teddiesProductItem.appendChild(teddiesProductDescription);                  //=> On déclare que "teddiesProductDescription" est l'enfant de "teddiesProductItem"
     teddiesProductDescription.textContent = "Description: " + data.description; //=> On lui attribut le texte "Description:" avec le contenu "description" qui se trouve dans le "data" de la requete
@@ -99,6 +99,7 @@ function productTeddies(data) {                                                 
     let teddiesSelectOptions = document.createElement ("option");               //=> Création d'une balise <option> que l'on va injecter dans la balise "teddiesDetailSelect"
     teddiesDetailSelect.appendChild(teddiesSelectOptions);                      //=> On déclare que "teddiesSelectOptions" est l'enfant de "teddiesDetailSelect" 
     teddiesSelectOptions.textContent = "--Choisissez votre couleur--";          //=> On lui attribut le texte "--Choisissez votre couleur--" 
+    teddiesSelectOptions.setAttribute("id" , "defaultOption");                  //=> On attribut un "ID"
     
 
     let detailBtn = document.createElement ("button");                          //=> Création d'une balise <button> que l'on va injecter dans la balise "teddiesCheckArticles"
@@ -112,7 +113,7 @@ function productTeddies(data) {                                                 
 
                                         /********** Création d'une boucle pour récupérer les couleurs des oursons **********/
 
-    for (let i = 0;i < data.colors.length; i++) {                                //=> On initialise l'index à 0 et index plus petit que le tableau => data => couleurs dans ce cas , on incrémente i ; ce qui récupère les différente couleurs de l'ourson
+    for (let i = 0;i < data.colors.length; i++) {                               //=> On initialise l'index à 0 et index plus petit que le tableau => data => couleurs dans ce cas , on incrémente i ; ce qui récupère les différente couleurs de l'ourson
 
         let option = document.createElement("option");                          //=> On crée une balise <option> qui va permettre de choisir la couleur
         teddiesDetailSelect.appendChild(option);                                //=> On déclare que "option" est l'enfant de "teddiesDetailSelect"
@@ -126,34 +127,57 @@ function productTeddies(data) {                                                 
     detailBtn.addEventListener('click', function (event) {                        //=> On crée un évènement au click sur le bouton 
         event.preventDefault();                                                   //=> On annule le comportement par défaut du bouton 
 
-        productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton                             
-                                                  
+        let selectItem = document.getElementById("selects").selectedOptions[0];   //=> On récupère l' ID "selects" avec le paramètre selectedOptions et le premier élément de l'array    
+
+        if(!(data.colors).includes(selectItem.textContent)){                      //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson
+       
+
+
+            //Afficher un message d'erreur//
+  
+            //alert('pas content')
+        } else {
+
+            // alert('content');
+
+            productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton   
+        }                         
+        
     });
 };
 
-
-                                        /********** On créer un array vide qui va contenir les oursons **********/
-
-
-let  indexTeddies = [];                                                            //=> On crée un tableau array vide qui va contenir les oursons sélectionnés
+                                        /********** On créer une fonction qui va contenir les oursons dans le panier **********/
 
 
 function productBasket (idTeddie) {                                                //=> On créer une fonction pour créer le panier avec les oursons à l'intérieur  
 
 
     if (localStorage.getItem("selectTeddies") == undefined ){                      //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
-     
+
+    let  indexTeddies = [];                                                        //=> On crée un tableau array vide qui va contenir les oursons sélectionnés    
+
     indexTeddies.push({id:id , quantity:1});                                       //=> On crée un objet et on le push dans le array "indexTeddies"
 
     localStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));         //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
     
 
     }else {                                                                         //=> Sinon si il est défini :
-      var teddiesTab =  JSON.parse(localStorage.getItem("selectTeddies"));          //=> on récupère le tableau "selectTeddies" 
+     
+        var teddiesTab =  JSON.parse(localStorage.getItem("selectTeddies"));        //=> on récupère le tableau "selectTeddies" 
 
         //console.log("avant",teddiesTab)
        // console.log(teddiesTab.length);
     
+
+       
+       if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idTeddie)) {     //=> Test si l'ourson sélectionner est présent dans le tableau                                                  
+        console.log("test")
+        
+        teddiesTab.push({id:id , quantity:1});
+        
+
+       }else{
+
        for (let index=0; index< teddiesTab.length ;index++) {                       //=> On met en place une boucle dans le cas de deux id identique , puis on incrémente leurs quantité  
           // console.log(teddiesTab[index].id == idTeddie );
           // console.log("boucle for",teddiesTab[index])
@@ -165,14 +189,14 @@ function productBasket (idTeddie) {                                             
             };             
         };                                                                  
        // console.log("apres",teddiesTab)  
-        localStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));        //=> On met à jour le tableau dans le localeStorage       
-
+        
+    }           
+    localStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));
 
 };
 };
 
-const essais = indexTeddies.map(function(selectTeddies) { return selectTeddies.id; }).includes(idTeddie);
-console.log(essais)
+
 
 
 
