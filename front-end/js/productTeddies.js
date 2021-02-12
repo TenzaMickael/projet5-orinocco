@@ -94,6 +94,7 @@ function productTeddies(data) {                                             //=>
     let teddiesDetailSelect = document.createElement ("select");                //=> Création d'une balise <select> que l'on va injecter dans la balise "teddiesCheckArticles"
     teddiesDetailSelect.setAttribute("id","selects");                           //=> On lui attribut un "ID"
     teddiesCheckArticles.appendChild(teddiesDetailSelect)                       //=> On déclare que "teddiesDetailSelect" est l'enfant de "teddiesCheckArticles"
+    
 
 
     let teddiesSelectOptions = document.createElement ("option");               //=> Création d'une balise <option> que l'on va injecter dans la balise "teddiesDetailSelect"
@@ -106,9 +107,12 @@ function productTeddies(data) {                                             //=>
     detailBtn.setAttribute("class","btn btn-primary");                          //=> On attribut une classe à notre <button>
     detailBtn.setAttribute("id","basket");                                      //=> On attribut un "ID" à notre <button>
     detailBtn.setAttribute("type","button");                                    //=> On définit sons type  
+   
     detailBtn.dataset.idteddie = data._id   ;                                   //=> On définit l'action quand on appuis sur le bouton 
     teddiesCheckArticles.appendChild(detailBtn);                                //=> On déclare que "detailBtn" est l'enfant de "teddiesCheckArticles"
     detailBtn.textContent="Ajouter à mon panier";                               //=> On lui attribut le texte "Ajouter à mon panier"  au bouton 
+    
+    
 
 
                                         /********** Création d'une boucle pour récupérer les couleurs des oursons **********/
@@ -122,30 +126,34 @@ function productTeddies(data) {                                             //=>
 
 
                                         /********** On écoute le bouton **********/
-
-
-    detailBtn.addEventListener('click', function (event) {                        //=> On crée un évènement au click sur le bouton 
-        event.preventDefault();                                                   //=> On annule le comportement par défaut du bouton 
-
-        let selectItem = document.getElementById("selects").selectedOptions[0];   //=> On récupère l' ID "selects" avec le paramètre selectedOptions et le premier élément de l'array    
-
-        if(!(data.colors).includes(selectItem.textContent)){                      //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson
-       
-
-
-            //Afficher un message d'erreur//
-  
-            //alert('pas content')
-        } else {
-
-            // alert('content');
-
-            productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton   
-        }                         
-        
+    selectItem.addEventListener('click' , function (event) {                          //=> On crée un évènement au click sur le bouton 
+                                    
+        let selectItem = document.getElementById("selects").selectedOptions[0];     //=> On récupère l' ID "selects" avec le paramètre selectedOptions et le premier élément de l'array                                   
+                                            
+            if(!(data.colors).includes(selectItem.textContent)){                      //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson  
+                                                          
+                basket.disabled = true
+                                    
+            } else  {
+                                      
+                basket.disabled = false   
+                                            
+            };
+                                        
     });
-};
 
+detailBtn.addEventListener('click', function (event){
+    event.preventDefault();
+
+    productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton   
+});                         
+
+
+
+
+
+    
+};
                                         /********** On créer une fonction qui va contenir les oursons dans le panier **********/
 
 
