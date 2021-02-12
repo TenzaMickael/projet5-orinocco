@@ -126,10 +126,10 @@ function productTeddies(data) {                                             //=>
 
 
                                         /********** On écoute le bouton **********/
-    selectItem.addEventListener('click' , function (event) {                          //=> On crée un évènement au click sur le bouton 
+    selectItem.addEventListener('change' , function (event) {                          //=> On crée un évènement au click sur le bouton 
                                     
         let selectItem = document.getElementById("selects").selectedOptions[0];     //=> On récupère l' ID "selects" avec le paramètre selectedOptions et le premier élément de l'array                                   
-                                            
+                                           
             if(!(data.colors).includes(selectItem.textContent)){                      //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson  
                                                           
                 basket.disabled = true
@@ -145,7 +145,7 @@ function productTeddies(data) {                                             //=>
 detailBtn.addEventListener('click', function (event){
     event.preventDefault();
 
-    productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton   
+  productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton   
 });                         
 
 
