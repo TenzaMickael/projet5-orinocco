@@ -146,10 +146,9 @@ p
 }
 
 #message{
-    font-size: 1.8em;
-    color:brown;
+    font-size: 1.6em;
     text-align: center;
-    font-weight: 900;
+    color: blue;
 }
 /*-------------------------------------------------------------------*/
 
