@@ -37,7 +37,8 @@ function basketTeddies (data){
 //Import du sessionStorage
 
 let selectTeddies = JSON.parse(sessionStorage.getItem("selectTeddies"));
-console.log(selectTeddies)
+
+
 
 
 };
