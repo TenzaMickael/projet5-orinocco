@@ -87,10 +87,10 @@ function productTeddies(data) {                                             //=>
     teddiesProductPrice.textContent = "Prix: " + data.price/100 + " €";         //=> On lui attribut le texte "Prix:" avec le contenu "price" qui se trouve dans le "data" de la requete puis on le divise par cent 
 
 
-    let instruction = document.createElement ("h3");                            //=>
-    instruction.setAttribute("class", "instruction");                           //=>
-    teddiesProductItem.appendChild(instruction);                                //=>
-    instruction.textContent = "Choisissez une couleurs pour ajouter votre article au panier "//=>
+    let instruction = document.createElement ("h3");                            //=> Création d'une balise <h3> que l'on va injecter dans la balise "teddiesProductItem"
+    instruction.setAttribute("class", "instruction");                           //=> On attribut une classe à notre <h3>
+    teddiesProductItem.appendChild(instruction);                                //=> On déclare que "instruction" est l'enfant de "teddiesProductItem"
+    instruction.textContent = "Choisissez une couleurs pour ajouter votre article au panier "//=> On lui attribut le texte "Choisissez une couleurs pour ajouter votre article au panier"
 
 
     let teddiesCheckArticles = document.createElement ("div")                   //=> Création d'une balise <div> que l'on va injecter dans la balise "teddiesProductItem" du code html et qui contiendra le bouton pour le panier et le choix de la couleurs
@@ -114,8 +114,6 @@ function productTeddies(data) {                                             //=>
     detailBtn.setAttribute("id","basket");                                      //=> On attribut un "ID" à notre <button>
     detailBtn.setAttribute("type","button");                                    //=> On définit sons type  
     detailBtn.setAttribute("disabled","true");                                  //=> On lui met en disabled par défaut 
-    
-    
     detailBtn.dataset.idteddie = data._id   ;                                   //=> On définit l'action quand on appuis sur le bouton 
     teddiesCheckArticles.appendChild(detailBtn);                                //=> On déclare que "detailBtn" est l'enfant de "teddiesCheckArticles"
     detailBtn.textContent="Ajouter à mon panier";                               //=> On lui attribut le texte "Ajouter à mon panier"  au bouton 
@@ -135,36 +133,38 @@ function productTeddies(data) {                                             //=>
                                         /********** On écoute le bouton **********/
 
 
-        teddiesDetailSelect.addEventListener('change' , function (event) {                          //=> On crée un évènement au changement sur la selecection des oursons
+        teddiesDetailSelect.addEventListener('change' , function (event) {      //=> On crée un évènement au changement sur la selèction des oursons
             
                                                
-        let basket = document.getElementById("basket")                                  //=>
+        let basket = document.getElementById("basket")                          //=> On récupère l' ID "basket"
 
         
-            if(!(data.colors).includes(event.target.value)){                      //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson  
-            basket.disabled = true ;                                            //=>
+            if(!(data.colors).includes(event.target.value)){                    //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson  
+            basket.disabled = true ;                                            //=> On déclare que le bouton est grisé 
             
                 
-            } else  {                                                           //=>
+            } else  {                                                           //=> Sinon
                                       
-                basket.disabled = false                                     //=>
+                basket.disabled = false                                         //=> On active le bouton pour ajouter l'ourson au panier 
                                            
             };                         
     });
 
   
-    detailBtn.addEventListener('click', function (event){                   //=>
-    event.preventDefault();                                                 //=>
-    productBasket(event.target.dataset.idteddie) ;                            //=> On associe l'évènement au bouton 
+    detailBtn.addEventListener('click', function (event){                       //=> On crée un évenement qui va écouter les clicks sur le bouton 
 
-        let confirm = document.createElement ("p");                             //=>
-        confirm.setAttribute("id","message")                                        //=>
-        teddiesCheckArticles.appendChild(confirm);                                  //=>
-        message.innerHTML =` L'ourson à été ajouter à votre panier `                //=>
+        event.preventDefault();                                                 //=> On désactive le comportement par défaut 
 
-        setTimeout(function () {                                                        //=>
-            message.innerHTML = "";                                                         //=>
-          },2000);                                                          //=>
+        productBasket(event.target.dataset.idteddie) ;                          //=> On récupère les informations  dont on as besoin 
+
+        let confirm = document.createElement ("p");                             //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesCheckArticles"
+        confirm.setAttribute("id","message")                                    //=> On attribut un "ID" à notre <p>
+        teddiesCheckArticles.appendChild(confirm);                              //=> On déclare que "confirm" est l'enfant de "teddiesCheckArticles"
+        message.innerHTML =` L'ourson à été ajouter à votre panier `            //=> On injecte la phrase "L'ourson à été ajouter à votre panier" quand l'utlisateur ajoute un ourson au panier
+
+        setTimeout(function () {                                                //=> On crée unr fonction pour gérer la disparition du texte 
+            message.innerHTML = "";                                             //=> On met en place un texte vide 
+          },2000);                                                              //=> Qui va apparaitre au bout de 2 secondes et qui va remplacer notre phrase 
           
     });      
 };
@@ -173,17 +173,17 @@ function productTeddies(data) {                                             //=>
                                         /********** On créer une fonction qui va contenir les oursons dans le panier **********/
 
 
-function productBasket (idTeddie) {                                                //=> On créer une fonction pour créer le panier avec les oursons à l'intérieur  
+function productBasket (idteddie) {                                             //=> On créer une fonction pour créer le panier avec les oursons à l'intérieur  
 
 
-    if (sessionStorage.getItem("selectTeddies") == undefined ){                      //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
+    if (sessionStorage.getItem("selectTeddies") == undefined ){                 //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
 
-    let  indexTeddies = [];                                                        //=> On crée un tableau array vide qui va contenir les oursons sélectionnés    
+    let  indexTeddies = [];                                                     //=> On crée un tableau array vide qui va contenir les oursons sélectionnés    
 
-    indexTeddies.push({id:id , quantity:1  
+    indexTeddies.push({id:id , quantity:1});                                       //=> On crée un objet et on le push dans le array "indexTeddies" 
     
     
-    });                                       //=> On crée un objet et on le push dans le array "indexTeddies"
+    
 
     sessionStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));         //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
     
@@ -192,7 +192,7 @@ function productBasket (idTeddie) {                                             
      
         var teddiesTab =  JSON.parse(sessionStorage.getItem("selectTeddies"));        //=> on récupère le tableau "selectTeddies" 
  
-       if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idTeddie)) {     //=> Test si l'ourson sélectionner est présent dans le tableau                                                  
+       if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idteddie)) {     //=> Test si l'ourson sélectionner est présent dans le tableau                                                  
         
         teddiesTab.push({id:id , quantity:1});                                         //=>
         
@@ -201,7 +201,7 @@ function productBasket (idTeddie) {                                             
 
        for (let index=0; index< teddiesTab.length ;index++) {                       //=> On met en place une boucle dans le cas de deux id identique , puis on incrémente leurs quantité  
         
-            if (teddiesTab[index].id == idTeddie ){                                 //=> Si le tableau dans le localStorage est identique à l'id sélectionner 
+            if (teddiesTab[index].id == idteddie ){                                 //=> Si le tableau dans le localStorage est identique à l'id sélectionner 
             
                 teddiesTab[index].quantity = teddiesTab[index].quantity+1;          //=> On incrémente la quantité en +1  
             };             
