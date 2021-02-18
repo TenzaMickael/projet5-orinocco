@@ -185,19 +185,19 @@ function productBasket (idteddie) {                                             
     
     
 
-    sessionStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));         //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
+    sessionStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));        //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
     
 
     }else {                                                                         //=> Sinon si il est défini :
      
-        var teddiesTab =  JSON.parse(sessionStorage.getItem("selectTeddies"));        //=> on récupère le tableau "selectTeddies" 
+        var teddiesTab =  JSON.parse(sessionStorage.getItem("selectTeddies"));      //=> on récupère le tableau "selectTeddies" 
  
        if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idteddie)) {     //=> Test si l'ourson sélectionner est présent dans le tableau                                                  
         
-        teddiesTab.push({id:id , quantity:1});                                         //=>
+        teddiesTab.push({id:id , quantity:1});                                      //=> On push l'ID et la quantité dans teddiesTab
         
 
-       }else{                                                                      //=>
+       }else{                                                                       //=> Sinon
 
        for (let index=0; index< teddiesTab.length ;index++) {                       //=> On met en place une boucle dans le cas de deux id identique , puis on incrémente leurs quantité  
         
@@ -207,7 +207,7 @@ function productBasket (idteddie) {                                             
             };             
         };                                                                     
     }           
-    sessionStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));           //=>
+    sessionStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));           //=> On met à jour le sessionStorage 
 
 };
 };
