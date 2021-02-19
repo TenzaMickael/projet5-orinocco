@@ -118,6 +118,7 @@ function productTeddies(data) {                                             //=>
     teddiesCheckArticles.appendChild(detailBtn);                                //=> On déclare que "detailBtn" est l'enfant de "teddiesCheckArticles"
     detailBtn.textContent="Ajouter à mon panier";                               //=> On lui attribut le texte "Ajouter à mon panier"  au bouton 
     
+    
 
                                         /********** Création d'une boucle pour récupérer les couleurs des oursons **********/
 
@@ -193,7 +194,7 @@ function productBasket (idteddie) {                                             
         var teddiesTab =  JSON.parse(sessionStorage.getItem("selectTeddies"));      //=> on récupère le tableau "selectTeddies" 
  
        if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idteddie)) {     //=> Test si l'ourson sélectionner est présent dans le tableau                                                  
-        
+        console.log(teddiesTab)
         teddiesTab.push({id:id , quantity:1});                                      //=> On push l'ID et la quantité dans teddiesTab
         
 
