@@ -11,7 +11,6 @@ var request = new XMLHttpRequest();
 request.onreadystatechange = function(){
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
         const response = JSON.parse(this.responseText);
-        console.log(response);
         for (let index = 0 ; index < response.length ; index++) {
             teddies(response[index]);   
         }  
@@ -24,7 +23,7 @@ request.send();
 //Création d'une fonction pour mettre en place les donnée récupérées de l'API 
 
 function teddies (data) {
-
+console.log(data)
 
 //Création des balises sous forme de cards 
 

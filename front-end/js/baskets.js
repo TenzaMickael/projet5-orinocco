@@ -1,15 +1,6 @@
 
 
 
-//Requete XMLHttpRequest pour récupérer l'API des oursons
-
-
-
-//Import de l'ID "basket" dans le code html 
-
-
-
-
 
 const basket = document.getElementById("basket");
 
@@ -17,47 +8,53 @@ const basket = document.getElementById("basket");
 
 let itemsTeddies = JSON.parse(sessionStorage.getItem("selectTeddies"));
 
-
 for (let i = 0;i < itemsTeddies.length; i++) {
 
-const essais = itemsTeddies.map (function () {return itemsTeddies[i++]});
-console.log(essais);
+    var id =  itemsTeddies[0].id 
 
-    
+    var request = new XMLHttpRequest();                                         
 
-        var request = new XMLHttpRequest();                                         
+    request.onreadystatechange = function () {                                  
 
-        request.onreadystatechange = function () {                                  
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {     
 
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {     
-
-                const response = JSON.parse (this.responseText)                 
-                basketTeddies(response); 
-                //console.log(itemsTeddies)                      
-            }; 
+            const response = JSON.parse (this.responseText)                 
+            basketTeddies(response);  
+                            
         }; 
-        
+    }; 
+};       
         request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             
         request.send();
         
+        function basketTeddies (itemsTeddies , data ) {
+          console.log (itemsTeddies.imageUrl)
+                
+               let productBasket = document.createElement("main");
+                productBasket.setAttribute ("class" , "cards__item__thumb");      
+                basket.appendChild(productBasket);
+            
+                let essais = document.createElement("img");
+                    essais.setAttribute ("class" , "image__teddies__product"); 
+
+                   
+                   essais.dataset.picture =  itemsTeddies.imageUrl;
+                  // essais.dataset.picture = itemsTeddies.imageUrl
+               console.log(itemsTeddies.imageUrl)
+                   
+                    essais.setAttribute("alt","image d'un ours en peluche");     
+                    productBasket.appendChild(essais);
+                 
+            }
         
-};       
 
 
-function basketTeddies (data) {}
 
-   // let productBasket = document.createElement("main");
-   // productBasket.setAttribute ("class" , "cards__item__thumb");      
-   // basket.appendChild(productBasket);
 
-   // let essais = document.createElement("img");
-      //  essais.setAttribute ("id" , "cards__item__thumb"); 
-      //  essais.dataset.idteddie =  itemsTeddies.data.imageUrl;
+
     
-        
-     //   essais.setAttribute("alt","image d'un ours en peluche");     
-     //   productBasket.appendChild(essais);
-     //   //essais.textContent = "Nom: " + itemsTeddies[i] ;
+
+
 
 
 

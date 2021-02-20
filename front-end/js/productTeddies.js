@@ -36,7 +36,7 @@ let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=>
 
 
 function productTeddies(data) {                                             //=> Fonction productTeddies avec en paramètre data qui correspond au donnée de l'API récupéré                     
-
+console.log(data)
                                         /********** Création de balises sous forme de cards **********/ 
                                 
 
