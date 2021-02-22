@@ -99,7 +99,7 @@ p
     text-transform:lowercase
 }
 
-.image__teddies__product
+.image__teddies__products
 {
     
     width:500px;
@@ -110,6 +110,7 @@ p
 {
     text-align: center;
 }
+
 
 .cards__item__thumb img
 {
@@ -158,6 +159,15 @@ p
     width: auto;
     height: auto;
     margin-bottom: 30px;
+}
+
+.image__teddies__product{
+
+    width:100px;
+    display: block;
+    border:3px solid brown;
+  
+
 }
 
 #basket

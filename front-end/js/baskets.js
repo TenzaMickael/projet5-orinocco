@@ -10,7 +10,7 @@ let itemsTeddies = JSON.parse(sessionStorage.getItem("selectTeddies"));
 
 for (let i = 0;i < itemsTeddies.length; i++) {
 
-    var id =  itemsTeddies[0].id 
+    var id =  itemsTeddies[i].id 
 
     var request = new XMLHttpRequest();                                         
 
@@ -23,31 +23,54 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                             
         }; 
     }; 
-};       
-        request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             
-        request.send();
+
+    request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             
+    request.send();
+       
         
-        function basketTeddies (itemsTeddies , data ) {
-          console.log (itemsTeddies.imageUrl)
-                
+        
+        function basketTeddies (data)  {
+    
                let productBasket = document.createElement("main");
-                productBasket.setAttribute ("class" , "cards__item__thumb");      
+                productBasket.setAttribute ("class" , "cards__item__thumb_1");      
                 basket.appendChild(productBasket);
+
+                let teddiesTables = document.createElement("table");
+                productBasket.appendChild(teddiesTables);
+                    let theadTables = document.createElement("thead");
+                    teddiesTables.appendChild(theadTables);
+                        let trTables = document.createElement("tr");
+                        theadTables.appendChild(trTables);
+                            let thTables = document.createElement("th");
+                            trTables.appendChild(thTables);
+                            thTables.textContent = " Miniature " + " Nom " + " Prix unitaire " + " Quantités " + " Prix total " + " Ajouter ou supprimer "  ; 
+                            
+                    let tbodyTables = document.createElement("tbody");
+                    teddiesTables.appendChild(tbodyTables);
+                        let trTablesBody = document.createElement("tr");
+                       tbodyTables.appendChild(trTablesBody);
+
+
+                
             
-                let essais = document.createElement("img");
-                    essais.setAttribute ("class" , "image__teddies__product"); 
+                //let imgItemTeddie = document.createElement("img");
+                //imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+                //imgItemTeddie.setAttribute ("src" , data.imageUrl)
+               // imgItemTeddie.setAttribute("alt","image d'un ours en peluche");     
+                //productBasket.appendChild(imgItemTeddie);
 
-                   
-                   essais.dataset.picture =  itemsTeddies.imageUrl;
-                  // essais.dataset.picture = itemsTeddies.imageUrl
-               console.log(itemsTeddies.imageUrl)
-                   
-                    essais.setAttribute("alt","image d'un ours en peluche");     
-                    productBasket.appendChild(essais);
-                 
+                //let nameItemTeddie = document.createElement("p");
+               // nameItemTeddie.setAttribute ("class", "cards__items__body--name");
+               // productBasket.appendChild(nameItemTeddie);
+               // nameItemTeddie.textContent = data.name;
+
+
+
+
+            
             }
-        
-
+            
+        };
 
 
 

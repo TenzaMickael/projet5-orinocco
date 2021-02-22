@@ -46,7 +46,7 @@ console.log(data)
 
 
     let teddiesProductPicture = document.createElement ("img");                 //=> Création d'une balise <img> que l'on va injecter dans la balise "teddiesProductContainer"   
-    teddiesProductPicture.setAttribute("class" , "image__teddies__product");    //=> On attribut une classe à notre <img>
+    teddiesProductPicture.setAttribute("class" , "image__teddies__products");    //=> On attribut une classe à notre <img>
     teddiesProductPicture.setAttribute("src" , data.imageUrl);                  //=> On lui indique où récupérer l'image
     teddiesProductPicture.setAttribute("alt","image d'un ours en peluche");     //=> On lui assigne une balise "alt"
     teddiesProductContainer.appendChild(teddiesProductPicture);                 //=> On déclare que "teddiesProductPicture" est l'enfant de "teddiesProductContainer"
