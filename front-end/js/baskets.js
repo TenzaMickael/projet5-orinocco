@@ -28,7 +28,10 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     request.send();
        
         
-        
+        //un tableau avec le nom de tes colonnes, puis tu boucle dessus avec create element th, ajoute l'attribute scop avec la valeur col et tu l'append au tr précédent à qui tu aura mis un id pour le reconnaitre
+
+
+
         function basketTeddies (data)  {
     
                let productBasket = document.createElement("main");
@@ -37,18 +40,30 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
                 let teddiesTables = document.createElement("table");
                 productBasket.appendChild(teddiesTables);
+
                     let theadTables = document.createElement("thead");
                     teddiesTables.appendChild(theadTables);
+
                         let trTables = document.createElement("tr");
+                        trTables.setAttribute ("id","trHeader")
                         theadTables.appendChild(trTables);
-                            let thTables = document.createElement("th");
-                            trTables.appendChild(thTables);
-                            thTables.textContent = " Miniature " + " Nom " + " Prix unitaire " + " Quantités " + " Prix total " + " Ajouter ou supprimer "  ; 
+
+
+                            let thTables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
+
+                            for (let i = 0;i < thTables.length; i++) {
                             
-                    let tbodyTables = document.createElement("tbody");
-                    teddiesTables.appendChild(tbodyTables);
-                        let trTablesBody = document.createElement("tr");
-                       tbodyTables.appendChild(trTablesBody);
+                            document.createElement("th");
+                            trTables.appendChild(thTables);
+                            thTables.textContent = thTables[i];
+console.log(thTables[i++])
+                              
+                            }
+                    //let tbodyTables = document.createElement("tbody");
+                   // teddiesTables.appendChild(tbodyTables);
+                     //   let trTablesBody = document.createElement("tr");
+                      // tbodyTables.appendChild(trTablesBody);
+                         //   let tdTables = document.createElement()
 
 
                 
