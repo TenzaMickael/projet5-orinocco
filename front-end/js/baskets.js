@@ -1,10 +1,15 @@
 
+
+
 const basket = document.getElementById("basket");
- 
+
+tablesBasket ()
 
 let itemsTeddies = JSON.parse(sessionStorage.getItem("selectTeddies"));
 
 for (let i = 0;i < itemsTeddies.length; i++) {
+
+    
 
     var id =  itemsTeddies[i].id 
 
@@ -15,7 +20,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {     
 
             const response = JSON.parse (this.responseText)                 
-            basketTeddies(response);  
+            tablesBasket(response);  
                             
         }; 
     }; 
@@ -25,71 +30,69 @@ for (let i = 0;i < itemsTeddies.length; i++) {
        
         
         //un tableau avec le nom de tes colonnes, puis tu boucle dessus avec create element th, ajoute l'attribute scop avec la valeur col et tu l'append au tr précédent à qui tu aura mis un id pour le reconnaitre
-
-                
-       
-                //let nameItemTeddie = document.createElement("p");
-               // nameItemTeddie.setAttribute ("class", "cards__items__body--name");
-               // productBasket.appendChild(nameItemTeddie);
-               // nameItemTeddie.textContent = data.name;
-                 
+           
+        function teddieOne (tablesBasket)  {
+           
+    
+            let imgItemTeddie = document.createElement("img");
+            imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+            imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl)
+            imgItemTeddie.setAttribute("alt","image d'un ours en peluche");  
+        };
         };
 
-        function basketTeddies (data)  {
-          
-             
-            let tables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
-
-            let productBasket = document.createElement("main");
-            productBasket.setAttribute ("class" , "cards__item__thumb_1");      
-            basket.appendChild(productBasket);
-
-            let teddiesTables = document.createElement("table");
-            productBasket.appendChild(teddiesTables);
-                
-            let tHead = document.createElement("thead");
-            teddiesTables.appendChild(tHead);
-
-            let trTables = document.createElement("tr");
-            trTables.setAttribute ("id","trHeader")
-            tHead.appendChild(trTables);
-           
-
-            let tBody = document.createElement("tbody") 
-            teddiesTables.appendChild(tBody);
-
-            let trBody = document.createElement("tr");
-            tBody.appendChild(trBody);
-
-            let thBody = document.createElement ("th");
-            thBody.setAttribute("scope","row");
-            trBody.appendChild(thBody);
-       
-
-            for (let i = 0;i < tables.length; i++) {
-                    
-                let thTables = document.createElement("th")
-                thTables.setAttribute("scope", "col");  
-                trTables.appendChild(thTables);
-                thTables.textContent = tables[i]; 
-                
-
-                
-               
-                
-            };   
-            let tdBody = document.createElement ("td");
-                thBody.appendChild(tdBody); 
-
-            let imgItemTeddie = document.createElement("img");
-                imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
-               imgItemTeddie.setAttribute ("src" , data.imageUrl)
-              imgItemTeddie.setAttribute("alt","image d'un ours en peluche");     
-                tdBody.appendChild(imgItemTeddie);
-                imgItemTeddie.textContent = tables.length.imageUrl
-    };
+        
 
     
+function tablesBasket (basketTeddies) {
+
+    let tables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
+
+    const basket = document.getElementById("basket");
+
+    let productBasket = document.createElement("main");
+    productBasket.setAttribute ("class" , "cards__item__thumb_1");      
+    basket.appendChild(productBasket);
+
+    let teddiesTables = document.createElement("table");
+    productBasket.appendChild(teddiesTables);
+        
+    let tHead = document.createElement("thead");
+    teddiesTables.appendChild(tHead);
+
+    let trTables = document.createElement("tr");
+    trTables.setAttribute ("id","trHeader")
+    tHead.appendChild(trTables);
+
+
+    let tBody = document.createElement("tbody") 
+    teddiesTables.appendChild(tBody);
+
+    let trBody = document.createElement("tr");
+    tBody.appendChild(trBody);
+
+    let thBody = document.createElement ("th");
+    thBody.setAttribute("scope","row");
+    trBody.appendChild(thBody);
+
+
+    for (let i = 0;i < tables.length; i++) {
+            
+        let thTables = document.createElement("th")
+        thTables.setAttribute("scope", "col");  
+        trTables.appendChild(thTables);
+        thTables.textContent = tables[i]; 
+        
+        let tdBody = document.createElement ("td");
+        thBody.appendChild(tdBody);
+
+        
+      
+    }
+  
+    };   
+
+   
 
 
 
