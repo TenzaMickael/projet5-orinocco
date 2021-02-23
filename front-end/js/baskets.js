@@ -33,32 +33,43 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
 
         function basketTeddies (data)  {
-    
-               let productBasket = document.createElement("main");
-                productBasket.setAttribute ("class" , "cards__item__thumb_1");      
-                basket.appendChild(productBasket);
+             
+            let tables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
+console.log(tables)
+            let productBasket = document.createElement("main");
+            productBasket.setAttribute ("class" , "cards__item__thumb_1");      
+            basket.appendChild(productBasket);
 
-                let teddiesTables = document.createElement("table");
-                productBasket.appendChild(teddiesTables);
+            let teddiesTables = document.createElement("table");
+            productBasket.appendChild(teddiesTables);
+                
+            let theadTables = document.createElement("thead");
+            teddiesTables.appendChild(theadTables);
 
-                    let theadTables = document.createElement("thead");
-                    teddiesTables.appendChild(theadTables);
+            let trTables = document.createElement("tr");
+            trTables.setAttribute ("id","trHeader")
+            theadTables.appendChild(trTables);
 
-                        let trTables = document.createElement("tr");
-                        trTables.setAttribute ("id","trHeader")
-                        theadTables.appendChild(trTables);
+            for (let i = 0;i < tables.length; i++) {
+                    
+                let thTables = document.createElement("th")
+                thTables.setAttribute("scope", "col");  
+                trTables.appendChild(thTables);
+                thTables.textContent = tables[i];
 
 
-                            let thTables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
+            
 
-                            for (let i = 0;i < thTables.length; i++) {
-                            
-                            document.createElement("th");
-                            trTables.appendChild(thTables);
-                            thTables.textContent = thTables[i];
-console.log(thTables[i++])
+
                               
-                            }
+          };
+
+                            //let imgItemTeddie = document.createElement("img");
+                //imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+                // imgItemTeddie.setAttribute ("src" , data.imageUrl)
+              // imgItemTeddie.setAttribute("alt","image d'un ours en peluche");     
+               // thTables.appendChild(imgItemTeddie);
+               // imgItemTeddie.textContent = data.imageUrl
                     //let tbodyTables = document.createElement("tbody");
                    // teddiesTables.appendChild(tbodyTables);
                      //   let trTablesBody = document.createElement("tr");
@@ -68,11 +79,7 @@ console.log(thTables[i++])
 
                 
             
-                //let imgItemTeddie = document.createElement("img");
-                //imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
-                //imgItemTeddie.setAttribute ("src" , data.imageUrl)
-               // imgItemTeddie.setAttribute("alt","image d'un ours en peluche");     
-                //productBasket.appendChild(imgItemTeddie);
+                
 
                 //let nameItemTeddie = document.createElement("p");
                // nameItemTeddie.setAttribute ("class", "cards__items__body--name");
