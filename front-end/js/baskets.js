@@ -43,12 +43,23 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             let teddiesTables = document.createElement("table");
             productBasket.appendChild(teddiesTables);
                 
-            let theadTables = document.createElement("thead");
-            teddiesTables.appendChild(theadTables);
+            let tHead = document.createElement("thead");
+            teddiesTables.appendChild(tHead);
 
             let trTables = document.createElement("tr");
             trTables.setAttribute ("id","trHeader")
-            theadTables.appendChild(trTables);
+            tHead.appendChild(trTables);
+            trTables.textContent = itemsTeddies[i]
+
+            let tBody = document.createElement("tbody") 
+            teddiesTables.appendChild(tBody);
+
+            let trBody = document.createElement("tr");
+            tBody.appendChild(trBody);
+
+            let thBody = document.createElement ("th");
+            thBody.setAttribute("scope","row");
+            trBody.appendChild(thBody);
 
             for (let i = 0;i < tables.length; i++) {
                     
@@ -56,18 +67,27 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 thTables.setAttribute("scope", "col");  
                 trTables.appendChild(thTables);
                 thTables.textContent = tables[i];   
-
-                let imgItemTeddie = document.createElement("img");
-                imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
-            imgItemTeddie.setAttribute ("src" , data.imageUrl)
-              imgItemTeddie.setAttribute("alt","image d'un ours en peluche");     
-                thTables.appendChild(imgItemTeddie);
-                imgItemTeddie.textContent = data.imageUrl
-            };
+            
 
             
 
-                           
+            
+
+          
+            let tdBody = document.createElement ("td");
+            thBody.appendChild(tdBody);
+            tdBody.textContent = itemsTeddies.imageUrl;
+            
+
+
+            
+
+                          //let imgItemTeddie = document.createElement("img");
+               // imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+            //imgItemTeddie.setAttribute ("src" , data.imageUrl)
+             // imgItemTeddie.setAttribute("alt","image d'un ours en peluche");     
+               // thTables.appendChild(imgItemTeddie);
+               // imgItemTeddie.textContent = data.imageUrl  
                     //let tbodyTables = document.createElement("tbody");
                    // teddiesTables.appendChild(tbodyTables);
                      //   let trTablesBody = document.createElement("tr");
@@ -88,12 +108,12 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
 
             
-            }
+            };
             
         };
 
 
-
+    };
 
     
 
