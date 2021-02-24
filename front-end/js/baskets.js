@@ -29,13 +29,13 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     request.send();
        
         
-        //un tableau avec le nom de tes colonnes, puis tu boucle dessus avec create element th, ajoute l'attribute scop avec la valeur col et tu l'append au tr précédent à qui tu aura mis un id pour le reconnaitre
-           
+    
         function tablesItems (tablesBasket)  {
 
             const secondTables = document.getElementById("secondTables");
 
             let trBody = document.createElement("tr");
+            trBody.setAttribute("class" , "table-dark table-striped table-hover")
             secondTables.appendChild(trBody);
         
             let thBody = document.createElement ("th");
@@ -47,17 +47,17 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
           
             
-            let imgItemTeddie = document.createElement("img");
-            imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
-           imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
-            imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
-            tdBody.appendChild(imgItemTeddie)
+           // let imgItemTeddie = document.createElement("img");
+           // imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+           //imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
+          //  imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
+           // tdBody.appendChild(imgItemTeddie)
             
            
 
-            let nameProductTeddies = document.createElement("p");
-            tdBody.appenchild(nameProductTeddies)
-            nameProductTeddies.textContent = tablesBasket.name;
+           // let nameProductTeddies = document.createElement("p");
+           // tdBody.appenchild(nameProductTeddies);
+           // nameProductTeddies.textContent = tablesBasket.name;
             
         };
 };
@@ -76,6 +76,7 @@ function tablesBasket () {
     basket.appendChild(productBasket);
 
     let teddiesTables = document.createElement("table");
+    teddiesTables.setAttribute("class" , "table table-striped table-hover");
     productBasket.appendChild(teddiesTables);
         
     let tHead = document.createElement("thead");
@@ -83,38 +84,23 @@ function tablesBasket () {
 
     let trTables = document.createElement("tr");
     trTables.setAttribute ("id","trHeader")
+    trTables.setAttribute ("class", "table-primary")
     tHead.appendChild(trTables);
 
     for (let i = 0;i < tables.length; i++) {
             
         let thTables = document.createElement("th")
         thTables.setAttribute("scope", "col");  
+        thTables.setAttribute ("class", "table-primary")
         trTables.appendChild(thTables);
         thTables.textContent = tables[i]; 
     }   
     let tBody = document.createElement("tbody") 
         tBody.setAttribute("id","secondTables");
         teddiesTables.appendChild(tBody);
-   
-
-   
-    
-
-    
+ 
 }; 
   
-
-   
-
-
-
-
-
-
-
-
-    //};
-    
 
  
 //1) Aller chercher le sessionStorage
