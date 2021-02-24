@@ -177,7 +177,7 @@ console.log(data)
 function productBasket (idteddie) {                                             //=> On créer une fonction pour créer le panier avec les oursons à l'intérieur  
 
 
-    if (sessionStorage.getItem("selectTeddies") == undefined ){                 //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
+    if (localStorage.getItem("selectTeddies") == undefined ){                 //=> On récupère avec getitem dans le sessionStorage "selectTeddies" et si il est "undefined" :
 
     let  indexTeddies = [];                                                     //=> On crée un tableau array vide qui va contenir les oursons sélectionnés    
 
@@ -186,12 +186,12 @@ function productBasket (idteddie) {                                             
     
     
 
-    sessionStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));        //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
+    localStorage.setItem("selectTeddies" , JSON.stringify (indexTeddies));        //=> On met à jour le tableau "selectTeddies" avec setitem avec à l'intérieur le tableau "indexTeddies"
     
 
     }else {                                                                         //=> Sinon si il est défini :
      
-        var teddiesTab =  JSON.parse(sessionStorage.getItem("selectTeddies"));      //=> on récupère le tableau "selectTeddies" 
+        var teddiesTab =  JSON.parse(localStorage.getItem("selectTeddies"));      //=> on récupère le tableau "selectTeddies" 
  
        if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idteddie)) {     //=> Test si l'ourson sélectionner est présent dans le tableau                                                  
         console.log(teddiesTab)
@@ -208,7 +208,7 @@ function productBasket (idteddie) {                                             
             };             
         };                                                                     
     }           
-    sessionStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));           //=> On met à jour le sessionStorage 
+    localStorage.setItem("selectTeddies" , JSON.stringify (teddiesTab));           //=> On met à jour le sessionStorage 
 
 };
 };

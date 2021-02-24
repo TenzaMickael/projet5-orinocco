@@ -6,7 +6,7 @@ const basket = document.getElementById("basket");
 
 tablesBasket ()
 
-let itemsTeddies = JSON.parse(sessionStorage.getItem("selectTeddies"));
+let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
 
 for (let i = 0;i < itemsTeddies.length; i++) {
 
