@@ -111,10 +111,7 @@ p
     text-align: center;
 }
 
-#trHeader{
-    display: flex;
-    flex-direction: row;
-}
+
 .cards__item__thumb img
 {
     display: block;

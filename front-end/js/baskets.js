@@ -1,5 +1,6 @@
 
-
+var nombre = 0 ;
+var Total = 0 ;
 
 const basket = document.getElementById("basket");
 
@@ -57,13 +58,29 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
             thImgTeddie.appendChild(imgItemTeddie);
 
-            let tdNameTeddies = document.createElement ("td");
-            trBody.appendChild(tdNameTeddies);
+            let tdNameTeddie = document.createElement ("td");
+            trBody.appendChild(tdNameTeddie);
+                let nameItemTeddie = document.createElement("p");
+                nameItemTeddie.textContent = tablesBasket.name;
+                tdNameTeddie.appendChild(nameItemTeddie);
 
-            let nameItemTeddie = document.createElement("p");
-            nameItemTeddie.textContent = tablesBasket.name;
-            tdNameTeddies.appendChild(nameItemTeddie);
+            let tdPriceUnitTeddie = document.createElement ("td");
+            trBody.appendChild(tdPriceUnitTeddie);
+                let priceUnitTeddie = document.createElement ("p");
+                priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
+                tdPriceUnitTeddie.appendChild(priceUnitTeddie);
 
+            let tdQuantityTeddie = document.createElement ("td");
+            trBody.appendChild(tdQuantityTeddie);
+                let quantityOfTeddie = document.createElement ("p");
+                quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
+                tdQuantityTeddie.appendChild(quantityOfTeddie);
+
+            let tdSubTotalTeddie = document.createElement ("td");
+            trBody.appendChild (tdSubTotalTeddie);
+                let subTotalTeddie = document.createElement ("p")
+                
+                tdSubTotalTeddie.appendChild(subTotalTeddie)
 
             
             
@@ -99,7 +116,6 @@ function tablesBasket () {
     teddiesTables.appendChild(tHead);
 
     let trTables = document.createElement("tr");
-    trTables.setAttribute ("id","trHeader")
     trTables.setAttribute ("class", "table-primary")
     tHead.appendChild(trTables);
 
