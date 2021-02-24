@@ -43,15 +43,16 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             trBody.appendChild(thBody);
 
             let tdBody = document.createElement ("td");
+            tdBody.setAttribute("id" , "tdBody");
             thBody.appendChild(tdBody);
 
           
             
-           // let imgItemTeddie = document.createElement("img");
-           // imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
-           //imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
-          //  imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
-           // tdBody.appendChild(imgItemTeddie)
+           let imgItemTeddie = document.createElement("img");
+            imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+           imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
+            imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
+            tdBody.appendChild(imgItemTeddie)
             
            
 
@@ -76,7 +77,7 @@ function tablesBasket () {
     basket.appendChild(productBasket);
 
     let teddiesTables = document.createElement("table");
-    teddiesTables.setAttribute("class" , "table table-striped table-hover");
+    teddiesTables.setAttribute("class" , "table table-bordered border-dark");
     productBasket.appendChild(teddiesTables);
         
     let tHead = document.createElement("thead");

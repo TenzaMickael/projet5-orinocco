@@ -166,11 +166,12 @@ p
 
 .image__teddies__product{
 
-    width:100px;
+    width:80px;
     display: block;
-    border:3px solid brown;
-  
+}
 
+#tdBody{
+    padding:0px;
 }
 
 #basket
