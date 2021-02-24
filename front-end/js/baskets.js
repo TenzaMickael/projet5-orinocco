@@ -38,21 +38,36 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             trBody.setAttribute("class" , "table-dark table-striped table-hover")
             secondTables.appendChild(trBody);
         
-            let thBody = document.createElement ("th");
-            thBody.setAttribute("scope","row");
-            trBody.appendChild(thBody);
+            //let thBody = document.createElement ("th");
+            //thBody.setAttribute("scope","row");
+            //trBody.appendChild(thBody);
 
-            let tdBody = document.createElement ("td");
-            tdBody.setAttribute("id" , "tdBody");
-            thBody.appendChild(tdBody);
+            //let tdBody = document.createElement ("td");
+           // tdBody.setAttribute("id" , "tdBody");
+           // thBody.appendChild(tdBody);
+     
 
-          
-            
+           let thImgTeddie = document.createElement ("th");
+           thImgTeddie.setAttribute("scope" , "row");
+            trBody.appendChild(thImgTeddie);
+
            let imgItemTeddie = document.createElement("img");
-            imgItemTeddie .setAttribute ("class" , "image__teddies__product"); 
+            imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
            imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
             imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
-            tdBody.appendChild(imgItemTeddie)
+            thImgTeddie.appendChild(imgItemTeddie);
+
+            let tdNameTeddies = document.createElement ("td");
+            trBody.appendChild(tdNameTeddies);
+
+            let nameItemTeddie = document.createElement("p");
+            nameItemTeddie.textContent = tablesBasket.name;
+            tdNameTeddies.appendChild(nameItemTeddie);
+
+
+            
+            
+
             
            
 
