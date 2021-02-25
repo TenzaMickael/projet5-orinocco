@@ -76,10 +76,13 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
                 tdQuantityTeddie.appendChild(quantityOfTeddie);
 
+
+                
+                console.log (subTotal)
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild (tdSubTotalTeddie);
                 let subTotalTeddie = document.createElement ("p")
-                
+                subTotalTeddie.textContent = subTotal (tablesBasket.price/100 * itemsTeddies[i].quantity) ;
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
 
             
@@ -95,7 +98,9 @@ for (let i = 0;i < itemsTeddies.length; i++) {
         };
 };
 
-        
+        function subTotal (priceUnitTeddie,quantityOfTeddie){
+            return priceUnitTeddie * quantityOfTeddie 
+        }
 
     
 function tablesBasket () {
