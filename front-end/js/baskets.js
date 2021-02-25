@@ -51,12 +51,11 @@ for (let i = 0;i < itemsTeddies.length; i++) {
            let thImgTeddie = document.createElement ("th");
            thImgTeddie.setAttribute("scope" , "row");
             trBody.appendChild(thImgTeddie);
-
-           let imgItemTeddie = document.createElement("img");
-            imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
-           imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
-            imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
-            thImgTeddie.appendChild(imgItemTeddie);
+                let imgItemTeddie = document.createElement("img");
+                imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
+                imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
+                imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
+                thImgTeddie.appendChild(imgItemTeddie);
 
             let tdNameTeddie = document.createElement ("td");
             trBody.appendChild(tdNameTeddie);
@@ -78,30 +77,23 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
 
                 
-                console.log (subTotal)
+             
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild (tdSubTotalTeddie);
                 let subTotalTeddie = document.createElement ("p")
-                subTotalTeddie.textContent = subTotal (tablesBasket.price/100 * itemsTeddies[i].quantity) ;
-                tdSubTotalTeddie.appendChild(subTotalTeddie)
 
-            
-            
+               // subTotalTeddie.textContent = "Total :" +   ;
+               // tdSubTotalTeddie.appendChild(subTotalTeddie)
 
-            
-           
 
-           // let nameProductTeddies = document.createElement("p");
-           // tdBody.appenchild(nameProductTeddies);
-           // nameProductTeddies.textContent = tablesBasket.name;
+        
             
         };
 };
 
-        function subTotal (priceUnitTeddie,quantityOfTeddie){
-            return priceUnitTeddie * quantityOfTeddie 
-        }
-
+function subTotal (priceUnitTeddie,quantityOfTeddie){
+    var subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) 
+}
     
 function tablesBasket () {
 
