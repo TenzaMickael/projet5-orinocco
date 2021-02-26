@@ -67,15 +67,30 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 quantityOfTeddie.setAttribute("id" , "quantity_"+ tablesBasket._id)
                 quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
                 tdQuantityTeddie.appendChild(quantityOfTeddie);  
-                
-               
-             
+    
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild (tdSubTotalTeddie);
                 let subTotalTeddie = document.createElement ("p")
                 subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
                 subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
+
+
+                const secondTable = document.getElementById("secondTable")
+
+               let tHeadSecondTab = document.createElement("tbody");
+                secondTable.appendChild(tHeadSecondTab);
+
+                let trNumberItemsTeddie = document.createElement ("tr");
+                secondTable.appendChild(trNumberItemsTeddie);
+
+                let numberItemTeddie = document.createElement ("p");
+                numberItemTeddie.setAttribute ("id" , "numberItem_"+ tablesBasket._id)
+                trNumberItemsTeddie.appendChild (numberItemTeddie);
+
+                numberArticles(tablesBasket._id , itemsTeddies[i].quantity ,totalArticles)
+                console.log(totalArticles)
+   
         };
 };
 
@@ -85,37 +100,21 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
     let secondTables = document.createElement ("table");
     secondTables.setAttribute("class" , "table table-bordered border-dark");
+    secondTables.setAttribute("id" , "secondTable")
     basket.appendChild(secondTables);
 
-    let tHeadSecondTab = document.createElement("tbody");
-    secondTables.appendChild(tHeadSecondTab);
-
-    let trNumberItemsTeddie = document.createElement ("tr");
-    secondTables.appendChild(trNumberItemsTeddie);
-
-    let numberItemTeddie = document.createElement ("p");
-    numberItemTeddie.setAttribute ("id" , "numberItem_"+ tablesBasket._id)
-    //numberItemTeddie.textContent = "essais";
-    trNumberItemsTeddie.appendChild (numberItemTeddie);
-    numberArticles(tablesBasket._id,itemsTeddies.quantity)
-
-
-
 function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
-    var subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) 
+    var subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
    var subTotalElement = document.getElementById("subTotal_" + idTeddie);
    subTotalElement.textContent = subTotalTeddie /100 + "€";
 }
 
 
-function numberArticles (idTeddie,quantityOfTeddie){
-    var numberItemsTeddie = parseInt(quantityOfTeddie * idTeddie)
-    var numberItemsElement = document.getElementById ("numberItem_" + idTeddie);
-    numberItemsElement.textContent = numberItemsTeddie;
+function numberArticles (totalArticles,numberItemTeddie,quantityOfTeddie){
+    var totalArticles = parseInt(numberItemTeddie + quantityOfTeddie);
+    var numberItemElement = document.getElementById ("numberItem_" + totalArticles);
+    numberItemElement.textContent = totalArticles;
 }
-
-
-
 
 
 function tablesBasket () {
@@ -152,7 +151,6 @@ function tablesBasket () {
         teddiesTables.appendChild(tBody);
  
 }; 
-  
 
  
 //1) Aller chercher le sessionStorage
