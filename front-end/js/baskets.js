@@ -1,6 +1,6 @@
 
-var nombre = 0 ;
-var Total = 0 ;
+var totalPrice = 0 ;
+var totalArticles = 0 ;
 
 const basket = document.getElementById("basket");
 
@@ -36,20 +36,11 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             const secondTables = document.getElementById("secondTables");
 
             let trBody = document.createElement("tr");
-            trBody.setAttribute("class" , "table-dark table-striped table-hover")
+            trBody.setAttribute("class" , "table-dark table-striped table-hover");
             secondTables.appendChild(trBody);
-        
-            //let thBody = document.createElement ("th");
-            //thBody.setAttribute("scope","row");
-            //trBody.appendChild(thBody);
 
-            //let tdBody = document.createElement ("td");
-           // tdBody.setAttribute("id" , "tdBody");
-           // thBody.appendChild(tdBody);
-     
-
-           let thImgTeddie = document.createElement ("th");
-           thImgTeddie.setAttribute("scope" , "row");
+            let thImgTeddie = document.createElement ("th");
+            thImgTeddie.setAttribute("scope" , "row");
             trBody.appendChild(thImgTeddie);
                 let imgItemTeddie = document.createElement("img");
                 imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
@@ -66,35 +57,67 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             let tdPriceUnitTeddie = document.createElement ("td");
             trBody.appendChild(tdPriceUnitTeddie);
                 let priceUnitTeddie = document.createElement ("p");
+                priceUnitTeddie.setAttribute ("id" , "priceUnit_"+ tablesBasket._id)
                 priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
                 tdPriceUnitTeddie.appendChild(priceUnitTeddie);
 
             let tdQuantityTeddie = document.createElement ("td");
             trBody.appendChild(tdQuantityTeddie);
                 let quantityOfTeddie = document.createElement ("p");
+                quantityOfTeddie.setAttribute("id" , "quantity_"+ tablesBasket._id)
                 quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
-                tdQuantityTeddie.appendChild(quantityOfTeddie);
-
-
+                tdQuantityTeddie.appendChild(quantityOfTeddie);  
                 
+               
              
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild (tdSubTotalTeddie);
                 let subTotalTeddie = document.createElement ("p")
-
-               // subTotalTeddie.textContent = "Total :" +   ;
-               // tdSubTotalTeddie.appendChild(subTotalTeddie)
-
-
-        
-            
+                subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
+                tdSubTotalTeddie.appendChild(subTotalTeddie)
+                subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
         };
 };
 
-function subTotal (priceUnitTeddie,quantityOfTeddie){
+    let resumeCommand = document.createElement ("h3");
+    resumeCommand.textContent = "Résumé de vos commandes";
+    basket.appendChild(resumeCommand);
+
+    let secondTables = document.createElement ("table");
+    secondTables.setAttribute("class" , "table table-bordered border-dark");
+    basket.appendChild(secondTables);
+
+    let tHeadSecondTab = document.createElement("tbody");
+    secondTables.appendChild(tHeadSecondTab);
+
+    let trNumberItemsTeddie = document.createElement ("tr");
+    secondTables.appendChild(trNumberItemsTeddie);
+
+    let numberItemTeddie = document.createElement ("p");
+    numberItemTeddie.setAttribute ("id" , "numberItem_"+ tablesBasket._id)
+    //numberItemTeddie.textContent = "essais";
+    trNumberItemsTeddie.appendChild (numberItemTeddie);
+    numberArticles(tablesBasket._id,itemsTeddies.quantity)
+
+
+
+function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     var subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) 
+   var subTotalElement = document.getElementById("subTotal_" + idTeddie);
+   subTotalElement.textContent = subTotalTeddie /100 + "€";
 }
-    
+
+
+function numberArticles (idTeddie,quantityOfTeddie){
+    var numberItemsTeddie = parseInt(quantityOfTeddie * idTeddie)
+    var numberItemsElement = document.getElementById ("numberItem_" + idTeddie);
+    numberItemsElement.textContent = numberItemsTeddie;
+}
+
+
+
+
+
 function tablesBasket () {
 
     let tables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
@@ -141,6 +164,10 @@ function tablesBasket () {
 
 //la fonction sert à injecter le code html avec des cartes pour chaque oursons pour la page 
 
+
+// Pour quantité total et total price mettre in id pour pouvoir gerer l'ourson quand on ajoute ou on supprime.
+
+// ex : quantity-id de l'ourson => le changer avec inerHtml  
 
 
 
