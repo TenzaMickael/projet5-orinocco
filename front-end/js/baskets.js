@@ -70,6 +70,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 quantityOfTeddie.setAttribute("id" , "quantity_"+ tablesBasket._id)
                 quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
                 tdQuantityTeddie.appendChild(quantityOfTeddie);  
+               
 
             //PRIS TOTAL PAR OURSONS 
             let tdSubTotalTeddie = document.createElement ("td");
@@ -79,11 +80,12 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
                 subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
 
-            var numberItem = document.getElementById("numberItem")
-            numberArticles (totalArticles + quantityOfTeddie)
-            numberItem.textContent = "total article : " + totalArticles 
-            console.log(quantityOfTeddie)
-            console.log(itemsTeddies)
+           // var numberItem = document.getElementById("numberItem")
+           // numberArticles (totalArticles ,itemsTeddies[i].quantity)
+           // numberItem.textContent = "total article : " + totalArticles 
+          
+
+           
         
         };
 };
@@ -123,9 +125,9 @@ function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     //var essais = quantityOfTeddie + totalArticles
   
 
-    function  numberArticles (totalArticles,quantityOfTeddie) {
+    function  numberArticles (itemsTeddies[i].quantity) {
        var totalArticles = parseInt(totalArticles + quantityOfTeddie);
-      
+      //console.log(itemsTeddies[i].quantity)
       }
 
 
