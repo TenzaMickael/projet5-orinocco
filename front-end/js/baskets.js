@@ -78,13 +78,13 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
                 subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
-                for (let i = 0;i < itemsTeddies.length; i++) {
+
             var numberItem = document.getElementById("numberItem")
             numberArticles (totalArticles + quantityOfTeddie)
             numberItem.textContent = "total article : " + totalArticles 
             console.log(quantityOfTeddie)
             console.log(itemsTeddies)
-                };
+        
         };
 };
 
