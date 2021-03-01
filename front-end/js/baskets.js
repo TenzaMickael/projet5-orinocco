@@ -75,15 +75,20 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             //PRIS TOTAL PAR OURSONS 
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild (tdSubTotalTeddie);
+
                 let subTotalTeddie = document.createElement ("p")
                 subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
                 subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
+                
 
-           // var numberItem = document.getElementById("numberItem")
-           // numberArticles (totalArticles ,itemsTeddies[i].quantity)
-           // numberItem.textContent = "total article : " + totalArticles 
+            var numberItem = document.getElementById("numberItem");
+            numberArticles (itemsTeddies[i].quantity);
+            numberItem.textContent = "Nombre d'articles: " + totalArticles;
           
+         var priceOfTeddie = document.getElementById("priceOfTeddies");
+        totalPriceOfTeddie ();
+        priceOfTeddie.textContent = "Prix total à payer : " + totalPrice + "€" ; 
 
            
         
@@ -100,8 +105,8 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     basket.appendChild(secondTables);
    
 
-    let tHeadSecondTab = document.createElement("tbody");
-     secondTables.appendChild(tHeadSecondTab);
+    //let tHeadSecondTab = document.createElement("tbody");
+    // secondTables.appendChild(tHeadSecondTab);
 
      let trNumberItemsTeddie = document.createElement ("tr");
      secondTables.appendChild(trNumberItemsTeddie);
@@ -110,25 +115,34 @@ for (let i = 0;i < itemsTeddies.length; i++) {
      numberItemTeddie.setAttribute ("id" , "numberItem");
      trNumberItemsTeddie.appendChild (numberItemTeddie);
 
-    // 
+     let trTotalPriceTeddie = document.createElement ("tr");
+     secondTables.appendChild(trTotalPriceTeddie);
+
+     let totalPriceTeddies= document.createElement ("p");
+     totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
+     trTotalPriceTeddie.appendChild(totalPriceTeddies)
+     
+
+     
+
+  
 
 
 function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     var subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
-   var subTotalElement = document.getElementById("subTotal_" + idTeddie);
-   subTotalElement.textContent = subTotalTeddie /100 + "€";
+    var subTotalElement = document.getElementById("subTotal_" + idTeddie);
+    subTotalElement.textContent = subTotalTeddie /100 + "€";
 }
 
 
-//function numberArticles (totalArticles,numberItemTeddie,quantityOfTeddie){
-   // var totalArticles = parseInt(numberItemTeddie + totalArticles);
-    //var essais = quantityOfTeddie + totalArticles
-  
+function  numberArticles (quantityOfTeddie) {
+    totalArticles = totalArticles +parseInt(quantityOfTeddie);
+}
 
-    function  numberArticles (itemsTeddies[i].quantity) {
-       var totalArticles = parseInt(totalArticles + quantityOfTeddie);
-      //console.log(itemsTeddies[i].quantity)
-      }
+function totalPriceOfTeddie () {
+    totalPrice = totalPrice +parseInt()
+   
+}
 
 
 
@@ -181,7 +195,7 @@ function tablesBasket () {
 
     
 
-    //Import du sessionStorage
+
 
 
 
