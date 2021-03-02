@@ -84,11 +84,11 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
             var numberItem = document.getElementById("numberItem");
             numberArticles (itemsTeddies[i].quantity);
-            numberItem.textContent = totalArticles + " articles ";
+            numberItem.textContent = "Votre panier contient : " + totalArticles + " articles ";
           
          var priceOfTeddie = document.getElementById("priceOfTeddies");
          totalPriceOfTeddie (tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
-        priceOfTeddie.textContent = "Prix total à payer : " + totalPrice/100 + "€" ; 
+        priceOfTeddie.textContent = "Le montant de votre commande s'élève à : " + totalPrice/100 + "€" ; 
   
         
         };
