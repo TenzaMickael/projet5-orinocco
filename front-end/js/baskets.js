@@ -72,23 +72,25 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 tdQuantityTeddie.appendChild(quantityOfTeddie);  
                
 
-            //PRIS TOTAL PAR OURSONS 
+            //PRIx TOTAL PAR OURSONS 
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild (tdSubTotalTeddie);
 
+            // prix par oursons 
                 let subTotalTeddie = document.createElement ("p")
                 subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
                 subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
                 
-
-            var numberItem = document.getElementById("numberItem");
+            // nombre d'articles 
+            
             numberArticles (itemsTeddies[i].quantity);
-            numberItem.textContent = "Votre panier contient : " + totalArticles + " articles ";
+            
           
-         var priceOfTeddie = document.getElementById("priceOfTeddies");
+            //pris des dépenses 
+        
          totalPriceOfTeddie (tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
-        priceOfTeddie.textContent = "Le montant de votre commande s'élève à : " + totalPrice/100 + "€" ; 
+       
   
         
         };
@@ -122,9 +124,10 @@ for (let i = 0;i < itemsTeddies.length; i++) {
      trTotalPriceTeddie.appendChild(totalPriceTeddies)
 
 
+
 function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
-     subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
-     subTotalElement = document.getElementById("subTotal_" + idTeddie);
+    var  subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
+    var  subTotalElement = document.getElementById("subTotal_" + idTeddie);
     subTotalElement.textContent = subTotalTeddie /100 + "€";
    
 };
@@ -132,13 +135,17 @@ function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
 
 function  numberArticles (quantityOfTeddie) {
     totalArticles = totalArticles + parseInt(quantityOfTeddie);
+    var numberItem = document.getElementById("numberItem");
+    numberItem.textContent = "Votre panier contient : " + totalArticles + " articles ";
+
 };
 
 function totalPriceOfTeddie (idTeddies,priceUnitTeddie,quantityOfTeddie) {
     subTotals = parseInt(priceUnitTeddie * quantityOfTeddie);
     teddies = document.getElementById("subTotal_" + idTeddies);
     totalPrice = totalPrice + parseInt(subTotals);
- 
+    var priceOfTeddie = document.getElementById("priceOfTeddies");
+    priceOfTeddie.textContent = "Le montant de votre commande s'élève à : " + totalPrice/100 + "€" ; 
 };
 
 
