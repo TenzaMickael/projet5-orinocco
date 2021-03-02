@@ -87,10 +87,9 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             numberItem.textContent = totalArticles + " articles ";
           
          var priceOfTeddie = document.getElementById("priceOfTeddies");
-         totalPriceOfTeddie(subTotalTeddie)
-        priceOfTeddie.textContent = "Prix total à payer : " + totalPrice + "€" ; 
-
-     
+         totalPriceOfTeddie (tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity)
+        priceOfTeddie.textContent = "Prix total à payer : " + totalPrice/100 + "€" ; 
+  
         
         };
 };
@@ -124,8 +123,8 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
 
 function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
-    var subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
-    var subTotalElement = document.getElementById("subTotal_" + idTeddie);
+     subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
+     subTotalElement = document.getElementById("subTotal_" + idTeddie);
     subTotalElement.textContent = subTotalTeddie /100 + "€";
    
 };
@@ -135,8 +134,10 @@ function  numberArticles (quantityOfTeddie) {
     totalArticles = totalArticles + parseInt(quantityOfTeddie);
 };
 
-function totalPriceOfTeddie (subTotalTeddie) {
-    totalPrice = totalPrice + parseInt(subTotalTeddie);
+function totalPriceOfTeddie (idTeddies,priceUnitTeddie,quantityOfTeddie) {
+    subTotals = parseInt(priceUnitTeddie * quantityOfTeddie);
+    teddies = document.getElementById("subTotal_" + idTeddies);
+    totalPrice = totalPrice + parseInt(subTotals);
  
 };
 
