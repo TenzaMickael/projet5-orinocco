@@ -87,9 +87,10 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             numberItem.textContent = "Nombre d'articles: " + totalArticles;
           
          var priceOfTeddie = document.getElementById("priceOfTeddies");
+        subTotal()
         totalPriceOfTeddie ();
         priceOfTeddie.textContent = "Prix total à payer : " + totalPrice + "€" ; 
-
+console.log(subTotal)
            
         
         };
@@ -140,6 +141,7 @@ function  numberArticles (quantityOfTeddie) {
 }
 
 function totalPriceOfTeddie () {
+    
     totalPrice = totalPrice +parseInt()
    
 }
