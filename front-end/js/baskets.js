@@ -32,11 +32,11 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     
         function tablesItems (tablesBasket)  {
 
-            const secondTables = document.getElementById("secondTables");
+            const tableContent = document.getElementById("tableContent");
 
             let trBody = document.createElement("tr");
             trBody.setAttribute("class" , "table-dark table-striped table-hover");
-            secondTables.appendChild(trBody);
+            tableContent.appendChild(trBody);
 
             //IMAGES
             let thImgTeddie = document.createElement ("th");
@@ -71,15 +71,9 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
                 tdQuantityTeddie.appendChild(quantityOfTeddie);  
 
-
-            //PRIx TOTAL PAR OURSONS 
+            //PRIX TOTAL PAR OURSONS 
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild(tdSubTotalTeddie);
-
-            //AJOUTER OU SUPPRIMER 
-            //let tdAddOrRemove = document.createElement ("td");
-           // secondTables.appenchild(tdAddOrRemove);
-
 
             // prix par oursons 
                 let subTotalTeddie = document.createElement ("p")
@@ -87,7 +81,18 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
                var subTotalOfTeddies = subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);
 
-             
+            //AJOUTER OU SUPPRIMER UN OURSON
+             let tdAddOrRemove = document.createElement ("td");
+             trBody.appendChild(tdAddOrRemove);
+                let btnAddTeddie = document.createElement ("btn");
+                tdAddOrRemove.appendChild(btnAddTeddie);
+                                      
+                btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
+                btnAddTeddie.setAttribute("id","addOrRemove");                                    
+                btnAddTeddie.setAttribute("type","button");                                                                   
+                                                                             
+                btnAddTeddie.textContent=" + ";                             
+               // btnAddTeddie.innerHTML = `<i class="fas fa-plus"> a voir </i>"`;
                 
             // nombre d'articles 
             
@@ -108,23 +113,22 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     basket.appendChild(resumeCommand);
 
 
-    let secondTables = document.createElement ("table");
-    secondTables.setAttribute("class" , "table table-bordered border-red");
-    basket.appendChild(secondTables);
+    let tableContent = document.createElement ("table");
+    tableContent.setAttribute("class" , "table table-bordered border-red");
+    basket.appendChild(tableContent);
    
-
     let tHeadSecondTab = document.createElement("tbody");
-     secondTables.appendChild(tHeadSecondTab);
+     tableContent.appendChild(tHeadSecondTab);
 
      let trNumberItemsTeddie = document.createElement ("tr");
-     secondTables.appendChild(trNumberItemsTeddie);
+     tableContent.appendChild(trNumberItemsTeddie);
 
      let numberItemTeddie = document.createElement ("p");
      numberItemTeddie.setAttribute ("id" , "numberItem");
      trNumberItemsTeddie.appendChild (numberItemTeddie);
 
      let trTotalPriceTeddie = document.createElement ("tr");
-     secondTables.appendChild(trTotalPriceTeddie);
+     tableContent.appendChild(trTotalPriceTeddie);
 
      let totalPriceTeddies= document.createElement ("p");
      totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
@@ -161,9 +165,9 @@ function tablesBasket () {
         thTables.textContent = tables[i]; 
     }   
     let tBody = document.createElement("tbody") 
-        tBody.setAttribute("id","secondTables");
+        tBody.setAttribute("id","tableContent");
         teddiesTables.appendChild(tBody);
- 
+        
 }; 
 
 //FONCTIONS GLOBALES 
