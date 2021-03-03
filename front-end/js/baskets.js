@@ -84,15 +84,28 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             //AJOUTER OU SUPPRIMER UN OURSON
              let tdAddOrRemove = document.createElement ("td");
              trBody.appendChild(tdAddOrRemove);
+
                 let btnAddTeddie = document.createElement ("btn");
-                tdAddOrRemove.appendChild(btnAddTeddie);
-                                      
+                tdAddOrRemove.appendChild(btnAddTeddie);                   
                 btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
-                btnAddTeddie.setAttribute("id","addOrRemove");                                    
-                btnAddTeddie.setAttribute("type","button");                                                                   
-                                                                             
-                btnAddTeddie.textContent=" + ";                             
-               // btnAddTeddie.innerHTML = `<i class="fas fa-plus"> a voir </i>"`;
+                btnAddTeddie.setAttribute("id","btnAdd");                                    
+                btnAddTeddie.setAttribute("type","button");  
+                btnAddTeddie.dataset.idteddie = tablesBasket._id   ;                                                                                                                           
+                btnAddTeddie.textContent=" + ";    
+                addTeddieItem();
+
+
+
+                
+                let btnRemoveTeddie = document.createElement ("btn");
+                tdAddOrRemove.appendChild(btnRemoveTeddie);                   
+                btnRemoveTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
+                btnRemoveTeddie.setAttribute("id","btnAdd");                                    
+                btnRemoveTeddie.setAttribute("type","button");                                                                                                                              
+                btnRemoveTeddie.textContent=" - ";    
+                
+                
+
                 
             // nombre d'articles 
             
@@ -167,8 +180,12 @@ function tablesBasket () {
     let tBody = document.createElement("tbody") 
         tBody.setAttribute("id","tableContent");
         teddiesTables.appendChild(tBody);
+
+       
         
 }; 
+
+
 
 //FONCTIONS GLOBALES 
 
@@ -194,9 +211,29 @@ function totalPriceOfTeddie (subTotalTeddie) {
     priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;   
 };
 
+//Ajouter un teddie
+function addTeddieItem (btnAdd) {
+
+    var btnAdd = document.getElementById("btnAdd")
+   
+    
 
 
+ btnAdd.addEventListener('click', function (event){
+        event.preventDefault();                                                
 
+        let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));  
+        var quantityOfTeddie = document.getElementById ("quantityOfTeddie")
+        console.log(quantityOfTeddie)
+  
+        for (let i = 0;i < itemsTeddies.length; i++) { 
+            
+           
+                          
+         
+    };
+});
+};
 
 
 

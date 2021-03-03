@@ -23,7 +23,7 @@ request.send();
 //Création d'une fonction pour mettre en place les donnée récupérées de l'API 
 
 function teddies (data) {
-console.log(data)
+
 
 //Création des balises sous forme de cards 
 

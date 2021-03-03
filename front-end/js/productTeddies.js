@@ -36,7 +36,7 @@ let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=>
 
 
 function productTeddies(data) {                                             //=> Fonction productTeddies avec en paramètre data qui correspond au donnée de l'API récupéré                     
-console.log(data)
+
                                         /********** Création de balises sous forme de cards **********/ 
                                 
 
@@ -166,8 +166,10 @@ console.log(data)
         setTimeout(function () {                                                //=> On crée unr fonction pour gérer la disparition du texte 
             message.innerHTML = "";                                             //=> On met en place un texte vide 
           },2000);                                                              //=> Qui va apparaitre au bout de 2 secondes et qui va remplacer notre phrase 
-          
-    });      
+         
+    });  
+    
+   
 };
 
 
