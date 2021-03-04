@@ -1,19 +1,25 @@
-
+/* VARIABLES GLOBALES */
 var totalPrice = 0 ;
 var totalArticles = 0 ;
 
+/* RECUPÉRATION DE L'ID "BASKET" */
 const basket = document.getElementById("basket");
 
+/* CHARGEMENT DU 1IER et 2IEME TABLEAU DÉS LE CHARGEMENT DU CODE JS */
 tablesBasket ()
+resumeTab ()
 
+/* RECUPERATION DU LOCAL STORAGE */
 let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
 
+/* MISE EN PLACE D' UNE BOUCLE POUR APPLIQUER TOUTE LES MODIFS A TOUT LES OURSONS */
 for (let i = 0;i < itemsTeddies.length; i++) {
 
     
-
+/* CREATION D'UNE VARIABLE POUR L'INCORPORER À L'URL DE LA REQUETE */ 
     var id =  itemsTeddies[i].id 
 
+/* REQUETE XMLHTTPREQUEST */
     var request = new XMLHttpRequest();                                         
 
     request.onreadystatechange = function () {                                  
@@ -29,7 +35,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             
     request.send();
 
-    
+/* FONCTON QUI PERMET D'INCORPORER LES ÉLÉMENTS DANS LE  PREMIER TABLEAU */    
         function tablesItems (tablesBasket)  {
 
             const tableContent = document.getElementById("tableContent");
@@ -38,7 +44,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             trBody.setAttribute("class" , "table-dark table-striped table-hover");
             tableContent.appendChild(trBody);
 
-            //IMAGES
+// => MISE EN PLACE DES IMAGES
             let thImgTeddie = document.createElement ("th");
             thImgTeddie.setAttribute("scope" , "row");
             trBody.appendChild(thImgTeddie);
@@ -48,14 +54,14 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
                 thImgTeddie.appendChild(imgItemTeddie);
 
-            //NOM
+// => MISE EN PLACE DES NOMS
             let tdNameTeddie = document.createElement ("td");
             trBody.appendChild(tdNameTeddie);
                 let nameItemTeddie = document.createElement("p");
                 nameItemTeddie.textContent = tablesBasket.name;
                 tdNameTeddie.appendChild(nameItemTeddie);
 
-            //PRIX UNITAIRE
+// => MISE EN PLACE DES PRIX UNITAIRE
             let tdPriceUnitTeddie = document.createElement ("td");
             trBody.appendChild(tdPriceUnitTeddie);
                 let priceUnitTeddie = document.createElement ("p");
@@ -63,7 +69,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
                 tdPriceUnitTeddie.appendChild(priceUnitTeddie);
 
-            //QUANTITÉ DE TEDDIE
+// => MISE EN PLACE DES QUANTITÉS DE TEDDIE
             let tdQuantityTeddie = document.createElement ("td");
             trBody.appendChild(tdQuantityTeddie);
                 let quantityOfTeddie = document.createElement ("p");
@@ -71,83 +77,74 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
                 tdQuantityTeddie.appendChild(quantityOfTeddie);  
 
-            //PRIX TOTAL PAR OURSONS 
+// => PRIX TOTAL PAR OURSONS 
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild(tdSubTotalTeddie);
-
-            // prix par oursons 
                 let subTotalTeddie = document.createElement ("p")
                 subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
                 tdSubTotalTeddie.appendChild(subTotalTeddie)
-               var subTotalOfTeddies = subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);
-
-            //AJOUTER OU SUPPRIMER UN OURSON
-             let tdAddOrRemove = document.createElement ("td");
-             trBody.appendChild(tdAddOrRemove);
-
-                let btnAddTeddie = document.createElement ("btn");
-                tdAddOrRemove.appendChild(btnAddTeddie);                   
-                btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
-                btnAddTeddie.setAttribute("id","btnAdd");                                    
-                btnAddTeddie.setAttribute("type","button");  
-                btnAddTeddie.dataset.idteddie = tablesBasket._id   ;                                                                                                                           
-                btnAddTeddie.textContent=" + ";    
-                addTeddieItem();
+                var subTotalOfTeddies = subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);
 
 
+// => AJOUTER OU SUPPRIMER UN OURSON
+    let tdAddOrRemove = document.createElement ("td");
+    trBody.appendChild(tdAddOrRemove);
 
-                
-                let btnRemoveTeddie = document.createElement ("btn");
-                tdAddOrRemove.appendChild(btnRemoveTeddie);                   
-                btnRemoveTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
-                btnRemoveTeddie.setAttribute("id","btnAdd");                                    
-                btnRemoveTeddie.setAttribute("type","button");                                                                                                                              
-                btnRemoveTeddie.textContent=" - ";    
-                
-                
+   let btnAddTeddie = document.createElement ("btn");
+   tdAddOrRemove.appendChild(btnAddTeddie);                   
+   btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
+   btnAddTeddie.setAttribute("id","btnAdd");                                    
+   btnAddTeddie.setAttribute("type","button");                                                                                                                           
+   btnAddTeddie.textContent=" + ";    
+   addTeddieItem(tablesBasket._id);
 
-                
-            // nombre d'articles 
-            
-            numberArticles (itemsTeddies[i].quantity);
-            
-          
-            //pris des dépenses 
-        
-            totalPriceOfTeddie (subTotalOfTeddies)
+   let btnRemoveTeddie = document.createElement ("btn");
+   tdAddOrRemove.appendChild(btnRemoveTeddie);                   
+   btnRemoveTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
+   btnRemoveTeddie.setAttribute("id","btnRemove");                                    
+   btnRemoveTeddie.setAttribute("type","button");                                                                                                                              
+   btnRemoveTeddie.textContent=" - "; 
 
-            
+/* REMPLISSAGE DU 2IEME TABLEAU */    
+
+// => Calcul nombre total d'articles 
+                numberArticles (itemsTeddies[i].quantity);
     
+// => Calcul prix total des dépenses 
+                totalPriceOfTeddie (subTotalOfTeddies)
+  
         };
 };
 
+/* CRÉATION DES ÉLÉMENTS DU 2IEME TABLEAU */ 
+function resumeTab (){
     let resumeCommand = document.createElement ("h3");
     resumeCommand.textContent = "Résumé de vos commandes";
     basket.appendChild(resumeCommand);
-
 
     let tableContent = document.createElement ("table");
     tableContent.setAttribute("class" , "table table-bordered border-red");
     basket.appendChild(tableContent);
    
     let tHeadSecondTab = document.createElement("tbody");
-     tableContent.appendChild(tHeadSecondTab);
+    tableContent.appendChild(tHeadSecondTab);
 
-     let trNumberItemsTeddie = document.createElement ("tr");
-     tableContent.appendChild(trNumberItemsTeddie);
+    let trNumberItemsTeddie = document.createElement ("tr");
+    tableContent.appendChild(trNumberItemsTeddie);
 
-     let numberItemTeddie = document.createElement ("p");
-     numberItemTeddie.setAttribute ("id" , "numberItem");
-     trNumberItemsTeddie.appendChild (numberItemTeddie);
+    let numberItemTeddie = document.createElement ("p");
+    numberItemTeddie.setAttribute ("id" , "numberItem");
+    trNumberItemsTeddie.appendChild (numberItemTeddie);
 
-     let trTotalPriceTeddie = document.createElement ("tr");
-     tableContent.appendChild(trTotalPriceTeddie);
+    let trTotalPriceTeddie = document.createElement ("tr");
+    tableContent.appendChild(trTotalPriceTeddie);
 
-     let totalPriceTeddies= document.createElement ("p");
-     totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
-     trTotalPriceTeddie.appendChild(totalPriceTeddies)
+    let totalPriceTeddies= document.createElement ("p");
+    totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
+    trTotalPriceTeddie.appendChild(totalPriceTeddies)
+}
 
-
+/* CRÉATION DES ÉLÉMENTS DU 1IER TABLEAU */
 function tablesBasket () {
 
     let tables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
@@ -179,17 +176,14 @@ function tablesBasket () {
     }   
     let tBody = document.createElement("tbody") 
         tBody.setAttribute("id","tableContent");
-        teddiesTables.appendChild(tBody);
-
-       
-        
+        teddiesTables.appendChild(tBody); 
 }; 
 
 
 
-//FONCTIONS GLOBALES 
+/* FONCTIONS GLOBALES */
 
-//prix total / oursons
+// => prix total / oursons
 function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     var  subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
     var  subTotalElement = document.getElementById("subTotal_" + idTeddie);
@@ -197,43 +191,36 @@ function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     return subTotalTeddie ;    
 };
 
-//Nombre totale d'articles
+// => Nombre totale d'articles
 function  numberArticles (quantityOfTeddie) {
     totalArticles = totalArticles + parseInt(quantityOfTeddie);
     var numberItemElement = document.getElementById("numberItem");
     numberItemElement.textContent = "Votre panier contient : " + totalArticles + " articles ";
 };
 
-//Prix total commande 
+// => Prix total commande 
 function totalPriceOfTeddie (subTotalTeddie) {
     totalPrice = totalPrice + parseInt(subTotalTeddie);
     var priceOfTeddieElement = document.getElementById("priceOfTeddies");
     priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;   
 };
 
-//Ajouter un teddie
-function addTeddieItem (btnAdd) {
+// => Ajouter un teddie
+function addTeddieItem (btnAdd,quantityOfTeddie) {
 
     var btnAdd = document.getElementById("btnAdd")
-   
+    //var quantity= document.getElementById("quantity_") ;
     
 
 
  btnAdd.addEventListener('click', function (event){
-        event.preventDefault();                                                
-
-        let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));  
-        var quantityOfTeddie = document.getElementById ("quantityOfTeddie")
-        console.log(quantityOfTeddie)
-  
-        for (let i = 0;i < itemsTeddies.length; i++) { 
-            
-           
-                          
-         
-    };
-});
+        event.preventDefault();   
+ 
+       console.log(quantityOfTeddie);
+       
+    });
 };
+
 
 
 
