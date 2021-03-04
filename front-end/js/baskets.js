@@ -206,17 +206,17 @@ function totalPriceOfTeddie (subTotalTeddie) {
 };
 
 // => Ajouter un teddie
-function addTeddieItem (btnAdd,quantityOfTeddie) {
+function addTeddieItem (tablesItems) {
 
     var btnAdd = document.getElementById("btnAdd")
-    //var quantity= document.getElementById("quantity_") ;
+  //  var quant= document.getElementById("subTotal_"+ tablesBasket._id) ;
     
 
 
  btnAdd.addEventListener('click', function (event){
         event.preventDefault();   
  
-       console.log(quantityOfTeddie);
+       console.log(tablesItems);
        
     });
 };
