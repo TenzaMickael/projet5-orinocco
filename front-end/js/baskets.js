@@ -12,12 +12,14 @@ resumeTab ()
 /* RECUPERATION DU LOCAL STORAGE */
 let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
 
+
 /* MISE EN PLACE D' UNE BOUCLE POUR APPLIQUER TOUTE LES MODIFS A TOUT LES OURSONS */
 for (let i = 0;i < itemsTeddies.length; i++) {
 
     
 /* CREATION D'UNE VARIABLE POUR L'INCORPORER À L'URL DE LA REQUETE */ 
     var id =  itemsTeddies[i].id 
+
 
 /* REQUETE XMLHTTPREQUEST */
     var request = new XMLHttpRequest();                                         
@@ -44,6 +46,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
             trBody.setAttribute("class" , "table-dark table-striped table-hover");
             tableContent.appendChild(trBody);
 
+
 // => MISE EN PLACE DES IMAGES
             let thImgTeddie = document.createElement ("th");
             thImgTeddie.setAttribute("scope" , "row");
@@ -54,12 +57,14 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
                 thImgTeddie.appendChild(imgItemTeddie);
 
+
 // => MISE EN PLACE DES NOMS
             let tdNameTeddie = document.createElement ("td");
             trBody.appendChild(tdNameTeddie);
                 let nameItemTeddie = document.createElement("p");
                 nameItemTeddie.textContent = tablesBasket.name;
                 tdNameTeddie.appendChild(nameItemTeddie);
+
 
 // => MISE EN PLACE DES PRIX UNITAIRE
             let tdPriceUnitTeddie = document.createElement ("td");
@@ -69,14 +74,16 @@ for (let i = 0;i < itemsTeddies.length; i++) {
                 priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
                 tdPriceUnitTeddie.appendChild(priceUnitTeddie);
 
+
 // => MISE EN PLACE DES QUANTITÉS DE TEDDIE
             let tdQuantityTeddie = document.createElement ("td");
             trBody.appendChild(tdQuantityTeddie);
                 let quantityOfTeddie = document.createElement ("p");
                 quantityOfTeddie.setAttribute("id" , "quantity_"+ tablesBasket._id)
-                quantityOfTeddie.textContent = "Quantités :" + itemsTeddies[i].quantity;
+                quantityOfTeddie.textContent = itemsTeddies[i].quantity;
                 tdQuantityTeddie.appendChild(quantityOfTeddie);  
-
+  
+                
 // => PRIX TOTAL PAR OURSONS 
             let tdSubTotalTeddie = document.createElement ("td");
             trBody.appendChild(tdSubTotalTeddie);
@@ -96,7 +103,13 @@ for (let i = 0;i < itemsTeddies.length; i++) {
    btnAddTeddie.setAttribute("id","btnAdd");                                    
    btnAddTeddie.setAttribute("type","button");                                                                                                                           
    btnAddTeddie.textContent=" + ";    
-   addTeddieItem(tablesBasket._id);
+   
+// => Evenement sur le bouton ajouter 
+   btnAddTeddie.addEventListener('click', function (event){
+    event.preventDefault();
+    updateTeddieItem(tablesBasket._id,1);
+
+   });
 
    let btnRemoveTeddie = document.createElement ("btn");
    tdAddOrRemove.appendChild(btnRemoveTeddie);                   
@@ -105,11 +118,21 @@ for (let i = 0;i < itemsTeddies.length; i++) {
    btnRemoveTeddie.setAttribute("type","button");                                                                                                                              
    btnRemoveTeddie.textContent=" - "; 
 
+// => Evenement sur le bouton enlever  
+   btnRemoveTeddie.addEventListener('click', function (event){
+    event.preventDefault();
+    updateTeddieItem(tablesBasket._id,-1);
+
+   });
+
+
 /* REMPLISSAGE DU 2IEME TABLEAU */    
+
 
 // => Calcul nombre total d'articles 
                 numberArticles (itemsTeddies[i].quantity);
-    
+ 
+                
 // => Calcul prix total des dépenses 
                 totalPriceOfTeddie (subTotalOfTeddies)
   
@@ -143,6 +166,7 @@ function resumeTab (){
     totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
     trTotalPriceTeddie.appendChild(totalPriceTeddies)
 }
+
 
 /* CRÉATION DES ÉLÉMENTS DU 1IER TABLEAU */
 function tablesBasket () {
@@ -180,7 +204,6 @@ function tablesBasket () {
 }; 
 
 
-
 /* FONCTIONS GLOBALES */
 
 // => prix total / oursons
@@ -191,12 +214,14 @@ function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     return subTotalTeddie ;    
 };
 
+
 // => Nombre totale d'articles
 function  numberArticles (quantityOfTeddie) {
     totalArticles = totalArticles + parseInt(quantityOfTeddie);
     var numberItemElement = document.getElementById("numberItem");
     numberItemElement.textContent = "Votre panier contient : " + totalArticles + " articles ";
 };
+
 
 // => Prix total commande 
 function totalPriceOfTeddie (subTotalTeddie) {
@@ -205,23 +230,44 @@ function totalPriceOfTeddie (subTotalTeddie) {
     priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;   
 };
 
+
 // => Ajouter un teddie
-function addTeddieItem (tablesItems) {
 
-    var btnAdd = document.getElementById("btnAdd")
-  //  var quant= document.getElementById("subTotal_"+ tablesBasket._id) ;
+function updateTeddieItem (idTeddie,nQuantity) {
+
     
+// =>  Ajouter +1 a la quantité de l'ourson sélectionner   
+         
+         var quantityElement = document.getElementById("quantity_" + idTeddie);
+        var quantity = parseInt(quantityElement.innerHTML)+nQuantity;
+        quantityElement.innerHTML = quantity;
 
+// =>  Mettre a jour le localStorage
 
- btnAdd.addEventListener('click', function (event){
-        event.preventDefault();   
- 
-       console.log(tablesItems);
-       
-    });
+    //updateStorageTeddie(idTeddie,quantity)
+
+   //Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
+//subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie)
+ var priceUnitTeddie = parseInt(document.getElementById("priceUnit_"+idTeddie).innerHTML)*100;
+subTotal(idTeddie,priceUnitTeddie,quantity)
+
+    //mettre a jour le prix total 
+    // mettre a jour le nb d'article total
 };
 
+function updateStorageTeddie (idTeddie,quantity) {
+    let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
+    for (let i = 0;i < itemsTeddies.length; i++) {
+        let id = itemsTeddies[i].id ;
+        if (id === idTeddie) {
+         itemsTeddies[i].quantity = quantity;
 
+            
+        }
+
+    }
+    localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
+}
 
 
    
