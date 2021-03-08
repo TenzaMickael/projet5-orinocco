@@ -252,6 +252,11 @@ function updateTeddieItem (idTeddie,nQuantity) {
 subTotal(idTeddie,priceUnitTeddie,quantity)
 
     //mettre a jour le prix total 
+   // totalPriceOfTeddie (subTotalTeddie)
+   
+var subTotalTeddie = parseInt(document.getElementById("subTotal_"+ idTeddie).innerHTML)*100;
+totalPriceOfTeddie (subTotalTeddie)
+
     // mettre a jour le nb d'article total
 };
 

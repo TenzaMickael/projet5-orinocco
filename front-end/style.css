@@ -18,7 +18,8 @@ nav
 
 .jumbotron
 {
-    background-color: rgb(78, 30, 100);
+   background-color: rgb(78, 30, 100);
+  
     color: rgb(221, 193, 37); 
     text-align: center;
 }  
