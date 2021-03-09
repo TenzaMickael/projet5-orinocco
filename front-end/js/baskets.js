@@ -101,7 +101,8 @@ for (let i = 0;i < itemsTeddies.length; i++) {
    tdAddOrRemove.appendChild(btnAddTeddie);                   
    btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
    btnAddTeddie.setAttribute("id","btnAdd");                                    
-   btnAddTeddie.setAttribute("type","button");                                                                                                                           
+   btnAddTeddie.setAttribute("type","button");  
+                                                                                                                          
    btnAddTeddie.textContent=" + ";    
    
 // => Evenement sur le bouton ajouter 
@@ -124,6 +125,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     updateTeddieItem(tablesBasket._id,-1);
 
    });
+
 
 
 /* REMPLISSAGE DU 2IEME TABLEAU */    
@@ -244,22 +246,31 @@ function updateTeddieItem (idTeddie,nQuantity) {
 
 // =>  Mettre a jour le localStorage
 
-    //updateStorageTeddie(idTeddie,quantity)
+    updateStorageTeddie(idTeddie,quantity)
 
-   //Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
-//subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie)
- var priceUnitTeddie = parseInt(document.getElementById("priceUnit_"+idTeddie).innerHTML)*100;
-subTotal(idTeddie,priceUnitTeddie,quantity)
+// => Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
 
-    //mettre a jour le prix total 
-   // totalPriceOfTeddie (subTotalTeddie)
+    var priceUnitTeddie = parseInt(document.getElementById("priceUnit_"+idTeddie).innerHTML)*100;
+    subTotal(idTeddie,priceUnitTeddie,quantity)
+
+// => mettre a jour le prix total 
+
+    totalPriceOfTeddie(priceUnitTeddie * nQuantity)
+
+// => mettre a jour le nb d'article total
+    numberArticles (nQuantity)
+  
+
+    if (quantity == 0) {
+       
+      // itemsTeddies.splice(1,1);
    
-var subTotalTeddie = parseInt(document.getElementById("subTotal_"+ idTeddie).innerHTML)*100;
-totalPriceOfTeddie (subTotalTeddie)
-
-    // mettre a jour le nb d'article total
+    };
+  // console.log(i) 
 };
 
+
+// Fonction qui permet de mettre à jour le localStorage
 function updateStorageTeddie (idTeddie,quantity) {
     let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
     for (let i = 0;i < itemsTeddies.length; i++) {
@@ -274,8 +285,6 @@ function updateStorageTeddie (idTeddie,quantity) {
     localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
 }
 
-
-   
 
     
 

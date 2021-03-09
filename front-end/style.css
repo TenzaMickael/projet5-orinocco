@@ -15,6 +15,13 @@ nav
     color : white;
     font-size:1.5em;
 }
+#btnAdd , #btnRemove
+{
+   width: 50px;
+   margin: auto;
+  
+}
+
 
 .jumbotron
 {
