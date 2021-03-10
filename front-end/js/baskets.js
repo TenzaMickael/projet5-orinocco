@@ -2,12 +2,15 @@
 var totalPrice = 0 ;
 var totalArticles = 0 ;
 
+
 /* RECUPÉRATION DE L'ID "BASKET" */
 const basket = document.getElementById("basket");
+
 
 /* CHARGEMENT DU 1IER et 2IEME TABLEAU DÉS LE CHARGEMENT DU CODE JS */
 tablesBasket ()
 resumeTab ()
+
 
 /* RECUPERATION DU LOCAL STORAGE */
 let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
@@ -38,7 +41,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     request.send();
 
 /* FONCTON QUI PERMET D'INCORPORER LES ÉLÉMENTS DANS LE  PREMIER TABLEAU */    
-        function tablesItems (tablesBasket)  {
+    function tablesItems (tablesBasket)  {
 
             const tableContent = document.getElementById("tableContent");
 
@@ -101,32 +104,37 @@ for (let i = 0;i < itemsTeddies.length; i++) {
    tdAddOrRemove.appendChild(btnAddTeddie);                   
    btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
    btnAddTeddie.setAttribute("id","btnAdd");                                    
-   btnAddTeddie.setAttribute("type","button");  
-                                                                                                                          
-   btnAddTeddie.textContent=" + ";    
-   
-// => Evenement sur le bouton ajouter 
-   btnAddTeddie.addEventListener('click', function (event){
-    event.preventDefault();
-    updateTeddieItem(tablesBasket._id,1);
-
-   });
+   btnAddTeddie.setAttribute("type","button");                                                                                                                      
+   btnAddTeddie.textContent=" + ";  
 
    let btnRemoveTeddie = document.createElement ("btn");
    tdAddOrRemove.appendChild(btnRemoveTeddie);                   
    btnRemoveTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
    btnRemoveTeddie.setAttribute("id","btnRemove");                                    
-   btnRemoveTeddie.setAttribute("type","button");                                                                                                                              
+   btnRemoveTeddie.setAttribute("type","button");  
+   btnRemoveTeddie.setAttribute("disabled","true");                                                                                                                           
    btnRemoveTeddie.textContent=" - "; 
+   
+   
+// => Evenement sur le bouton ajouter 
 
-// => Evenement sur le bouton enlever  
-   btnRemoveTeddie.addEventListener('click', function (event){
+    btnAddTeddie.addEventListener('click', function (event){
     event.preventDefault();
-    updateTeddieItem(tablesBasket._id,-1);
+    updateTeddieItem(tablesBasket._id,1);
 
    });
 
 
+// => Evenement sur le bouton enlever  
+    btnRemoveTeddie.addEventListener('click', function (event){
+    event.preventDefault();
+
+    
+        updateTeddieItem(tablesBasket._id, -1);
+  
+   });
+  
+  
 
 /* REMPLISSAGE DU 2IEME TABLEAU */    
 
@@ -138,7 +146,41 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 // => Calcul prix total des dépenses 
                 totalPriceOfTeddie (subTotalOfTeddies)
   
-        };
+};
+
+    function updateTeddieItem (idTeddie,nQuantity) {
+
+    
+    // =>  Ajouter +1 a la quantité de l'ourson sélectionner   
+             
+            var quantityElement = document.getElementById("quantity_" + idTeddie);
+            var quantity = parseInt(quantityElement.innerHTML)+nQuantity;
+            quantityElement.innerHTML = quantity;
+    
+   
+    
+    // => Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
+    
+        var priceUnitTeddie = parseInt(document.getElementById("priceUnit_"+idTeddie).innerHTML)*100;
+        subTotal(idTeddie,priceUnitTeddie,quantity)
+    
+    // => mettre a jour le prix total 
+    
+        totalPriceOfTeddie(priceUnitTeddie * nQuantity)
+    
+    // => mettre a jour le nb d'article total
+        numberArticles (nQuantity)
+
+
+
+        if (quantity === 0 ) {
+            deleteTeddie (itemsTeddies[i].id)
+        }  
+    
+         // =>  Mettre a jour le localStorage
+    
+         updateStorageTeddie(idTeddie,quantity)
+    };
 };
 
 /* CRÉATION DES ÉLÉMENTS DU 2IEME TABLEAU */ 
@@ -146,7 +188,7 @@ function resumeTab (){
     let resumeCommand = document.createElement ("h3");
     resumeCommand.textContent = "Résumé de vos commandes";
     basket.appendChild(resumeCommand);
-
+   
     let tableContent = document.createElement ("table");
     tableContent.setAttribute("class" , "table table-bordered border-red");
     basket.appendChild(tableContent);
@@ -233,41 +275,19 @@ function totalPriceOfTeddie (subTotalTeddie) {
 };
 
 
-// => Ajouter un teddie
 
-function updateTeddieItem (idTeddie,nQuantity) {
 
+// => Supprimer un ourson 
+function deleteTeddie (itemsTeddies){
+    for (let i = 0;i < localStorage.length; i++){
     
-// =>  Ajouter +1 a la quantité de l'ourson sélectionner   
-         
-         var quantityElement = document.getElementById("quantity_" + idTeddie);
-        var quantity = parseInt(quantityElement.innerHTML)+nQuantity;
-        quantityElement.innerHTML = quantity;
-
-// =>  Mettre a jour le localStorage
-
-    updateStorageTeddie(idTeddie,quantity)
-
-// => Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
-
-    var priceUnitTeddie = parseInt(document.getElementById("priceUnit_"+idTeddie).innerHTML)*100;
-    subTotal(idTeddie,priceUnitTeddie,quantity)
-
-// => mettre a jour le prix total 
-
-    totalPriceOfTeddie(priceUnitTeddie * nQuantity)
-
-// => mettre a jour le nb d'article total
-    numberArticles (nQuantity)
+    console.log(localStorage[0])
   
-
-    if (quantity == 0) {
-       
-      // itemsTeddies.splice(1,1);
-   
-    };
-  // console.log(i) 
 };
+    
+}
+
+
 
 
 // Fonction qui permet de mettre à jour le localStorage
