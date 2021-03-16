@@ -20,11 +20,11 @@ let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
 for (let i = 0;i < itemsTeddies.length; i++) {
 
     
-/* CREATION D'UNE VARIABLE POUR L'INCORPORER À L'URL DE LA REQUETE */ 
+    /* CREATION D'UNE VARIABLE POUR L'INCORPORER À L'URL DE LA REQUETE */ 
     var id =  itemsTeddies[i].id 
 
 
-/* REQUETE XMLHTTPREQUEST */
+    /* REQUETE XMLHTTPREQUEST */
     var request = new XMLHttpRequest();                                         
 
     request.onreadystatechange = function () {                                  
@@ -40,182 +40,147 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             
     request.send();
 
-/* FONCTON QUI PERMET D'INCORPORER LES ÉLÉMENTS DANS LE  PREMIER TABLEAU */    
+    /* FONCTON QUI PERMET D'INCORPORER LES ÉLÉMENTS DANS LE  PREMIER TABLEAU */ 
+
     function tablesItems (tablesBasket)  {
 
-            const tableContent = document.getElementById("tableContent");
+        const tableContent = document.getElementById("tableContent");
 
-            let trBody = document.createElement("tr");
-            trBody.setAttribute("class" , "table-dark table-striped table-hover");
-            tableContent.appendChild(trBody);
+        let trBody = document.createElement("tr");
+        trBody.setAttribute("class" , "table-dark table-striped table-hover");
+        tableContent.appendChild(trBody);        
 
+        // => MISE EN PLACE DES IMAGES
+        let thImgTeddie = document.createElement ("th");
+        thImgTeddie.setAttribute("scope" , "row");
+        trBody.appendChild(thImgTeddie);
+            let imgItemTeddie = document.createElement("img");
+            imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
+            imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
+            imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
+            thImgTeddie.appendChild(imgItemTeddie);
 
-// => MISE EN PLACE DES IMAGES
-            let thImgTeddie = document.createElement ("th");
-            thImgTeddie.setAttribute("scope" , "row");
-            trBody.appendChild(thImgTeddie);
-                let imgItemTeddie = document.createElement("img");
-                imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
-                imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
-                imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
-                thImgTeddie.appendChild(imgItemTeddie);
+        // => MISE EN PLACE DES NOMS
+        let tdNameTeddie = document.createElement ("td");
+        trBody.appendChild(tdNameTeddie);
+            let nameItemTeddie = document.createElement("p");
+            nameItemTeddie.textContent = tablesBasket.name;
+            tdNameTeddie.appendChild(nameItemTeddie);
 
+        // => MISE EN PLACE DES PRIX UNITAIRE
+        let tdPriceUnitTeddie = document.createElement ("td");
+        trBody.appendChild(tdPriceUnitTeddie);
+            let priceUnitTeddie = document.createElement ("p");
+            priceUnitTeddie.setAttribute ("id" , "priceUnit_"+ tablesBasket._id)
+            priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
+            tdPriceUnitTeddie.appendChild(priceUnitTeddie);
 
-// => MISE EN PLACE DES NOMS
-            let tdNameTeddie = document.createElement ("td");
-            trBody.appendChild(tdNameTeddie);
-                let nameItemTeddie = document.createElement("p");
-                nameItemTeddie.textContent = tablesBasket.name;
-                tdNameTeddie.appendChild(nameItemTeddie);
+        // => MISE EN PLACE DES QUANTITÉS DE TEDDIE
+        let tdQuantityTeddie = document.createElement ("td");
+        trBody.appendChild(tdQuantityTeddie);
+            let quantityOfTeddie = document.createElement ("p");
+            quantityOfTeddie.setAttribute("id" , "quantity_"+ tablesBasket._id)
+            quantityOfTeddie.textContent = itemsTeddies[i].quantity;
+            tdQuantityTeddie.appendChild(quantityOfTeddie);  
+                    
+        // => PRIX TOTAL PAR OURSONS 
+        let tdSubTotalTeddie = document.createElement ("td");
+        trBody.appendChild(tdSubTotalTeddie);
+            let subTotalTeddie = document.createElement ("p")
+            subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
+            tdSubTotalTeddie.appendChild(subTotalTeddie)
+            var subTotalOfTeddies = subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);
 
+        // => AJOUTER UN OURSON
+        let tdAddOrRemove = document.createElement ("td");
+        trBody.appendChild(tdAddOrRemove);
+            let btnAddTeddie = document.createElement ("btn");
+            tdAddOrRemove.appendChild(btnAddTeddie);                   
+            btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
+            btnAddTeddie.setAttribute("id","btnAdd");                                    
+            btnAddTeddie.setAttribute("type","button");                                                                                                                      
+            btnAddTeddie.textContent= "+";  
 
-// => MISE EN PLACE DES PRIX UNITAIRE
-            let tdPriceUnitTeddie = document.createElement ("td");
-            trBody.appendChild(tdPriceUnitTeddie);
-                let priceUnitTeddie = document.createElement ("p");
-                priceUnitTeddie.setAttribute ("id" , "priceUnit_"+ tablesBasket._id)
-                priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
-                tdPriceUnitTeddie.appendChild(priceUnitTeddie);
+        // => EVENEMENT SUR LE BOUTON AJOUTER 
+        btnAddTeddie.addEventListener('click', function (event){
+            event.preventDefault();
+            updateTeddieItem(tablesBasket._id,1);
+        });
 
+        // => ENLEVER UN OURSON 
+        let btnRemoveTeddie = document.createElement ("btn");
+        tdAddOrRemove.appendChild(btnRemoveTeddie);                   
+            btnRemoveTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
+            btnRemoveTeddie.setAttribute("id","btnRemove");                                    
+            btnRemoveTeddie.setAttribute("type","button");  
+            btnRemoveTeddie.setAttribute("disabled","true");                                                                                                                           
+            btnRemoveTeddie.textContent= "-"; 
 
-// => MISE EN PLACE DES QUANTITÉS DE TEDDIE
-            let tdQuantityTeddie = document.createElement ("td");
-            trBody.appendChild(tdQuantityTeddie);
-                let quantityOfTeddie = document.createElement ("p");
-                quantityOfTeddie.setAttribute("id" , "quantity_"+ tablesBasket._id)
-                quantityOfTeddie.textContent = itemsTeddies[i].quantity;
-                tdQuantityTeddie.appendChild(quantityOfTeddie);  
-  
-                
-// => PRIX TOTAL PAR OURSONS 
-            let tdSubTotalTeddie = document.createElement ("td");
-            trBody.appendChild(tdSubTotalTeddie);
-                let subTotalTeddie = document.createElement ("p")
-                subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id)
-                tdSubTotalTeddie.appendChild(subTotalTeddie)
-                var subTotalOfTeddies = subTotal(tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);
+        // => EVENEMENT SUR LE BOUTON ENLEVER  
+        btnRemoveTeddie.addEventListener('click', function (event){
+            event.preventDefault();
+            updateTeddieItem(tablesBasket._id, -1);  
+        });
 
+        //BOUTON SUPPRIMER UN OURSON 
+        let tdDelete = document.createElement ("td");
+        trBody.appendChild(tdDelete);
+            let btnDeleteTeddie = document.createElement ("btn");
+            tdDelete.appendChild(btnDeleteTeddie);                   
+            btnDeleteTeddie.setAttribute("class","btn btn-danger btn-sm");                                             
+            btnDeleteTeddie.setAttribute("id","btnRemove");        
+            btnDeleteTeddie.dataset.idteddie = tablesBasket._id   ;                            
+            btnDeleteTeddie.setAttribute("type","button");                                                                                                                      
+            btnDeleteTeddie.textContent= "X";  
 
-// => AJOUTER OU SUPPRIMER UN OURSON
-    let tdAddOrRemove = document.createElement ("td");
-    trBody.appendChild(tdAddOrRemove);
-
-   let btnAddTeddie = document.createElement ("btn");
-   tdAddOrRemove.appendChild(btnAddTeddie);                   
-   btnAddTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
-   btnAddTeddie.setAttribute("id","btnAdd");                                    
-   btnAddTeddie.setAttribute("type","button");                                                                                                                      
-   btnAddTeddie.textContent=" + ";  
-
-   let btnRemoveTeddie = document.createElement ("btn");
-   tdAddOrRemove.appendChild(btnRemoveTeddie);                   
-   btnRemoveTeddie.setAttribute("class","btn btn-primary btn-sm");                                             
-   btnRemoveTeddie.setAttribute("id","btnRemove");                                    
-   btnRemoveTeddie.setAttribute("type","button");  
-   btnRemoveTeddie.setAttribute("disabled","true");                                                                                                                           
-   btnRemoveTeddie.textContent=" - "; 
+        //EVENEMENT SUR LE BOUTON SUPPRIMER
+            btnDeleteTeddie.addEventListener('click', function (event){
+                event.preventDefault();
+                deleteTeddie (tablesBasket._id)
+            });
    
-   
-// => Evenement sur le bouton ajouter 
-
-    btnAddTeddie.addEventListener('click', function (event){
-    event.preventDefault();
-    updateTeddieItem(tablesBasket._id,1);
-
-   });
-
-
-// => Evenement sur le bouton enlever  
-    btnRemoveTeddie.addEventListener('click', function (event){
-    event.preventDefault();
-
+        /* REMPLISSAGE DU 2IEME TABLEAU */    
+        // => Calcul nombre total d'articles 
+        numberArticles (itemsTeddies[i].quantity);
+                    
+        // => Calcul prix total des dépenses 
+        totalPriceOfTeddie (subTotalOfTeddies)
     
-        updateTeddieItem(tablesBasket._id, -1);
-  
-   });
-  
-  
+    };
 
-/* REMPLISSAGE DU 2IEME TABLEAU */    
-
-
-// => Calcul nombre total d'articles 
-                numberArticles (itemsTeddies[i].quantity);
- 
-                
-// => Calcul prix total des dépenses 
-                totalPriceOfTeddie (subTotalOfTeddies)
-  
-};
-
+// => FONCTION POUR LE 2 IEME TABLEAU 
     function updateTeddieItem (idTeddie,nQuantity) {
-
+ 
+        // =>  Ajouter +1 a la quantité de l'ourson sélectionner           
+        var quantityElement = document.getElementById("quantity_" + idTeddie);
+        var quantity = parseInt(quantityElement.innerHTML)+nQuantity;
+        quantityElement.innerHTML = quantity;
     
-    // =>  Ajouter +1 a la quantité de l'ourson sélectionner   
-             
-            var quantityElement = document.getElementById("quantity_" + idTeddie);
-            var quantity = parseInt(quantityElement.innerHTML)+nQuantity;
-            quantityElement.innerHTML = quantity;
-    
-   
-    
-    // => Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
-    
+        // => Appeller la fonction pour mettre a jour chaque ligne de l'ourson 
         var priceUnitTeddie = parseInt(document.getElementById("priceUnit_"+idTeddie).innerHTML)*100;
         subTotal(idTeddie,priceUnitTeddie,quantity)
     
-    // => mettre a jour le prix total 
-    
+        // => mettre a jour le prix total    
         totalPriceOfTeddie(priceUnitTeddie * nQuantity)
     
-    // => mettre a jour le nb d'article total
+        // => mettre a jour le nb d'article total
         numberArticles (nQuantity)
 
-
-
         if (quantity === 0 ) {
-            deleteTeddie (itemsTeddies[i].id)
+           
+           deleteTeddie (idTeddie)
         }  
     
-         // =>  Mettre a jour le localStorage
-    
+        // =>  Mettre a jour le localStorage
          updateStorageTeddie(idTeddie,quantity)
     };
 };
 
-/* CRÉATION DES ÉLÉMENTS DU 2IEME TABLEAU */ 
-function resumeTab (){
-    let resumeCommand = document.createElement ("h3");
-    resumeCommand.textContent = "Résumé de vos commandes";
-    basket.appendChild(resumeCommand);
-   
-    let tableContent = document.createElement ("table");
-    tableContent.setAttribute("class" , "table table-bordered border-red");
-    basket.appendChild(tableContent);
-   
-    let tHeadSecondTab = document.createElement("tbody");
-    tableContent.appendChild(tHeadSecondTab);
+/* CRÉATION DES ÉLÉMENTS DU 1 IER TABLEAU */
 
-    let trNumberItemsTeddie = document.createElement ("tr");
-    tableContent.appendChild(trNumberItemsTeddie);
-
-    let numberItemTeddie = document.createElement ("p");
-    numberItemTeddie.setAttribute ("id" , "numberItem");
-    trNumberItemsTeddie.appendChild (numberItemTeddie);
-
-    let trTotalPriceTeddie = document.createElement ("tr");
-    tableContent.appendChild(trTotalPriceTeddie);
-
-    let totalPriceTeddies= document.createElement ("p");
-    totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
-    trTotalPriceTeddie.appendChild(totalPriceTeddies)
-}
-
-
-/* CRÉATION DES ÉLÉMENTS DU 1IER TABLEAU */
 function tablesBasket () {
 
-    let tables = [" Miniature " , " Nom " , " Prix unitaire " , " Quantités " ," Prix total " , " Ajouter ou supprimer " ] ;
+    let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
 
     const basket = document.getElementById("basket");
 
@@ -241,11 +206,87 @@ function tablesBasket () {
         thTables.setAttribute ("class", "table-primary")
         trTables.appendChild(thTables);
         thTables.textContent = tables[i]; 
-    }   
+    } 
+
     let tBody = document.createElement("tbody") 
         tBody.setAttribute("id","tableContent");
         teddiesTables.appendChild(tBody); 
 }; 
+
+
+/* CRÉATION DES ÉLÉMENTS DU 2IEME TABLEAU */ 
+
+function resumeTab (){
+    let resumeCommand = document.createElement ("h3");
+    resumeCommand.textContent = "Résumé de votre commande";
+    basket.appendChild(resumeCommand);
+   
+    let tableContent = document.createElement ("table");
+    tableContent.setAttribute("class" , "table table-bordered border-red");
+    basket.appendChild(tableContent);
+
+    let tHeadSecondTab = document.createElement("tbody");
+    tableContent.appendChild(tHeadSecondTab);
+
+    let trNumberItemsTeddie = document.createElement ("tr");
+    tableContent.appendChild(trNumberItemsTeddie);
+        let numberItemTeddie = document.createElement ("p");
+        numberItemTeddie.setAttribute ("id" , "numberItem");
+        trNumberItemsTeddie.appendChild (numberItemTeddie);
+
+    let trTotalPriceTeddie = document.createElement ("tr");
+    tableContent.appendChild(trTotalPriceTeddie);
+        let totalPriceTeddies= document.createElement ("p");
+        totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
+        trTotalPriceTeddie.appendChild(totalPriceTeddies)
+
+       
+
+     
+        /*btnOrder.addEventListener("click", function (event){
+            event.preventDefault();
+        placeOrder();
+        });*/
+
+        let continueShopping = document.createElement ("a");
+        continueShopping.setAttribute ("type" , "button");
+        continueShopping.setAttribute ("class" , "btn btn-success");
+        continueShopping.setAttribute ("id" , "btnContinueShopping");
+        continueShopping.setAttribute ("href" , "./index.html")
+        continueShopping.textContent = " Continuer vos achats ";
+        tableContent.appendChild(continueShopping); 
+
+        if (localStorage.length > 0) {
+
+            let placeOrderBasket = document.createElement ("btn");
+            placeOrderBasket.setAttribute ("type" , "button");
+            placeOrderBasket.setAttribute("class" , "btn btn-success");
+            placeOrderBasket.setAttribute("id","btnOrder");
+            placeOrderBasket.textContent = " Commander ";
+            tableContent.appendChild(placeOrderBasket);
+            
+          
+        }
+        
+        
+
+        let deleteLocalStorage = document.createElement ("btn");
+        deleteLocalStorage.setAttribute ("type" , "button");
+        deleteLocalStorage.setAttribute ("class" , "btn btn-danger");
+        deleteLocalStorage.setAttribute ("id" , "btnDeleteLocallStorage");
+        deleteLocalStorage.textContent = " Vider le panier ";
+        tableContent.appendChild(deleteLocalStorage);
+
+       
+       
+         btnDeleteLocallStorage.addEventListener("click", function (event){
+            event.preventDefault();
+         localStorage.clear();
+           window.location.reload ()
+        });
+        console.log(localStorage)
+     
+    };
 
 
 /* FONCTIONS GLOBALES */
@@ -276,34 +317,177 @@ function totalPriceOfTeddie (subTotalTeddie) {
 
 
 
-
 // => Supprimer un ourson 
-function deleteTeddie (itemsTeddies){
-    for (let i = 0;i < localStorage.length; i++){
+function deleteTeddie (idTeddie,quantityOfTeddie){
+    let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
+    let index = findIndexTeddieStorage (idTeddie,itemsTeddies)
+    itemsTeddies.splice(index,1);
+    console.log(itemsTeddies)
+    //if (itemsTeddies.length === 0 ) {
+      // localStorage.removeItem("selectTeddies");
+    //}
     
-    console.log(localStorage[0])
-  
-};
-    
+    localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
+   // window.location.reload ()
 }
-
-
-
 
 // Fonction qui permet de mettre à jour le localStorage
 function updateStorageTeddie (idTeddie,quantity) {
     let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
-    for (let i = 0;i < itemsTeddies.length; i++) {
-        let id = itemsTeddies[i].id ;
-        if (id === idTeddie) {
-         itemsTeddies[i].quantity = quantity;
-
-            
-        }
-
-    }
+    let index = findIndexTeddieStorage (idTeddie,itemsTeddies)
+    itemsTeddies[index].quantity = quantity;
     localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
+    
 }
+
+function findIndexTeddieStorage(idTeddie,itemsTeddies){
+    
+    for (let index = 0;index < itemsTeddies.length; index++) {
+        let id = itemsTeddies[index].id ;
+        if (id === idTeddie) {
+          return  index       
+        }
+    }
+};
+
+function placeOrder () {
+
+    //=> CONTAINER POUR LE FORMULAIRE
+    let formContaint = document.createElement ("form");
+    formContaint.setAttribute("method", "post")
+    formContaint.setAttribute("id" , "form")
+    basket.appendChild(formContaint)
+
+    let formTitle = document.createElement ("h2");
+    formTitle.textContent= "Veuillez remplir ce formulaire pour valider votre commande";
+    formContaint.appendChild(formTitle);
+
+    //=> NOM
+        let lastNameForm = document.createElement ("label");
+        lastNameForm.setAttribute("for", "lastName");
+        lastNameForm.textContent = " NOM : "    ;     
+        formContaint.appendChild(lastNameForm)
+            let inputLastName = document.createElement ("input");
+            inputLastName.setAttribute ("type" , "text") ;
+            inputLastName.setAttribute ("name" , "nom") ;
+            inputLastName.setAttribute ("id" , "lastName") ;
+            inputLastName.setAttribute("placeholder" , "nom") ; 
+            inputLastName.setAttribute("required" , "true");
+            lastNameForm.appendChild(inputLastName);
+                let spanLastName = document.createElement ("span");
+                spanLastName.setAttribute ("id", "missLastName");
+                lastNameForm.appendChild(spanLastName);
+                
+            
+//=> PRENOM
+        let firstNameForm = document.createElement ("label");
+        firstNameForm.setAttribute("for", "firstName");
+        firstNameForm.textContent = " PRENOM : " ;       
+        formContaint.appendChild(firstNameForm);
+            let inputFirstName = document.createElement ("input");
+            inputFirstName.setAttribute ("type" , "text") ;
+            inputFirstName.setAttribute ("name" , "firstName") ;
+            inputFirstName.setAttribute ("id" , "firstName") ;
+            inputFirstName.setAttribute("placeholder" , "prénom") ; 
+            inputFirstName.setAttribute("required" , "true");
+            firstNameForm.appendChild(inputFirstName);
+                let spanFirstName = document.createElement ("span");
+                spanFirstName.setAttribute ("id", "missFirstName");
+                firstNameForm.appendChild(spanFirstName);
+
+//=> ADRESSE
+        let adressForm = document.createElement ("label");
+        adressForm.setAttribute("for", "address");
+        adressForm.textContent = " ADRESSE : " ;         
+        formContaint.appendChild(adressForm);
+            let inputAdress = document.createElement ("input");
+            inputAdress.setAttribute ("type" , "text") ;
+            inputAdress.setAttribute ("name" , "adress") ;
+            inputAdress.setAttribute ("id" , "adress") ;
+            inputAdress.setAttribute("placeholder" , "adresse") ; 
+            inputAdress.setAttribute("required" , "true");
+            adressForm.appendChild(inputAdress);
+                let spanAdress = document.createElement ("span");
+                spanAdress.setAttribute ("id", "missAdress");
+                adressForm.appendChild(spanAdress);
+
+//=> VILLLE
+        let cityForm = document.createElement ("label");
+        cityForm.setAttribute("for", "city");
+        cityForm.textContent = " VILLE : "            
+        formContaint.appendChild(cityForm);
+            let inputCity = document.createElement ("input");
+            inputCity.setAttribute ("type" , "text") ;
+            inputCity.setAttribute ("name" , "city") ;
+            inputCity.setAttribute ("id" , "city") ;
+            inputCity.setAttribute("placeholder" , "ville") ; 
+            inputCity.setAttribute("required" , "true");
+            cityForm.appendChild(inputCity);
+                let spanCity = document.createElement ("span");
+                spanCity.setAttribute ("id", "missCity");
+                cityForm.appendChild(spanCity);
+
+//=> MAIL
+        let mailForm = document.createElement ("label");
+        mailForm.setAttribute("for", "mail");
+        mailForm.textContent = " MAIL :"            
+        formContaint.appendChild(mailForm);
+            let inputMail = document.createElement ("input");
+            inputMail.setAttribute ("type" , "mail") ;
+            inputMail.setAttribute ("name" , "mail") ;
+            inputMail.setAttribute ("id" , "mail") ;
+            inputMail.setAttribute("placeholder" , "email") ; 
+            inputMail.setAttribute("required" , "true");
+            mailForm.appendChild(inputMail);
+                let spanMail = document.createElement ("span");
+                spanMail.setAttribute ("id", "missMail");
+                mailForm.appendChild(spanMail);
+
+//=> VALIDER
+        let validForm = document.createElement ("input");
+        validForm.setAttribute ("type","submit");
+        validForm.setAttribute ("value" , "valider");
+        validForm.setAttribute ("id","btnValid");
+        formContaint.appendChild(validForm) ;
+        btnValid.addEventListener("click",validation);
+
+function validation(event,placeOrder){
+    event.preventDefault();
+    if (lastName.validity.valueMissing){
+       
+        missLastName.textContent = "nom manquant";
+        missLastName.style.color = "red" ;
+
+    } if (firstName.validity.valueMissing){
+        
+        missFirstName.textContent = "prénom manquant";
+        missFirstName.style.color = "red" ;
+
+    } if (adress.validity.valueMissing){
+       
+        missAdress.textContent = "Adresse manquant";
+        missAdress.style.color = "red" ;
+
+    } if (city.validity.valueMissing){
+        
+        missCity.textContent = "Ville manquante";
+        missCity.style.color = "red" ;
+
+    } if (mail.validity.valueMissing){
+   
+    missMail.textContent = "Email manquant";
+    missMail.style.color = "red" ;
+
+    }else{
+    missLastName.textContent ="";
+    missFirstName.textContent ="";
+    missAdress.textContent ="";
+    missCity.textContent ="";
+    missMail.textContent ="";
+    };
+};
+};
+
 
 
     
