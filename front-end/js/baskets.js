@@ -318,17 +318,18 @@ function totalPriceOfTeddie (subTotalTeddie) {
 
 
 // => Supprimer un ourson 
-function deleteTeddie (idTeddie,quantityOfTeddie){
+function deleteTeddie (idTeddie){
     let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
     let index = findIndexTeddieStorage (idTeddie,itemsTeddies)
     itemsTeddies.splice(index,1);
     console.log(itemsTeddies)
-    //if (itemsTeddies.length === 0 ) {
-      // localStorage.removeItem("selectTeddies");
-    //}
+
+    if (itemsTeddies.length == 0 ) {
+       localStorage.removeItem("selectTeddies");
+    }
     
     localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
-   // window.location.reload ()
+    window.location.reload ()
 }
 
 // Fonction qui permet de mettre à jour le localStorage
