@@ -7,9 +7,7 @@ var totalArticles = 0 ;
 const basket = document.getElementById("basket");
 
 
-/* CHARGEMENT DU 1IER et 2IEME TABLEAU DÉS LE CHARGEMENT DU CODE JS */
-tablesBasket ()
-resumeTab ()
+
 
 
 /* RECUPERATION DU LOCAL STORAGE */
@@ -17,6 +15,9 @@ let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
 
 
 /* MISE EN PLACE D' UNE BOUCLE POUR APPLIQUER TOUTE LES MODIFS A TOUT LES OURSONS */
+/* CHARGEMENT DU 1IER et 2IEME TABLEAU DÉS LE CHARGEMENT DU CODE JS */
+tablesBasket ()
+resumeTab ()
 for (let i = 0;i < itemsTeddies.length; i++) {
 
     
@@ -166,13 +167,15 @@ for (let i = 0;i < itemsTeddies.length; i++) {
         // => mettre a jour le nb d'article total
         numberArticles (nQuantity)
 
+ // =>  Mettre a jour le localStorage
+ updateStorageTeddie(idTeddie,quantity)
+
         if (quantity === 0 ) {
            
            deleteTeddie (idTeddie)
         }  
     
-        // =>  Mettre a jour le localStorage
-         updateStorageTeddie(idTeddie,quantity)
+       
     };
 };
 
@@ -216,7 +219,7 @@ function tablesBasket () {
 
 /* CRÉATION DES ÉLÉMENTS DU 2IEME TABLEAU */ 
 
-function resumeTab (){
+function resumeTab (itemsTeddies){
     let resumeCommand = document.createElement ("h3");
     resumeCommand.textContent = "Résumé de votre commande";
     basket.appendChild(resumeCommand);
@@ -256,7 +259,7 @@ function resumeTab (){
         continueShopping.textContent = " Continuer vos achats ";
         tableContent.appendChild(continueShopping); 
 
-        if (localStorage.length > 0) {
+        if (itemsTeddies) {
 
             let placeOrderBasket = document.createElement ("btn");
             placeOrderBasket.setAttribute ("type" , "button");
@@ -281,7 +284,7 @@ function resumeTab (){
        
          btnDeleteLocallStorage.addEventListener("click", function (event){
             event.preventDefault();
-         localStorage.clear();
+            deleteTeddie(itemsTeddies);
            window.location.reload ()
         });
         console.log(localStorage)
@@ -326,10 +329,11 @@ function deleteTeddie (idTeddie){
 
     if (itemsTeddies.length == 0 ) {
        localStorage.removeItem("selectTeddies");
-    }
+    } else {
     
     localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
     window.location.reload ()
+    }
 }
 
 // Fonction qui permet de mettre à jour le localStorage
