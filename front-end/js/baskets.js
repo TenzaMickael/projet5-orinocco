@@ -17,7 +17,7 @@ let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
 /* MISE EN PLACE D' UNE BOUCLE POUR APPLIQUER TOUTE LES MODIFS A TOUT LES OURSONS */
 /* CHARGEMENT DU 1IER et 2IEME TABLEAU DÉS LE CHARGEMENT DU CODE JS */
 tablesBasket ()
-resumeTab ()
+resumeTab (itemsTeddies)
 for (let i = 0;i < itemsTeddies.length; i++) {
 
     
@@ -332,8 +332,9 @@ function deleteTeddie (idTeddie){
     } else {
     
     localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
-    window.location.reload ()
+   
     }
+     window.location.reload ()
 }
 
 // Fonction qui permet de mettre à jour le localStorage
