@@ -25,8 +25,7 @@ nav
 
 .jumbotron
 {
-   background-color: rgb(78, 30, 100);
-  
+  background-color: rgb(78, 30, 100);
     color: rgb(221, 193, 37); 
     text-align: center;
 }  
@@ -39,6 +38,7 @@ nav
     flex-wrap: wrap;  
     justify-content:center;      
     align-items: center; 
+   
 }
 
 
@@ -46,6 +46,7 @@ nav
 {
     margin:30px;
     width: 30rem;
+    
 }
 
 .card-img-top
@@ -195,10 +196,19 @@ input {
 
 .image__teddies__product{
 
-    width:80px;
+    width:100px;
     display: block;
+   margin: auto;
+   border: 1px solid brown;  
 }
 
+
+td p{
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    color:brown;
+}
 #tdBody{
     padding:0px;
 }

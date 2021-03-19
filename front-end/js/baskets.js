@@ -199,7 +199,7 @@ function tablesBasket () {
     teddiesTables.appendChild(tHead);
 
     let trTables = document.createElement("tr");
-    trTables.setAttribute ("class", "table-primary")
+    trTables.setAttribute ("class", "table-primary ")
     tHead.appendChild(trTables);
 
     for (let i = 0;i < tables.length; i++) {
@@ -243,13 +243,6 @@ function resumeTab (itemsTeddies){
         totalPriceTeddies.setAttribute ("id" , "priceOfTeddies");
         trTotalPriceTeddie.appendChild(totalPriceTeddies)
 
-       
-
-     
-        /*btnOrder.addEventListener("click", function (event){
-            event.preventDefault();
-        placeOrder();
-        });*/
 
         let continueShopping = document.createElement ("a");
         continueShopping.setAttribute ("type" , "button");
@@ -267,27 +260,33 @@ function resumeTab (itemsTeddies){
             placeOrderBasket.setAttribute("id","btnOrder");
             placeOrderBasket.textContent = " Commander ";
             tableContent.appendChild(placeOrderBasket);
+
+            btnOrder.addEventListener("click", function (event){
+                event.preventDefault();
+                    placeOrder();
+                
             
+            });
+            
+
+            let deleteLocalStorage = document.createElement ("btn");
+            deleteLocalStorage.setAttribute ("type" , "button");
+            deleteLocalStorage.setAttribute ("class" , "btn btn-danger");
+            deleteLocalStorage.setAttribute ("id" , "btnDeleteLocallStorage");
+            deleteLocalStorage.textContent = " Vider le panier ";
+            tableContent.appendChild(deleteLocalStorage);
+       
+            btnDeleteLocallStorage.addEventListener("click", function (event){
+                event.preventDefault();
+                deleteTeddie(itemsTeddies);
+            window.location.reload ()
+            });
+            console.log(localStorage)
           
         }
         
         
 
-        let deleteLocalStorage = document.createElement ("btn");
-        deleteLocalStorage.setAttribute ("type" , "button");
-        deleteLocalStorage.setAttribute ("class" , "btn btn-danger");
-        deleteLocalStorage.setAttribute ("id" , "btnDeleteLocallStorage");
-        deleteLocalStorage.textContent = " Vider le panier ";
-        tableContent.appendChild(deleteLocalStorage);
-
-       
-       
-         btnDeleteLocallStorage.addEventListener("click", function (event){
-            event.preventDefault();
-            deleteTeddie(itemsTeddies);
-           window.location.reload ()
-        });
-        console.log(localStorage)
      
     };
 
@@ -457,39 +456,48 @@ function placeOrder () {
         formContaint.appendChild(validForm) ;
         btnValid.addEventListener("click",validation);
 
-function validation(event,placeOrder){
-    event.preventDefault();
-    if (lastName.validity.valueMissing){
-       
+function validation(){
+  
+
+    //NOM
+    if (lastName.validity.valueMissing) {
         missLastName.textContent = "nom manquant";
         missLastName.style.color = "red" ;
+    }else{
+        missLastName.textContent ="";
+    }
 
-    } if (firstName.validity.valueMissing){
-        
+
+    //PRENOM
+    if (firstName.validity.valueMissing){    
         missFirstName.textContent = "prénom manquant";
         missFirstName.style.color = "red" ;
+    }else{
+        missFirstName.textContent ="";
+    } 
 
-    } if (adress.validity.valueMissing){
-       
+    //ADRESSE
+    if (adress.validity.valueMissing){
         missAdress.textContent = "Adresse manquant";
         missAdress.style.color = "red" ;
+    }else{
+        missAdress.textContent ="";
+    }
 
-    } if (city.validity.valueMissing){
-        
+    //VILLE
+    if (city.validity.valueMissing){ 
         missCity.textContent = "Ville manquante";
         missCity.style.color = "red" ;
-
-    } if (mail.validity.valueMissing){
-   
-    missMail.textContent = "Email manquant";
-    missMail.style.color = "red" ;
-
     }else{
-    missLastName.textContent ="";
-    missFirstName.textContent ="";
-    missAdress.textContent ="";
-    missCity.textContent ="";
-    missMail.textContent ="";
+        missCity.textContent ="";
+    }
+
+    //EMAIL
+    if (mail.validity.valueMissing){
+        missMail.textContent = "Email manquant";
+        missMail.style.color = "red" ;
+    }else{
+        missMail.textContent ="";
     };
 };
 };
