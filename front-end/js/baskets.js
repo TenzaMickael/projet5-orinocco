@@ -261,11 +261,13 @@ function resumeTab (itemsTeddies){
             placeOrderBasket.textContent = " Commander ";
             tableContent.appendChild(placeOrderBasket);
 
+          
+
             btnOrder.addEventListener("click", function (event){
                 event.preventDefault();
+                if (!document.getElementById("form")){
                     placeOrder();
-                
-            
+                };
             });
             
 
@@ -281,7 +283,7 @@ function resumeTab (itemsTeddies){
                 deleteTeddie(itemsTeddies);
             window.location.reload ()
             });
-            console.log(localStorage)
+           
           
         }
         
@@ -457,13 +459,19 @@ function placeOrder () {
         btnValid.addEventListener("click",validation);
 
 function validation(){
-  
+console.log(lastName.value);
 
     //NOM
-    if (lastName.validity.valueMissing) {
+    if (lastName.validity.valueMissing  ){
         missLastName.textContent = "nom manquant";
         missLastName.style.color = "red" ;
-    }else{
+
+    } else if (!(/^\D+$/.test(lastName.value))) {
+
+        missLastName.textContent = "le nom contient des chiffres";
+        missLastName.style.color = "red" ;
+    }
+    else {
         missLastName.textContent ="";
     }
 
@@ -472,7 +480,13 @@ function validation(){
     if (firstName.validity.valueMissing){    
         missFirstName.textContent = "prénom manquant";
         missFirstName.style.color = "red" ;
-    }else{
+
+    } else if (!(/^\D+$/.test(firstName.value))) {
+
+        missFirstName.textContent = "le prénom contient des chiffres";
+        missFirstName.style.color = "red" ;
+    } else{
+
         missFirstName.textContent ="";
     } 
 
@@ -480,23 +494,36 @@ function validation(){
     if (adress.validity.valueMissing){
         missAdress.textContent = "Adresse manquant";
         missAdress.style.color = "red" ;
-    }else{
+    }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {
+
+        missAdress.textContent = "Vous utiliser des caractère spéciaux";
+        missAdress.style.color = "red" ;
+    } else {
         missAdress.textContent ="";
     }
-
+   
     //VILLE
     if (city.validity.valueMissing){ 
         missCity.textContent = "Ville manquante";
         missCity.style.color = "red" ;
-    }else{
-        missCity.textContent ="";
+    }else  if (!(/[A-Za-z-']/.test(city.value))) {
+
+        missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";
+        missCity.style.color = "red" ;
+
+    }else { missCity.textContent ="";
+
     }
 
     //EMAIL
     if (mail.validity.valueMissing){
         missMail.textContent = "Email manquant";
         missMail.style.color = "red" ;
-    }else{
+    }else if (!/[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})/.test(mail.value)){
+
+        missMail.textContent = "Format email incorect";
+        missMail.style.color = "red" ;
+    }else {   
         missMail.textContent ="";
     };
 };
