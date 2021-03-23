@@ -1,7 +1,7 @@
 /* VARIABLES GLOBALES */
 var totalPrice = 0 ;
 var totalArticles = 0 ;
-
+var formValid = true;
 
 /* RECUPÉRATION DE L'ID "BASKET" */
 const basket = document.getElementById("basket");
@@ -261,8 +261,6 @@ function resumeTab (itemsTeddies){
             placeOrderBasket.textContent = " Commander ";
             tableContent.appendChild(placeOrderBasket);
 
-          
-
             btnOrder.addEventListener("click", function (event){
                 event.preventDefault();
                 if (!document.getElementById("form")){
@@ -456,15 +454,15 @@ function placeOrder () {
         validForm.setAttribute ("value" , "valider");
         validForm.setAttribute ("id","btnValid");
         formContaint.appendChild(validForm) ;
-        btnValid.addEventListener("click",validation);
-
+        validation()
+       
 function validation(){
-console.log(lastName.value);
 
     //NOM
     if (lastName.validity.valueMissing  ){
         missLastName.textContent = "nom manquant";
         missLastName.style.color = "red" ;
+        formValid = false;
 
     } else if (!(/^\D+$/.test(lastName.value))) {
 
@@ -480,6 +478,7 @@ console.log(lastName.value);
     if (firstName.validity.valueMissing){    
         missFirstName.textContent = "prénom manquant";
         missFirstName.style.color = "red" ;
+        formValid = false ;
 
     } else if (!(/^\D+$/.test(firstName.value))) {
 
@@ -494,6 +493,9 @@ console.log(lastName.value);
     if (adress.validity.valueMissing){
         missAdress.textContent = "Adresse manquant";
         missAdress.style.color = "red" ;
+        formValid = false ;
+
+
     }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {
 
         missAdress.textContent = "Vous utiliser des caractère spéciaux";
@@ -506,6 +508,8 @@ console.log(lastName.value);
     if (city.validity.valueMissing){ 
         missCity.textContent = "Ville manquante";
         missCity.style.color = "red" ;
+        formValid = false;
+
     }else  if (!(/[A-Za-z-']/.test(city.value))) {
 
         missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";
@@ -519,6 +523,8 @@ console.log(lastName.value);
     if (mail.validity.valueMissing){
         missMail.textContent = "Email manquant";
         missMail.style.color = "red" ;
+        formValid = false;
+
     }else if (!/[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})/.test(mail.value)){
 
         missMail.textContent = "Format email incorect";
@@ -526,8 +532,26 @@ console.log(lastName.value);
     }else {   
         missMail.textContent ="";
     };
+    
+    
+btnValid.addEventListener("click", function (event){
+    event.preventDefault();
+
+    if (formValid = true){
+
+        const contact = {
+            lastName: document.getElementById("lastName").value,
+            firstName: document.getElementById("firstName").value,
+            address: document.getElementById("address").value,
+            city: document.getElementById("city").value,
+            email: document.getElementById("mail").value
+        }
+console.log(contact)
+    }
+});
+    
 };
-};
+}
 
 
 
