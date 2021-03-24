@@ -559,30 +559,32 @@ btnValid.addEventListener("click", function (event){
             
         }
         
-        var order = {
+        var order= {
             contact: contact,
             products: panier 
         };
-
+        
 
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
-
+          
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        const response = JSON.parse(this.responseText);
-       
-            console.log(response);   
-         
-    }
+               
+                sessionStorage.setItem("order", this.responseText);
+               
+        }
+        console.log("test")
 };
 request.open("POST" ,"http://localhost:3000/api/teddies/order");
-request.send();                                          
+request.setRequestHeader("Content-Type", "application/json");
+request.send(JSON.stringify(order));  
+                                       
     }
 });
 }
 
 
-
+   
     
 
 
