@@ -568,18 +568,21 @@ btnValid.addEventListener("click", function (event){
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
           
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-               
-                sessionStorage.setItem("order", this.responseText);
-               
-        }
-        console.log("test")
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
+                sessionStorage.setItem("order", this.responseText);  
+                order = JSON.parse(sessionStorage.getItem('order'));
+                console.log(order)
+                window.location = "./confirm.html";
+            }
+           
+       
 };
 request.open("POST" ,"http://localhost:3000/api/teddies/order");
 request.setRequestHeader("Content-Type", "application/json");
 request.send(JSON.stringify(order));  
                                        
     }
+   
 });
 }
 
