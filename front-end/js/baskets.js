@@ -359,7 +359,7 @@ function placeOrder () {
 
     //=> CONTAINER POUR LE FORMULAIRE
     let formContaint = document.createElement ("form");
-    formContaint.setAttribute("method", "post")
+    formContaint.setAttribute("method", "POST")
     formContaint.setAttribute("id" , "form")
     basket.appendChild(formContaint)
 
@@ -454,7 +454,7 @@ function placeOrder () {
         validForm.setAttribute ("value" , "valider");
         validForm.setAttribute ("id","btnValid");
         formContaint.appendChild(validForm) ;
-        validation()
+        btnValid.addEventListener("click",validation);
        
 function validation(){
 
@@ -534,6 +534,10 @@ function validation(){
     };
     
     
+
+    
+};
+
 btnValid.addEventListener("click", function (event){
     event.preventDefault();
 
@@ -542,15 +546,39 @@ btnValid.addEventListener("click", function (event){
         const contact = {
             lastName: document.getElementById("lastName").value,
             firstName: document.getElementById("firstName").value,
-            address: document.getElementById("address").value,
+            address: document.getElementById("adress").value,
             city: document.getElementById("city").value,
             email: document.getElementById("mail").value
         }
-console.log(contact)
+
+        let panier = []
+
+        for (let index = 0;index < itemsTeddies.length; index++) {
+            
+            panier.push(itemsTeddies[index].id)
+            
+        }
+        
+        var order = {
+            contact: contact,
+            products: panier 
+        };
+
+
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+        const response = JSON.parse(this.responseText);
+       
+            console.log(response);   
+         
+    }
+};
+request.open("POST" ,"http://localhost:3000/api/teddies/order");
+request.send();                                          
     }
 });
-    
-};
 }
 
 
