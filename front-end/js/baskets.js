@@ -314,7 +314,8 @@ function  numberArticles (quantityOfTeddie) {
 function totalPriceOfTeddie (subTotalTeddie) {
     totalPrice = totalPrice + parseInt(subTotalTeddie);
     var priceOfTeddieElement = document.getElementById("priceOfTeddies");
-    priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;   
+    priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;  
+    console.log(totalPrice/100) 
 };
 
 
@@ -542,6 +543,7 @@ btnValid.addEventListener("click", function (event){
     event.preventDefault();
 
     if (formValid = true){
+        let totalPriceCommand = document.getElementById("priceOfTeddies")
 
         const contact = {
             lastName: document.getElementById("lastName").value,
@@ -569,10 +571,13 @@ btnValid.addEventListener("click", function (event){
         request.onreadystatechange = function () {
           
             if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
-                sessionStorage.setItem("order", this.responseText);  
-                order = JSON.parse(sessionStorage.getItem('order'));
-                console.log(order)
-                window.location = "./confirm.html";
+                //sessionStorage.setItem("order", this.responseText);  
+                const response = JSON.parse(this.responseText);
+               
+                console.log(totalPriceCommand)
+               // order = JSON.parse(sessionStorage.getItem('order'));
+               // console.log(order)
+               // window.location = "./confirm.html";
             }
            
        
