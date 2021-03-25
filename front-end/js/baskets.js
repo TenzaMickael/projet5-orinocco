@@ -252,6 +252,8 @@ function resumeTab (itemsTeddies){
         continueShopping.textContent = " Continuer vos achats ";
         tableContent.appendChild(continueShopping); 
 
+       
+
         if (itemsTeddies) {
 
             let placeOrderBasket = document.createElement ("btn");
@@ -290,7 +292,7 @@ function resumeTab (itemsTeddies){
      
     };
 
-
+    
 /* FONCTIONS GLOBALES */
 
 // => prix total / oursons
@@ -299,6 +301,7 @@ function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
     var  subTotalElement = document.getElementById("subTotal_" + idTeddie);
     subTotalElement.textContent = subTotalTeddie /100 + "€"; 
     return subTotalTeddie ;    
+    
 };
 
 
@@ -315,7 +318,7 @@ function totalPriceOfTeddie (subTotalTeddie) {
     totalPrice = totalPrice + parseInt(subTotalTeddie);
     var priceOfTeddieElement = document.getElementById("priceOfTeddies");
     priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;  
-    console.log(totalPrice/100) 
+   
 };
 
 
@@ -538,13 +541,13 @@ function validation(){
 
     
 };
-
+ 
 btnValid.addEventListener("click", function (event){
     event.preventDefault();
 
     if (formValid = true){
-        let totalPriceCommand = document.getElementById("priceOfTeddies")
-
+       // let totalPriceCommand = document.getElementById("priceOfTeddies")
+        
         const contact = {
             lastName: document.getElementById("lastName").value,
             firstName: document.getElementById("firstName").value,
@@ -552,32 +555,40 @@ btnValid.addEventListener("click", function (event){
             city: document.getElementById("city").value,
             email: document.getElementById("mail").value
         }
-
         let panier = []
-
         for (let index = 0;index < itemsTeddies.length; index++) {
-            
-            panier.push(itemsTeddies[index].id)
-            
+            panier.push(itemsTeddies[index].id)  
         }
         
         var order= {
             contact: contact,
             products: panier 
         };
+
+
         
 
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
           
             if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
-                //sessionStorage.setItem("order", this.responseText);  
+ 
                 const response = JSON.parse(this.responseText);
-               
-                console.log(totalPriceCommand)
+
+                var orderId = response.orderId
+                var totalPriceCommand = totalPrice/100
+                
+                var confirmOrder = {
+                    orderId ,
+                    totalPriceCommand
+                }
+                deleteTeddie(itemsTeddies);
+                
+                sessionStorage.setItem("resumeCommand",JSON.stringify (confirmOrder));
+             
                // order = JSON.parse(sessionStorage.getItem('order'));
                // console.log(order)
-               // window.location = "./confirm.html";
+               window.location = "./confirm.html";
             }
            
        
