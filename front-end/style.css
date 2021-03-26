@@ -51,7 +51,8 @@ body
    
     
     background-image: url(./images/papier\ grain.jpg);
-    background-size:contain;
+    background-size:cover;
+    background-attachment:fixed
    
 }
 
