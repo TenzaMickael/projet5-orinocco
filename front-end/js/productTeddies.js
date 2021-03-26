@@ -40,50 +40,51 @@ function productTeddies(data) {                                             //=>
                                         /********** Création de balises sous forme de cards **********/ 
                                 
 
-    let teddiesProductContainer = document.createElement ("div");               //=> Création d'une balise <div> que l'on va injecter dans la balise "descriptionTeddies" du code html et qui contiendra l'image de l'ourson 
-    teddiesProductContainer.setAttribute ("class" , "cards__item__thumb");      //=> On attribut une class à notre <div>
-    descriptionTeddies.appendChild(teddiesProductContainer);                    //=> On déclare que "teddiesProductContainer" est l'enfant de "descriptionTeddies"
+    
 
-
-    let teddiesProductPicture = document.createElement ("img");                 //=> Création d'une balise <img> que l'on va injecter dans la balise "teddiesProductContainer"   
-    teddiesProductPicture.setAttribute("class" , "image__teddies__products");    //=> On attribut une classe à notre <img>
-    teddiesProductPicture.setAttribute("src" , data.imageUrl);                  //=> On lui indique où récupérer l'image
-    teddiesProductPicture.setAttribute("alt","image d'un ours en peluche");     //=> On lui assigne une balise "alt"
-    teddiesProductContainer.appendChild(teddiesProductPicture);                 //=> On déclare que "teddiesProductPicture" est l'enfant de "teddiesProductContainer"
+    
 
 
     let teddiesProductItem = document.createElement ("div");                    //=> Création d'une balise <div> que l'on va injecter dans la balise "descriptionTeddies" du code html et qui contiendra les info de l'ourson
     teddiesProductItem.setAttribute("class" , "cards__items__body");            //=> On attribut une classe à notre <div>
     descriptionTeddies.appendChild(teddiesProductItem);                         //=> On déclare que "teddiesProductItem" est l'enfant de "descriptionTeddies"
 
+    let teddiesProductPicture = document.createElement ("img");                 //=> Création d'une balise <img> que l'on va injecter dans la balise "teddiesProductContainer"   
+    teddiesProductPicture.setAttribute("class" , "image__teddies__products");    //=> On attribut une classe à notre <img>
+    teddiesProductPicture.setAttribute("src" , data.imageUrl);                  //=> On lui indique où récupérer l'image
+    teddiesProductPicture.setAttribute("alt","image d'un ours en peluche");     //=> On lui assigne une balise "alt"
+    teddiesProductItem.appendChild(teddiesProductPicture);                 //=> On déclare que "teddiesProductPicture" est l'enfant de "teddiesProductContainer"
 
     let teddiesProductTitle = document.createElement ("h3");                    //=> Création d'une balise <h3> que l'on va injecter dans la balise "teddiesProductItem"
     teddiesProductTitle.setAttribute("class" , "cards__items__body--title")     //=> On attribut une classe à notre <h3>
     teddiesProductItem.appendChild(teddiesProductTitle);                        //=> On déclare que "teddiesProductTitle" est l'enfant de "teddiesProductItem"
     teddiesProductTitle.textContent = data.name;                                //=> On lui attribut le contenu "name" qui se trouve dans le "data" de la requete 
 
+let contentProductTeddie = document.createElement ("div");
+contentProductTeddie.setAttribute ("class", "contentProductTeddie")
+teddiesProductItem.appendChild (contentProductTeddie)
 
     let teddiesProductName = document.createElement ("p");                      //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
     teddiesProductName.setAttribute("class", "cards__items__body--name");       //=> On attribut une classe à notre <p>
-    teddiesProductItem.appendChild(teddiesProductName);                         //=> On déclare que "teddiesProductName" est l'enfant de "teddiesProductItem"
+    contentProductTeddie.appendChild(teddiesProductName);                         //=> On déclare que "teddiesProductName" est l'enfant de "teddiesProductItem"
     teddiesProductName.textContent = "Nom: " + data.name;                       //=> On lui attribut le texte "Nom :" avec le contenu "name" qui se trouve dans le "data" de la requete 
 
 
     let teddiesProductColors = document.createElement ("p");                    //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
     teddiesProductColors.setAttribute("class" , "cards__items__body—colors");   //=> On attribut une classe à notre <p>
-    teddiesProductItem.appendChild(teddiesProductColors);                       //=> On déclare que "teddiesProductColors" est l'enfant de "teddiesProductItem"
+    contentProductTeddie.appendChild(teddiesProductColors);                       //=> On déclare que "teddiesProductColors" est l'enfant de "teddiesProductItem"
     teddiesProductColors.textContent = "Couleurs: " + data.colors;              //=> On lui attribut le texte "Couleurs:" avec le contenu "colors" qui se trouve dans le "data" de la requete 
 
 
     let teddiesProductDescription = document.createElement ("p");               //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
     teddiesProductDescription.setAttribute("class" , "cards__items__body—description"); //=> On attribut une classe à notre <p> 
-    teddiesProductItem.appendChild(teddiesProductDescription);                  //=> On déclare que "teddiesProductDescription" est l'enfant de "teddiesProductItem"
+    contentProductTeddie.appendChild(teddiesProductDescription);                  //=> On déclare que "teddiesProductDescription" est l'enfant de "teddiesProductItem"
     teddiesProductDescription.textContent = "Description: " + data.description; //=> On lui attribut le texte "Description:" avec le contenu "description" qui se trouve dans le "data" de la requete
 
 
     let teddiesProductPrice = document.createElement ("p");                     //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
     teddiesProductPrice.setAttribute("class", "cards__items__body—price");      //=> On attribut une classe à notre <p>
-    teddiesProductItem.appendChild(teddiesProductPrice);                        //=> On déclare que "teddiesProductPrice" est l'enfant de "teddiesProductItem"
+    contentProductTeddie.appendChild(teddiesProductPrice);                        //=> On déclare que "teddiesProductPrice" est l'enfant de "teddiesProductItem"
     teddiesProductPrice.textContent = "Prix: " + data.price/100 + " €";         //=> On lui attribut le texte "Prix:" avec le contenu "price" qui se trouve dans le "data" de la requete puis on le divise par cent 
 
 

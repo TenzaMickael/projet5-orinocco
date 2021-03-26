@@ -58,6 +58,7 @@ nav
 {
     display: flex;
     font-size:1.9em;
+    color: yellow;
 }
 
 
@@ -109,6 +110,7 @@ nav
 {
  border:5px solid brown;
  background-color: #93f5e8a4;
+ font-size: 1.2em;
  
 }
 
@@ -142,6 +144,10 @@ footer
     font-size:1.5em;  
 }
 
+.foot-icone img{
+margin-right:10px;
+}
+
 .foot
 {
     background-color:#4d555e;
@@ -155,24 +161,64 @@ footer
 {
     display: inline-block;
     padding: 10px;
-    font-size:1.7em;  
-   
+    font-size: 1.5em;   
 }
 
-/*------------------------------------------------------------*/
+/*************** PAGE PRODUITS ***************/
 
+.cards__items__body 
+{
+    margin:50px 50px 0 50px;
+    padding:20px;
+    background-color: #93f5e8a4;
+    border:2px solid black;
+}
+.image__teddies__products
+{
+    
+    width:300px;
+    margin:auto;
+    margin-top:30px;
+    display:block;
+    border:3px solid brown;;
+}
+
+.cards__items__body p{
+    font-size: 1.2em;
+    text-align: left;
+    padding:10px;
+}
+
+.contentProductTeddie{
+    border: 3px solid black;
+    margin: 0px 250px 0px 250px;
+}
+
+.instruction {
+    margin: 70px 0px 50px 0px;
+}
 #selects
 {
-    margin: 30px 0px 30px 0px;
-    font-size:1.5em;
     height: 50px; 
-    font-size:1em;
     color:rgba(251, 255, 0, 0.938);
     background-color: brown;
-    display: block; 
+    display: flex; 
+    margin: auto;
+    margin-top:30px;
 }
 
-.checkArticle
+#basket{
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+
+    width: auto;
+    font-size: 1em;
+    border: 2px solid brown ; 
+    text-align: center;
+}
+
+/*.checkArticle
 {
     margin: 10px;
 }
@@ -182,12 +228,7 @@ footer
     text-transform:lowercase
 }
 
-.image__teddies__products
-{
-    
-    width:500px;
-    margin-bottom: 50px;
-}
+
 
 .option
 {
@@ -204,15 +245,7 @@ footer
     margin-top:50px; 
 }
 
-.cards__items__body 
-{
-    margin:20px 20px 0 20px;
-    
-    padding:20px;
-    font-size:1em;
-    background-color: #93f5e8a4;
-    border:2px solid black;
-}
+
 
 .input-group
 {
@@ -237,7 +270,7 @@ footer
 }
 /*-------------------------------------------------------------------*/
 
-.cards__items__body
+/*.cards__items__body
 {
     width: auto;
     height: auto;
@@ -263,7 +296,7 @@ td p{
     padding:0px;
 }
 
-#basket
+/*#basket
 {
     display: block;
     margin: 10px;
@@ -273,7 +306,8 @@ td p{
     border: 2px solid brown ; 
     text-align: center;
 }
-
+*/
+/*
 .table
 {
     background-color:burlywood;
