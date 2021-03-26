@@ -50,7 +50,8 @@ body
     /*background-color: rgba(233, 183, 183, 0.616);*/
    
     
-    background-image: url(./images/doux\ vert.jpg);
+    background-image: url(./images/papier\ grain.jpg);
+    background-size:contain;
    
 }
 
@@ -66,23 +67,59 @@ nav
   /*background-color: rgb(78, 30, 100);*/
     color: rgb(221, 193, 37); 
     text-align: center;
-    background-image: url(./images/coton\ chammp\ blanc\ vert.jpg);
+    background-image: url(./images/coton.jpg);
   
     background-position: center;
  
 }  
 
 @font-face{
-    font-family: "essais";
+    font-family: "cutecartoons";
     src: url("./fonts/Cute\ Cartoon.ttf");
     font-weight: bold;
 }
 
+@font-face{
+    font-family: "milky";
+    src: url("./fonts/MilkyNice.ttf");
+    font-weight: bold;
+}
+
+@font-face{
+    font-family: "candypop";
+    src: url("./fonts/Candy_Pop!-demo-font.ttf");
+    font-weight: bold;
+}
+@font-face{
+    font-family: "Letters";
+    src: url("./fonts/Letters\ for\ Learners.ttf");
+    font-weight: bold;
+}
+@font-face{
+    font-family: "myugly";
+    src: url("./fonts/MyUglyHandwriting-Regular.otf");
+    font-weight: bold;
+}
+@font-face{
+    font-family: "cursive";
+    src: url("./fonts/Cursive\ standard.ttf");
+    font-weight: bold;
+}
+@font-face{
+    font-family: "kinder";
+    src: url("./fonts/kindergarten.ttf");
+    font-weight: bold;
+}
 .container h1 {
     /*color:rgb(99, 77, 61);*/
-    color: black;
+    color:rgb(22, 145, 59);
     font-size:  5.5em;
-    font-family: "essais";
+    font-family: "letters";
+}
+
+.container p{ /* ligne de dessous */
+    font-family: "myugly";
+    color: blue;
 }
 
 #listTeddies  
@@ -107,9 +144,9 @@ nav
 
 .card-body
 {
- border:5px solid brown;
- background-color: #93f5e8a4;
- 
+ border:5px solid rgb(15, 158, 110);
+ background-color: rgb(195, 228, 187);
+
 }
 
 .card-title , h3
@@ -119,7 +156,8 @@ nav
     text-transform: capitalize;
     text-decoration: underline;
     margin:30px 0px 30px 0px;
-    color: brown;
+    color: rgb(101, 165, 42);
+    font-family: "myugly"
 }
 
 #btnProduct
