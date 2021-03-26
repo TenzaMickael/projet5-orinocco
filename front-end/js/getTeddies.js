@@ -25,90 +25,54 @@ request.send();
 function teddies (data) {
 
 
-//Création des balises sous forme de cards 
-
     let masterContainer = document.createElement ("div"); 
-
-    let bodyContainer = document.createElement ("div");
+    masterContainer.setAttribute("class", "card") ;
+    listTeddies.appendChild(masterContainer);
+        let bodyContainer = document.createElement ("div");
+        bodyContainer.setAttribute("class", "card-body");
+        masterContainer.appendChild(bodyContainer);
 
     let pictureIndexTeddies = document.createElement ("img");
-
-    let titleIndexPicture = document.createElement ("h3");
-
-    let nameIndexTeddies = document.createElement ("p");
-
-    let colorsIndexTeddies = document.createElement ("p");
-
-    let descriptionIndexTeddies = document.createElement ("p");
-
-    let priceIndexTeddies = document.createElement ("p");
-
-    let btnIndexContainer = document.createElement ("div");
-
-    let btnIndexProduct = document.createElement ("a");
-
-
-//Ajout des attributs au balises pour la création du style
-
-    masterContainer.setAttribute("class", "card") ;
-
-    bodyContainer.setAttribute("class", "card-body");
-
     pictureIndexTeddies.setAttribute("src",data.imageUrl);
     pictureIndexTeddies.setAttribute("class","card-img-top");
     pictureIndexTeddies.setAttribute("alt" , "image d'un ourson en peluche");
-
-    titleIndexPicture.setAttribute("class" , "card-title");
-
-    nameIndexTeddies.setAttribute("class" , "cards__item__body--name");
-
-    colorsIndexTeddies.setAttribute("class" , "cards__item__body--colors");
-
-    descriptionIndexTeddies.setAttribute("class" , "cards-text");
-
-    priceIndexTeddies.setAttribute("class" , "cards__items__body--price");
-
-    btnIndexContainer.setAttribute("class" , "cards__item--button");
-
-    btnIndexProduct.setAttribute("class" , "btn btn-primary");
-    btnIndexProduct.setAttribute("href" , "./product.html?id="+ data._id);
-   
-
-//Agencement des éléments 
-    
     bodyContainer.appendChild(pictureIndexTeddies);
 
+    let titleIndexPicture = document.createElement ("h3");
+    titleIndexPicture.setAttribute("class" , "card-title");
     bodyContainer.appendChild(titleIndexPicture);
-
-    bodyContainer.appendChild(nameIndexTeddies);
-
-    bodyContainer.appendChild(colorsIndexTeddies);
-
-    bodyContainer.appendChild(descriptionIndexTeddies);
-
-    bodyContainer.appendChild(priceIndexTeddies);
-
-    bodyContainer.appendChild(btnIndexContainer);
-
-    btnIndexContainer.appendChild(btnIndexProduct);
-
-    listTeddies.appendChild(masterContainer);
-
-    masterContainer.appendChild(bodyContainer);
-    
-//Contenu des balises 
-
     titleIndexPicture.textContent = data.name;
 
+    let nameIndexTeddies = document.createElement ("p");
+    nameIndexTeddies.setAttribute("class" , "card-text");
+    bodyContainer.appendChild(nameIndexTeddies);
     nameIndexTeddies.textContent = "Nom: " + data.name;
 
+    let colorsIndexTeddies = document.createElement ("p");
+    colorsIndexTeddies.setAttribute("class" , "card-text");
+    bodyContainer.appendChild(colorsIndexTeddies);
     colorsIndexTeddies.textContent = "Couleurs: " + data.colors;
 
+    let descriptionIndexTeddies = document.createElement ("p");
+    descriptionIndexTeddies.setAttribute("class" , "cards-text");
+    bodyContainer.appendChild(descriptionIndexTeddies);
     descriptionIndexTeddies.textContent = "Description: " + data.description;
 
+    let priceIndexTeddies = document.createElement ("p");
+    priceIndexTeddies.setAttribute("class" , "card-text");
+    bodyContainer.appendChild(priceIndexTeddies);
     priceIndexTeddies.textContent = "Prix: " + data.price/100 + " €";
 
-    btnIndexProduct.textContent = "Voir l'ourson ";
+    let btnIndexContainer = document.createElement ("div");
+    btnIndexContainer.setAttribute("class" , "cards__item--button");
+    btnIndexContainer.setAttribute ("id" , "btnProduct")
+    bodyContainer.appendChild(btnIndexContainer);
 
+    let btnIndexProduct = document.createElement ("a");
+    btnIndexProduct.setAttribute("class" , "btn btn-outline-info");
+    btnIndexProduct.setAttribute("id" , "btnIndexProduct");
+    btnIndexProduct.setAttribute("href" , "./product.html?id="+ data._id);
+    btnIndexContainer.appendChild(btnIndexProduct);
+    btnIndexProduct.textContent = "Voir l'ourson ";
 };
 
