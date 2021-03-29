@@ -33,8 +33,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {     
 
             const response = JSON.parse (this.responseText)                 
-            tablesItems(response);  
-                          
+            tablesItems(response);                 
         }; 
     }; 
 
@@ -48,7 +47,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {
         const tableContent = document.getElementById("tableContent");
 
         let trBody = document.createElement("tr");
-        trBody.setAttribute("class" , "table-dark table-striped table-hover");
+        trBody.setAttribute("class" , "table table-dark table-striped table-hover");
         tableContent.appendChild(trBody);        
 
         // => MISE EN PLACE DES IMAGES
@@ -184,29 +183,33 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 function tablesBasket () {
 
     let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
+    
 
     const basket = document.getElementById("basket");
+    basket.setAttribute ("class", "card-body");
 
     let productBasket = document.createElement("main");
     productBasket.setAttribute ("class" , "cards__item__thumb_1");      
     basket.appendChild(productBasket);
 
     let teddiesTables = document.createElement("table");
-    teddiesTables.setAttribute("class" , "table table-bordered border-dark");
+    teddiesTables.setAttribute("class" , "table table-bordered border-dark")
     productBasket.appendChild(teddiesTables);
         
     let tHead = document.createElement("thead");
+    teddiesTables.setAttribute ("id" , "tHead");
     teddiesTables.appendChild(tHead);
+    
 
     let trTables = document.createElement("tr");
-    trTables.setAttribute ("class", "table-primary ")
+    trTables.setAttribute ("class", "table-success table-bordered")
     tHead.appendChild(trTables);
 
     for (let i = 0;i < tables.length; i++) {
             
         let thTables = document.createElement("th")
         thTables.setAttribute("scope", "col");  
-        thTables.setAttribute ("class", "table-primary")
+        thTables.setAttribute ("class", "border border-dark")
         trTables.appendChild(thTables);
         thTables.textContent = tables[i]; 
     } 
@@ -565,37 +568,10 @@ btnValid.addEventListener("click", function (event){
             products: panier 
         };
 
-
+        postOfTeddie (order);
         
 
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-          
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
- 
-                const response = JSON.parse(this.responseText);
-
-                var orderId = response.orderId
-                var totalPriceCommand = totalPrice/100
-                
-                var confirmOrder = {
-                    orderId ,
-                    totalPriceCommand
-                }
-                deleteTeddie(itemsTeddies);
-                
-                sessionStorage.setItem("resumeCommand",JSON.stringify (confirmOrder));
-             
-               // order = JSON.parse(sessionStorage.getItem('order'));
-               // console.log(order)
-               window.location = "./confirm.html";
-            }
-           
-       
-};
-request.open("POST" ,"http://localhost:3000/api/teddies/order");
-request.setRequestHeader("Content-Type", "application/json");
-request.send(JSON.stringify(order));  
+         
                                        
     }
    

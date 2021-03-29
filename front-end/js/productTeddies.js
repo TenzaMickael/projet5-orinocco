@@ -7,29 +7,17 @@
 let params = window.location.search;                                        //=> récupère l'URL courante 
 const urlParams = new URLSearchParams(params);                              //=> On créer une constante avec la nouvelle URL 
 const id = urlParams.get("id");                                             //=> récupère l'ID sur la page courante 
-                                                    
+let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=> On récupère l'élément "descriptionTeddies" qui est dans le code html                                                    
 
                                         /**********On lance une requete pour récupérer l'API des oursons **********/ 
 
-
-var request = new XMLHttpRequest();                                         //=> Lance une requete XMLHttRequest
-
-request.onreadystatechange = function () {                                  //=> Au changement de onreadystatechange :
-
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {     //=> Si son changement est égal à une requete réussis et un status de 200 :
-
-        const response = JSON.parse (this.responseText)                     //=> Créer une constante que l'on parse dans un JSON en string
-        productTeddies (response);                                          //=> ProductTeddies c'est le nom de la futur fonction 
-    };
-};
-request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             //=> On lance la requete sur cette url 
-request.send();                                                             //=> On donne l'ordre de lance la requete 
+getOneTeddie (id)
 
 
                                         /********** Import de l'ID descriptionTeddies présent dans le code HTML **********/
 
 
-let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=> On récupère l'élément "descriptionTeddies" qui est dans le code html
+
 
 
                                         /********** Création d'une fonction pour mettre en place les donnée récupérées de l'API **********/
@@ -40,13 +28,13 @@ function productTeddies(data) {                                             //=>
                                         /********** Création de balises sous forme de cards **********/ 
                                 
 
-    
+
 
     
 
 
     let teddiesProductItem = document.createElement ("div");                    //=> Création d'une balise <div> que l'on va injecter dans la balise "descriptionTeddies" du code html et qui contiendra les info de l'ourson
-    teddiesProductItem.setAttribute("class" , "cards__items__body");            //=> On attribut une classe à notre <div>
+    teddiesProductItem.setAttribute("class" , "cardOfProduct");            //=> On attribut une classe à notre <div>
     descriptionTeddies.appendChild(teddiesProductItem);                         //=> On déclare que "teddiesProductItem" est l'enfant de "descriptionTeddies"
 
     let teddiesProductPicture = document.createElement ("img");                 //=> Création d'une balise <img> que l'on va injecter dans la balise "teddiesProductContainer"   
@@ -61,7 +49,7 @@ function productTeddies(data) {                                             //=>
     teddiesProductTitle.textContent = data.name;                                //=> On lui attribut le contenu "name" qui se trouve dans le "data" de la requete 
 
 let contentProductTeddie = document.createElement ("div");
-contentProductTeddie.setAttribute ("class", "contentProductTeddie")
+contentProductTeddie.setAttribute ("id", "contentProductTeddie")
 teddiesProductItem.appendChild (contentProductTeddie)
 
     let teddiesProductName = document.createElement ("p");                      //=> Création d'une balise <p> que l'on va injecter dans la balise "teddiesProductItem"
@@ -88,7 +76,7 @@ teddiesProductItem.appendChild (contentProductTeddie)
     teddiesProductPrice.textContent = "Prix: " + data.price/100 + " €";         //=> On lui attribut le texte "Prix:" avec le contenu "price" qui se trouve dans le "data" de la requete puis on le divise par cent 
 
 
-    let instruction = document.createElement ("h3");                            //=> Création d'une balise <h3> que l'on va injecter dans la balise "teddiesProductItem"
+    let instruction = document.createElement ("h2");                            //=> Création d'une balise <h3> que l'on va injecter dans la balise "teddiesProductItem"
     instruction.setAttribute("class", "instruction");                           //=> On attribut une classe à notre <h3>
     teddiesProductItem.appendChild(instruction);                                //=> On déclare que "instruction" est l'enfant de "teddiesProductItem"
     instruction.textContent = "Choisissez une couleurs pour ajouter votre article au panier "//=> On lui attribut le texte "Choisissez une couleurs pour ajouter votre article au panier"
@@ -112,7 +100,7 @@ teddiesProductItem.appendChild (contentProductTeddie)
 
     let detailBtn = document.createElement ("button");                          //=> Création d'une balise <button> que l'on va injecter dans la balise "teddiesCheckArticles"
     detailBtn.setAttribute("class","btn btn-primary");                          //=> On attribut une classe à notre <button>                       
-    detailBtn.setAttribute("id","basket");                                      //=> On attribut un "ID" à notre <button>
+    detailBtn.setAttribute("id","basketCommand");                                      //=> On attribut un "ID" à notre <button>
     detailBtn.setAttribute("type","button");                                    //=> On définit sons type  
     detailBtn.setAttribute("disabled","true");                                  //=> On lui met en disabled par défaut 
     detailBtn.dataset.idteddie = data._id   ;                                   //=> On définit l'action quand on appuis sur le bouton 
@@ -138,16 +126,16 @@ teddiesProductItem.appendChild (contentProductTeddie)
         teddiesDetailSelect.addEventListener('change' , function (event) {      //=> On crée un évènement au changement sur la selèction des oursons
             
                                                
-        let basket = document.getElementById("basket")                          //=> On récupère l' ID "basket"
+        let basketCommand = document.getElementById("basketCommand")                          //=> On récupère l' ID "basket"
 
         
             if(!(data.colors).includes(event.target.value)){                    //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson  
-            basket.disabled = true ;                                            //=> On déclare que le bouton est grisé 
+            basketCommand.disabled = true ;                                            //=> On déclare que le bouton est grisé 
             
                 
             } else  {                                                           //=> Sinon
                                       
-                basket.disabled = false                                         //=> On active le bouton pour ajouter l'ourson au panier 
+                basketCommand.disabled = false                                         //=> On active le bouton pour ajouter l'ourson au panier 
                                            
             };                         
     });

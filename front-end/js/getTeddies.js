@@ -7,17 +7,8 @@ const listTeddies = document.getElementById('listTeddies');
 
 //Requete XMLHttpRequest pour récupérer l'API des oursons
 
-var request = new XMLHttpRequest();
-request.onreadystatechange = function(){
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
-        const response = JSON.parse(this.responseText);
-        for (let index = 0 ; index < response.length ; index++) {
-            teddies(response[index]);   
-        }  
-    }
-};
-request.open("GET" ,"http://localhost:3000/api/teddies");
-request.send();
+
+getAllTeddies ();
 
 
 //Création d'une fonction pour mettre en place les donnée récupérées de l'API 
