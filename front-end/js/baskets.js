@@ -1,7 +1,7 @@
 /* VARIABLES GLOBALES */
 var totalPrice = 0 ;
 var totalArticles = 0 ;
-var formValid = true;
+
 
 /* RECUPÉRATION DE L'ID "BASKET" */
 const basket = document.getElementById("basket");
@@ -301,69 +301,7 @@ function resumeTab (itemsTeddies){
     
 /* FONCTIONS GLOBALES */
 
-// => prix total / oursons
-function subTotal (idTeddie,priceUnitTeddie,quantityOfTeddie){
-    var  subTotalTeddie = parseInt(priceUnitTeddie * quantityOfTeddie) ;
-    var  subTotalElement = document.getElementById("subTotal_" + idTeddie);
-    subTotalElement.textContent = subTotalTeddie /100 + "€"; 
-    return subTotalTeddie ;    
-    
-};
 
-
-// => Nombre totale d'articles
-function  numberArticles (quantityOfTeddie) {
-    totalArticles = totalArticles + parseInt(quantityOfTeddie);
-    var numberItemElement = document.getElementById("numberItem");
-    numberItemElement.textContent = "Votre panier contient : " + totalArticles + " articles ";
-};
-
-
-// => Prix total commande 
-function totalPriceOfTeddie (subTotalTeddie) {
-    totalPrice = totalPrice + parseInt(subTotalTeddie);
-    var priceOfTeddieElement = document.getElementById("priceOfTeddies");
-    priceOfTeddieElement.textContent = "Le montant total de votre commande s'élève à : " + totalPrice/100 + "€" ;  
-   
-};
-
-
-
-// => Supprimer un ourson 
-function deleteTeddie (idTeddie){
-    let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
-    let index = findIndexTeddieStorage (idTeddie,itemsTeddies)
-    itemsTeddies.splice(index,1);
-    console.log(itemsTeddies)
-
-    if (itemsTeddies.length == 0 ) {
-       localStorage.removeItem("selectTeddies");
-    } else {
-    
-    localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
-   
-    }
-     window.location.reload ()
-}
-
-// Fonction qui permet de mettre à jour le localStorage
-function updateStorageTeddie (idTeddie,quantity) {
-    let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
-    let index = findIndexTeddieStorage (idTeddie,itemsTeddies)
-    itemsTeddies[index].quantity = quantity;
-    localStorage.setItem("selectTeddies" , JSON.stringify (itemsTeddies));
-    
-}
-
-function findIndexTeddieStorage(idTeddie,itemsTeddies){
-    
-    for (let index = 0;index < itemsTeddies.length; index++) {
-        let id = itemsTeddies[index].id ;
-        if (id === idTeddie) {
-          return  index       
-        }
-    }
-};
 
 function placeOrder () {
 
@@ -465,14 +403,16 @@ function placeOrder () {
         validForm.setAttribute ("id","btnValid");
         formContaint.appendChild(validForm) ;
         btnValid.addEventListener("click",validation);
-       
-function validation(){
 
+var formValid = true;
+     
+function validation(){
+   
     //NOM
     if (lastName.validity.valueMissing  ){
         missLastName.textContent = "nom manquant";
         missLastName.style.color = "red" ;
-        formValid = false;
+     var formValid = false;
 
     } else if (!(/^\D+$/.test(lastName.value))) {
 
@@ -481,6 +421,7 @@ function validation(){
     }
     else {
         missLastName.textContent ="";
+        var formValid = true ;
     }
 
 
@@ -488,7 +429,7 @@ function validation(){
     if (firstName.validity.valueMissing){    
         missFirstName.textContent = "prénom manquant";
         missFirstName.style.color = "red" ;
-        formValid = false ;
+      var  formValid = false ;
 
     } else if (!(/^\D+$/.test(firstName.value))) {
 
@@ -497,13 +438,14 @@ function validation(){
     } else{
 
         missFirstName.textContent ="";
+        var formValid = true ;
     } 
 
     //ADRESSE
     if (adress.validity.valueMissing){
         missAdress.textContent = "Adresse manquant";
         missAdress.style.color = "red" ;
-        formValid = false ;
+      var  formValid = false ;
 
 
     }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {
@@ -512,13 +454,14 @@ function validation(){
         missAdress.style.color = "red" ;
     } else {
         missAdress.textContent ="";
+        var formValid = true ;
     }
    
     //VILLE
     if (city.validity.valueMissing){ 
         missCity.textContent = "Ville manquante";
         missCity.style.color = "red" ;
-        formValid = false;
+      var  formValid = false;
 
     }else  if (!(/[A-Za-z-']/.test(city.value))) {
 
@@ -526,6 +469,7 @@ function validation(){
         missCity.style.color = "red" ;
 
     }else { missCity.textContent ="";
+    var formValid = true ;
 
     }
 
@@ -533,25 +477,27 @@ function validation(){
     if (mail.validity.valueMissing){
         missMail.textContent = "Email manquant";
         missMail.style.color = "red" ;
-        formValid = false;
+       var formValid = false;
 
-    }else if (!/[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})/.test(mail.value)){
-
+    }else if (!/.+@.+\..+/.test(mail.value)){
+        
+        //[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})//
         missMail.textContent = "Format email incorect";
         missMail.style.color = "red" ;
     }else {   
         missMail.textContent ="";
+        var formValid = true ;
     };
     
     
-
+console.log(formValid)
     
 };
  
 btnValid.addEventListener("click", function (event){
     event.preventDefault();
-
-    if (formValid = true){
+   
+    if (formValid == true){
        // let totalPriceCommand = document.getElementById("priceOfTeddies")
         
         const contact = {
@@ -573,8 +519,8 @@ btnValid.addEventListener("click", function (event){
 
         postOfTeddie (order);
         
+    
 
-         
                                        
     }
    
