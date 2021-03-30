@@ -1,13 +1,9 @@
-//APPELLE DE L'API DES OURSONS 
-
 
 // Import de l'Id "listTeddies"
 
 const listTeddies = document.getElementById('listTeddies');
 
 //Requete XMLHttpRequest pour récupérer l'API des oursons
-
-
 getAllTeddies ();
 
 

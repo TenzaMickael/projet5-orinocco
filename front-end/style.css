@@ -194,7 +194,7 @@ footer
     margin:auto;
     margin-top:30px;
     display:block;
-    border:3px solid brown;;
+    border:3px solid rgb(0, 0, 0);
 }
 @media screen and (max-width: 1100px) {
     .image__teddies__products{ 
@@ -240,6 +240,7 @@ footer
     text-decoration:underline;
     text-transform: uppercase;
     color: brown;
+    font-size:1.3em;
 }
 @media screen and (max-width: 1100px) {
     .instruction {
@@ -278,7 +279,7 @@ footer
 
 /*************** PAGE PANIER ***************/
 
-.border border-dark{
+#tableContent, .cards__item__thumb__1{
     width: auto;
     height: auto;
     margin: auto;
@@ -328,9 +329,7 @@ td p{
    text-align: center;
 }
 
-#tableContent{
-    width:200px;
-}
+
 
 /* **********************************/
 

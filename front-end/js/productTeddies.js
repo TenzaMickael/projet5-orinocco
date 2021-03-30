@@ -14,24 +14,12 @@ let descriptionTeddies = document.getElementById ("descriptionTeddies");    //=>
 getOneTeddie (id)
 
 
-                                        /********** Import de l'ID descriptionTeddies présent dans le code HTML **********/
-
-
-
-
-
-                                        /********** Création d'une fonction pour mettre en place les donnée récupérées de l'API **********/
 
 
 function productTeddies(data) {                                             //=> Fonction productTeddies avec en paramètre data qui correspond au donnée de l'API récupéré                     
 
                                         /********** Création de balises sous forme de cards **********/ 
-                                
-
-
-
     
-
 
     let teddiesProductItem = document.createElement ("div");                    //=> Création d'une balise <div> que l'on va injecter dans la balise "descriptionTeddies" du code html et qui contiendra les info de l'ourson
     teddiesProductItem.setAttribute("class" , "cardOfProduct");            //=> On attribut une classe à notre <div>
@@ -112,7 +100,7 @@ teddiesProductItem.appendChild (contentProductTeddie)
                                         /********** Création d'une boucle pour récupérer les couleurs des oursons **********/
 
 
-    for (let i = 0;i < data.colors.length; i++) {                               //=> On initialise l'index à 0 et index plus petit que le tableau => data => couleurs dans ce cas , on incrémente i ; ce qui récupère les différente couleurs de l'ourson
+        for (let i = 0;i < data.colors.length; i++) {                               //=> On initialise l'index à 0 et index plus petit que le tableau => data => couleurs dans ce cas , on incrémente i ; ce qui récupère les différente couleurs de l'ourson
 
         let option = document.createElement("option");                          //=> On crée une balise <option> qui va permettre de choisir la couleur
         teddiesDetailSelect.appendChild(option);                                //=> On déclare que "option" est l'enfant de "teddiesDetailSelect"

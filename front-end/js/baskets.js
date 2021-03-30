@@ -182,11 +182,14 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
 function tablesBasket () {
 
-    let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
+    
     
 
     const basket = document.getElementById("basket");
     basket.setAttribute ("class", "card-body");
+let containerOfTables = document.createElement ("div");
+basket.appendChild (containerOfTables)
+    let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
 
     let productBasket = document.createElement("main");
     productBasket.setAttribute ("class" , "cards__item__thumb_1");      
