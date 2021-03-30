@@ -76,7 +76,7 @@ body
 
 
 .container h1 {
-    color:rgb(53, 50, 47);
+    color: rgb(15, 158, 110);
     font-size: 8.5em;
     font-family: "cutecartoons";
     text-align: left;
@@ -85,7 +85,7 @@ body
 .container p{ 
     font-family: "cursive";
     font-style: italic;
-    color: rgb(53, 50, 47);
+    color: rgb(4, 85, 4);
     font-size: 2em;
     text-align:left;
 }
@@ -103,7 +103,7 @@ body
     margin:30px;
     width: 30rem;
     border-radius: 10px;
-background-color: rgb(15, 158, 110);
+    background-color: rgb(15, 158, 110);
     
 }
 
@@ -254,6 +254,12 @@ footer
     }
 }
 
+#message{
+    font-size: 1.7em;
+    text-align: center;
+    color: #9B6D3D;
+
+}
 #selects
 {
     margin: auto;
@@ -280,9 +286,10 @@ footer
 /*************** PAGE PANIER ***************/
 
 #tableContent, .cards__item__thumb__1{
-    width: auto;
+    max-width: 200px;
     height: auto;
     margin: auto;
+  
 }
 .panier{
     font-size: 2.5em;

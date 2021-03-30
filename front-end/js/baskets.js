@@ -182,11 +182,9 @@ for (let i = 0;i < itemsTeddies.length; i++) {
 
 function tablesBasket () {
 
-    
-    
 
     const basket = document.getElementById("basket");
-    basket.setAttribute ("class", "card-body");
+    basket.setAttribute ("class", "table");
 let containerOfTables = document.createElement ("div");
 basket.appendChild (containerOfTables)
     let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
@@ -292,15 +290,8 @@ function resumeTab (itemsTeddies){
            
           
         }
-        
-        
-
-     
+ 
     };
-
-    
-/* FONCTIONS GLOBALES */
-
 
 
 function placeOrder () {
@@ -404,24 +395,25 @@ function placeOrder () {
         formContaint.appendChild(validForm) ;
         btnValid.addEventListener("click",validation);
 
-var formValid = true;
-     
+var formValid = true;   
 function validation(){
    
+    var formValid = true;
     //NOM
     if (lastName.validity.valueMissing  ){
         missLastName.textContent = "nom manquant";
         missLastName.style.color = "red" ;
-     var formValid = false;
+        formValid = false;
 
     } else if (!(/^\D+$/.test(lastName.value))) {
 
         missLastName.textContent = "le nom contient des chiffres";
         missLastName.style.color = "red" ;
+        formValid = false
     }
     else {
         missLastName.textContent ="";
-        var formValid = true ;
+        formValid = true ;
     }
 
 
@@ -429,47 +421,52 @@ function validation(){
     if (firstName.validity.valueMissing){    
         missFirstName.textContent = "prénom manquant";
         missFirstName.style.color = "red" ;
-      var  formValid = false ;
+        formValid = false ;
 
     } else if (!(/^\D+$/.test(firstName.value))) {
 
         missFirstName.textContent = "le prénom contient des chiffres";
         missFirstName.style.color = "red" ;
+        formValid = false
+
     } else{
 
         missFirstName.textContent ="";
-        var formValid = true ;
+        formValid = true ;
     } 
 
     //ADRESSE
     if (adress.validity.valueMissing){
         missAdress.textContent = "Adresse manquant";
         missAdress.style.color = "red" ;
-      var  formValid = false ;
+        formValid = false ;
 
 
     }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {
 
         missAdress.textContent = "Vous utiliser des caractère spéciaux";
         missAdress.style.color = "red" ;
+        formValid = false;
+
     } else {
         missAdress.textContent ="";
-        var formValid = true ;
+        formValid = true ;
     }
    
     //VILLE
     if (city.validity.valueMissing){ 
         missCity.textContent = "Ville manquante";
         missCity.style.color = "red" ;
-      var  formValid = false;
+        formValid = false;
 
     }else  if (!(/[A-Za-z-']/.test(city.value))) {
 
         missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";
         missCity.style.color = "red" ;
+        formValid = false;
 
     }else { missCity.textContent ="";
-    var formValid = true ;
+        formValid = true ;
 
     }
 
@@ -477,16 +474,18 @@ function validation(){
     if (mail.validity.valueMissing){
         missMail.textContent = "Email manquant";
         missMail.style.color = "red" ;
-       var formValid = false;
+        formValid = false;
 
     }else if (!/.+@.+\..+/.test(mail.value)){
         
         //[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})//
         missMail.textContent = "Format email incorect";
         missMail.style.color = "red" ;
+        formValid = false;
+
     }else {   
         missMail.textContent ="";
-        var formValid = true ;
+        formValid = true ;
     };
     
     
@@ -497,7 +496,7 @@ console.log(formValid)
 btnValid.addEventListener("click", function (event){
     event.preventDefault();
    
-    if (formValid == true){
+    if (formValid = true){
        // let totalPriceCommand = document.getElementById("priceOfTeddies")
         
         const contact = {
@@ -518,10 +517,9 @@ btnValid.addEventListener("click", function (event){
         };
 
         postOfTeddie (order);
-        
-    
-
-                                       
+                               
+    }else{
+        alert("formulaire invalide")
     }
    
 });
