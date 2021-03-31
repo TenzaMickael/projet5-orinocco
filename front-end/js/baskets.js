@@ -45,14 +45,15 @@ for (let i = 0;i < itemsTeddies.length; i++) {
     function tablesItems (tablesBasket)  {
 
         const tableContent = document.getElementById("tableContent");
+     
 
         let trBody = document.createElement("tr");
-        trBody.setAttribute("class" , "table table-dark table-striped table-hover");
+       // trBody.setAttribute("class" , "table table-dark table-striped table-hover");
         tableContent.appendChild(trBody);        
 
         // => MISE EN PLACE DES IMAGES
-        let thImgTeddie = document.createElement ("th");
-        thImgTeddie.setAttribute("scope" , "row");
+        let thImgTeddie = document.createElement ("td");
+      //  thImgTeddie.setAttribute("scope" , "row");
         trBody.appendChild(thImgTeddie);
             let imgItemTeddie = document.createElement("img");
             imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
@@ -184,40 +185,37 @@ function tablesBasket () {
 
 
     const basket = document.getElementById("basket");
-    basket.setAttribute ("class", "table");
-let containerOfTables = document.createElement ("div");
-basket.appendChild (containerOfTables)
+   
+        let containtTable = document.createElement ("div");
+        containtTable.setAttribute("class", "responsive-table-line");
+        basket.appendChild (containtTable);
+
     let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
-
-    let productBasket = document.createElement("main");
-    productBasket.setAttribute ("class" , "cards__item__thumb_1");      
-    basket.appendChild(productBasket);
-
-    let teddiesTables = document.createElement("table");
-    teddiesTables.setAttribute("class" , "table table-bordered border-dark")
-    productBasket.appendChild(teddiesTables);
+   
+            let teddiesTables = document.createElement("table");
+            teddiesTables.setAttribute("class","table table-light table-striped table-bordered table-hover table-sm")
+            teddiesTables.setAttribute ("id","table_1")
+            containtTable.appendChild(teddiesTables);
         
-    let tHead = document.createElement("thead");
-    teddiesTables.setAttribute ("id" , "tHead");
-    teddiesTables.appendChild(tHead);
-    
+                let tHead = document.createElement("thead");
+                tHead.setAttribute ("class" , "thead-dark");
+                teddiesTables.appendChild(tHead);
 
-    let trTables = document.createElement("tr");
-    trTables.setAttribute ("class", "table-success table-bordered")
-    tHead.appendChild(trTables);
+                    let trTables = document.createElement("tr");
+                    trTables.setAttribute ("class" ,"trTable")
+                    tHead.appendChild(trTables);
 
-    for (let i = 0;i < tables.length; i++) {
-            
-        let thTables = document.createElement("th")
-        thTables.setAttribute("scope", "col");  
-        thTables.setAttribute ("class", "border border-dark")
-        trTables.appendChild(thTables);
-        thTables.textContent = tables[i]; 
-    } 
+                        for (let i = 0;i < tables.length; i++) {
+                                
+                            let thTables = document.createElement("th")
+                            thTables.setAttribute ("class", "thTable")
+                            trTables.appendChild(thTables);
+                            thTables.textContent = tables[i]; 
+                        } 
 
-    let tBody = document.createElement("tbody") 
-        tBody.setAttribute("id","tableContent");
-        teddiesTables.appendChild(tBody); 
+            let tBody = document.createElement("tbody") 
+            tBody.setAttribute("id","tableContent");
+            teddiesTables.appendChild(tBody); 
 }; 
 
 
@@ -295,7 +293,7 @@ function resumeTab (itemsTeddies){
 
 
 function placeOrder () {
-
+    
     //=> CONTAINER POUR LE FORMULAIRE
     let formContaint = document.createElement ("form");
     formContaint.setAttribute("method", "POST")
@@ -398,7 +396,7 @@ function placeOrder () {
 var formValid = true;   
 function validation(){
    
-    var formValid = true;
+  
     //NOM
     if (lastName.validity.valueMissing  ){
         missLastName.textContent = "nom manquant";
@@ -488,41 +486,40 @@ function validation(){
         formValid = true ;
     };
     
+ 
+  
+    if (formValid = true){
+      
+         
+         const contact = {
+             lastName: document.getElementById("lastName").value,
+             firstName: document.getElementById("firstName").value,
+             address: document.getElementById("adress").value,
+             city: document.getElementById("city").value,
+             email: document.getElementById("mail").value
+         }
+         let panier = []
+         for (let index = 0;index < itemsTeddies.length; index++) {
+             panier.push(itemsTeddies[index].id)  
+         }
+         
+         var order= {
+             contact: contact,
+             products: panier 
+         };
+ 
+         postOfTeddie (order);
+         window.location = "./confirm.html";                      
+     }else{
+         formValid= false;
+     };
     
 console.log(formValid)
-    
-};
- 
-btnValid.addEventListener("click", function (event){
-    event.preventDefault();
-   
-    if (formValid = true){
-       // let totalPriceCommand = document.getElementById("priceOfTeddies")
-        
-        const contact = {
-            lastName: document.getElementById("lastName").value,
-            firstName: document.getElementById("firstName").value,
-            address: document.getElementById("adress").value,
-            city: document.getElementById("city").value,
-            email: document.getElementById("mail").value
-        }
-        let panier = []
-        for (let index = 0;index < itemsTeddies.length; index++) {
-            panier.push(itemsTeddies[index].id)  
-        }
-        
-        var order= {
-            contact: contact,
-            products: panier 
-        };
 
-        postOfTeddie (order);
-                               
-    }else{
-        alert("formulaire invalide")
-    }
+};
+
    
-});
+
 }
 
 

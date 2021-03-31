@@ -285,17 +285,8 @@ footer
 
 /*************** PAGE PANIER ***************/
 
-#tableContent, .cards__item__thumb__1{
-    max-width: 200px;
-    height: auto;
-    margin: auto;
-  
-}
-.panier{
-    font-size: 2.5em;
-    text-align: center;
-    margin:20px 0px 20px 0px ;
-}
+
+
 
 #tHead{
     font-size:1.5em;
