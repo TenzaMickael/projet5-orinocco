@@ -375,7 +375,7 @@ function placeOrder () {
         mailForm.textContent = " MAIL :"            
         formContaint.appendChild(mailForm);
             let inputMail = document.createElement ("input");
-            inputMail.setAttribute ("type" , "mail") ;
+            inputMail.setAttribute ("type" , "email") ;
             inputMail.setAttribute ("name" , "mail") ;
             inputMail.setAttribute ("id" , "mail") ;
             inputMail.setAttribute("placeholder" , "email") ; 
@@ -411,7 +411,7 @@ function validation(){
     }
     else {
         missLastName.textContent ="";
-        formValid = true ;
+      
     }
 
 
@@ -430,7 +430,7 @@ function validation(){
     } else{
 
         missFirstName.textContent ="";
-        formValid = true ;
+     
     } 
 
     //ADRESSE
@@ -448,7 +448,7 @@ function validation(){
 
     } else {
         missAdress.textContent ="";
-        formValid = true ;
+       
     }
    
     //VILLE
@@ -464,7 +464,7 @@ function validation(){
         formValid = false;
 
     }else { missCity.textContent ="";
-        formValid = true ;
+       
 
     }
 
@@ -483,11 +483,13 @@ function validation(){
 
     }else {   
         missMail.textContent ="";
-        formValid = true ;
+        
     };
     
  
-  
+btnValid.addEventListener ("click" , function (event){
+    event.preventDefault ()
+
     if (formValid = true){
       
          
@@ -510,15 +512,14 @@ function validation(){
  
          postOfTeddie (order);
          window.location = "./confirm.html";                      
-     }else{
-         formValid= false;
+     
      };
     
 console.log(formValid)
 
-};
+});
 
-   
+};  
 
 }
 
