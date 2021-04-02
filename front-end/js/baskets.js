@@ -52,29 +52,28 @@ for (let i = 0;i < itemsTeddies.length; i++) {
         tableContent.appendChild(trBody);        
 
         // => MISE EN PLACE DES IMAGES
-        let thImgTeddie = document.createElement ("td");
-      //  thImgTeddie.setAttribute("scope" , "row");
-        trBody.appendChild(thImgTeddie);
+       // let thImgTeddie = document.createElement ("td");
+       // trBody.appendChild(thImgTeddie);
             let imgItemTeddie = document.createElement("img");
             imgItemTeddie.setAttribute ("class" , "image__teddies__product"); 
             imgItemTeddie.setAttribute ("src" , tablesBasket.imageUrl);
             imgItemTeddie.setAttribute("alt","image d'un ours en peluche");
-            thImgTeddie.appendChild(imgItemTeddie);
+            trBody.appendChild(imgItemTeddie);
 
         // => MISE EN PLACE DES NOMS
-        let tdNameTeddie = document.createElement ("td");
-        trBody.appendChild(tdNameTeddie);
+      //  let tdNameTeddie = document.createElement ("td");
+      //  trBody.appendChild(tdNameTeddie);
             let nameItemTeddie = document.createElement("p");
             nameItemTeddie.textContent = tablesBasket.name;
-            tdNameTeddie.appendChild(nameItemTeddie);
+            trBody.appendChild(nameItemTeddie);
 
         // => MISE EN PLACE DES PRIX UNITAIRE
-        let tdPriceUnitTeddie = document.createElement ("td");
-        trBody.appendChild(tdPriceUnitTeddie);
+        //let tdPriceUnitTeddie = document.createElement ("td");
+       // trBody.appendChild(tdPriceUnitTeddie);
             let priceUnitTeddie = document.createElement ("p");
             priceUnitTeddie.setAttribute ("id" , "priceUnit_"+ tablesBasket._id)
             priceUnitTeddie.textContent = tablesBasket.price/100 + " €",
-            tdPriceUnitTeddie.appendChild(priceUnitTeddie);
+            trBody.appendChild(priceUnitTeddie);
 
         // => MISE EN PLACE DES QUANTITÉS DE TEDDIE
         let tdQuantityTeddie = document.createElement ("td");
@@ -190,7 +189,7 @@ function tablesBasket () {
         containtTable.setAttribute("class", "responsive-table-line");
         basket.appendChild (containtTable);
 
-    let tables = ["Miniature","Nom","Prix unitaire"," Quantités","Prix total","Ajouter ou enlever","Supprimer"];
+    let tables = ["Oursons", "Quantités","Prix total","Ajouter ou enlever","Supprimer"];
    
             let teddiesTables = document.createElement("table");
             teddiesTables.setAttribute("class","table table-light table-striped table-bordered table-hover table-sm")
@@ -296,7 +295,6 @@ function placeOrder () {
     
     //=> CONTAINER POUR LE FORMULAIRE
     let formContaint = document.createElement ("form");
-    formContaint.setAttribute("method", "POST")
     formContaint.setAttribute("id" , "form")
     basket.appendChild(formContaint)
 
@@ -394,6 +392,7 @@ function placeOrder () {
         btnValid.addEventListener("click",validation);
 
 var formValid = true;   
+
 function validation(){
    
   
@@ -486,12 +485,7 @@ function validation(){
         
     };
     
- 
-btnValid.addEventListener ("click" , function (event){
-    event.preventDefault ()
-
-    if (formValid = true){
-      
+    if (formValid == true){
          
          const contact = {
              lastName: document.getElementById("lastName").value,
@@ -511,13 +505,13 @@ btnValid.addEventListener ("click" , function (event){
          };
  
          postOfTeddie (order);
-         window.location = "./confirm.html";                      
+                            
      
      };
     
 console.log(formValid)
 
-});
+
 
 };  
 

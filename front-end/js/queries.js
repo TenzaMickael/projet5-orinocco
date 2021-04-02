@@ -53,7 +53,7 @@ function postOfTeddie (order) {
              
                // order = JSON.parse(sessionStorage.getItem('order'));
                // console.log(order)
-              
+               window.location = "./confirm.html";  
             }
            
        
