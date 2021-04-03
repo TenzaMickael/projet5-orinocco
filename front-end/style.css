@@ -145,7 +145,6 @@ body
 #btnIndexProduct{
    margin: auto;
    font-size: 1.2em;
-   /*background-image: url(./images/aquarelle\ bleu.jpg);*/
 }
 
 footer
@@ -153,6 +152,7 @@ footer
     
     background-image: url(./images/osier\ flou\ marron.jpg);
     opacity:0.75;
+    position:static;
 }
 
 
@@ -179,7 +179,7 @@ footer
 
 .cardOfProduct
 {
-    width: auto;
+    max-width: 900px;
     margin: auto;
     padding:20px;
     font-size:1.2em;
@@ -190,7 +190,7 @@ footer
 .image__teddies__products
 {
     
-    width:400px;
+    width:300px;
     margin:auto;
     margin-top:30px;
     display:block;
@@ -217,6 +217,7 @@ footer
 }
 
 #contentProductTeddie{
+  max-width: 900px;
     border: 3px solid black;
     margin: 0px 250px 0px 250px;
     padding:20px;
@@ -284,23 +285,35 @@ footer
 }
 
 /*************** PAGE PANIER ***************/
-
-.responsive-table-line{
-  
+.panier{
+    text-align: center;
+    font-size:2.5em;
+    margin-top:20px;
+    margin-bottom:20px;
+    text-decoration: underline;
+}
+#table_1 , #table_2{
+   
     margin: auto;
-    width: auto;
-  
-
+    margin-bottom: 50px;
+    max-width: 1000px;
+    max-height: 200px;
+    background-color:rgba(42, 165, 89, 0.44) ;
+    border:2px solid black ;
+   
 }
 
-
+.responsive-table-line p , #table_2 p  {
+text-align: center;
+font-size: 1.5em;
+color: brown;
+margin:5px;
+margin-top: 20px;
+}
 
 .image__teddies__product{
-
-    width:100px;
-    display: block;
-   margin: auto ;
-   margin-top:20px;
+    margin-top:30px;
+    width:80px;
    border: 1px solid brown;  
 }
 @media screen and (max-width: 1100px) {
@@ -315,31 +328,45 @@ footer
     }
 }
 
+
+
 #basket
 {
    
     margin: auto;
-    padding: 10px;
     width: auto;
     font-size: 0.8em;
     text-align: center;
 }
 
-td p{
-    text-align: center;
-    margin: auto;
-    padding: 15px;
-    color:brown;
-}
 
-#btnAdd , #btnRemove
+
+#btnAdd , #btnRemove 
 {
-   width: 50px;
-   margin: auto;
-   margin-right:50px;
+  
+   width: 60px;
+   margin:auto ;
+   margin-top: 30px;
+   margin-right: 10px;
    text-align: center;
 }
+@media screen and (max-width: 1100px) {
+    #btnAdd , #btnRemove{
+        margin-top:20px;
+    }
+}
+  
+@media screen and (max-width: 576px) {
+    #btnAdd , #btnRemove {
+        margin-top:20px;
+    }
+}
 
+#btnContinueShopping,#btnOrder,#btnDeleteLocallStorage{
+    width: 200px;
+    margin:10px;
+
+}
 
 
 /* **********************************/
