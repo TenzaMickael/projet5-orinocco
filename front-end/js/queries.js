@@ -1,4 +1,5 @@
-//REQUETE DE LA PAGE GETTEDDIES.JS POUR RÉCUPÉRER TOUTE LES DONNÉES DE L'API
+/* Requette de la page getTeddies.js */
+
 function getAllTeddies (){
     var request = new XMLHttpRequest();
 request.onreadystatechange = function(){
@@ -14,7 +15,7 @@ request.send();
 }
 
 
-//REQUETE POUR RÉCUPÉRER L'ID DE L'OURSON SÉLECTIONNER SUR LA PAGE D'ACCEUIL
+//REQUETE POUR RÉCUPÉRER L'ID DE L'OURSON SÉLECTIONNER SUR LA PAGE D'ACCEUIL page produit
 function getOneTeddie (id) {
     var request = new XMLHttpRequest();                                         //=> Lance une requete XMLHttRequest
 
