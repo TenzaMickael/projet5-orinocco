@@ -139,7 +139,7 @@ function productTeddies (data) {
 
         event.preventDefault();                                                                  //=> On désactive le comportement par défaut 
 
-        productBasket (event.target.dataset.idteddie);                                           //=> On récupère les informations  dont on as besoin 
+        productBasket (event.target.dataset.idteddie);                                           //=> On récupère les informations dont on as besoin 
 
         let confirm = document.createElement ("p");                                              //=> Création d'une balise <p>
         confirm.setAttribute ("id","message")                                                    //=> On attribut un "ID"
