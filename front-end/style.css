@@ -202,6 +202,11 @@ footer {
 }
 
 /*************** PAGE PANIER ***************/
+
+#trBody , #tdQuantityTeddie , #tdSubTotalTeddie , #tdAddOrRemove , #tdDelete {
+    border:1px solid rgb(45, 87, 5);
+}
+
 .panier {
     color: rgb(101, 165, 42);
     font-family: "letters";
@@ -218,7 +223,7 @@ footer {
     max-width: 1000px;
     max-height: 200px;
     background-color:rgba(42, 165, 89, 0.44) ;
-    border: 2px solid black ;  
+    border: 2mm ridge rgb(101, 165, 42); ;  
 }
 
 .responsive-table-line p , #table_2 p {
@@ -230,8 +235,8 @@ footer {
 
 .image__teddies__product {
     margin-top:30px;
-    width:80px;
-   border: 1px solid brown;  
+    width:100px;
+    border: 3px solid rgb(101, 165, 42);;  
 }
 
 #basket {
@@ -254,12 +259,30 @@ footer {
     margin:10px;
 }
 
+#formTitle{
+    font-size:2em;
+    font-family: letters ;
+    text-align: center;
+    margin:30px auto 30px auto;
+    font-weight: 100;
+}
+
 #form { 
     margin: auto;
-    border: 1px solid black;
-    width:400px;
+    border: 2mm ridge rgb(101, 165, 42);
+    background-color:rgba(42, 165, 89, 0.44);
+    max-width: 400px;
     text-align: center;
     margin-bottom:20px;
+}
+
+#form label {
+    margin:10px auto 10px auto;
+  
+}
+
+#missLastName{
+    color:green;
 }
 
 #btnValid {
@@ -284,7 +307,7 @@ article {
     max-width: 900px;
     width: auto;
     padding:20px;
-    border:1px solid black;
+    border:2mm ridge rgb(101, 165, 42);
     text-align: center;
     font-size:1.5em;
     margin: 100px auto 102px auto;  

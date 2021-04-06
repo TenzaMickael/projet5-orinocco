@@ -56,6 +56,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
 
     /***** Balise <tr> *****/
     let trBody = document.createElement("tr");                                                                      //=> Création d'une balise <tr>
+    trBody.setAttribute("id","trBody");
     tableContent.appendChild(trBody);                                                                               //=> On lui déclare son parent
 
 
@@ -78,12 +79,13 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
     let priceUnitTeddie = document.createElement ("p");                                                             //=> Création d'une balise <p>
     priceUnitTeddie.setAttribute ("class" , "priceUnit__teddies__product");                                         //=> On lui attribut une classe
     priceUnitTeddie.setAttribute ("id" , "priceUnit_"+ tablesBasket._id);                                           //=> On lui attribut un <ID>
-    priceUnitTeddie.textContent = "Prix unitaire : " + tablesBasket.price/100 + " €";                               //=> On lui attribut un contenu
+    priceUnitTeddie.textContent = tablesBasket.price/100 + " €";                                                    //=> On lui attribut un contenu
     trBody.appendChild (priceUnitTeddie);                                                                           //=> On lui déclare son parent
 
 
     /***** Cellule <td> + quantité d'oursons  *****/
     let tdQuantityTeddie = document.createElement ("td");                                                           //=> Création d'une balise <td>
+    tdQuantityTeddie.setAttribute("id","tdQuantityTeddie");                                                         //=> On lui attribut un <ID> 
     trBody.appendChild (tdQuantityTeddie);                                                                          //=> On lui déclare son parent
         let quantityOfTeddie = document.createElement ("p");                                                        //=> Création d'une balise <p>
         quantityOfTeddie.setAttribute ("id" , "quantity_"+ tablesBasket._id);                                       //=> On lui attribut un <ID> 
@@ -93,6 +95,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
 
     /***** Cellule <td> + prix sous total de l'ourson *****/
     let tdSubTotalTeddie = document.createElement ("td");                                                           //=> Création d'une balise <td>
+    tdSubTotalTeddie.setAttribute("id","tdSubTotalTeddie");                                                         //=> On lui attribut un <ID>
     trBody.appendChild (tdSubTotalTeddie);                                                                          //=> On lui déclare son parent
         let subTotalTeddie = document.createElement ("p");                                                          //=> Création d'une balise <p>
         subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id);                                         //=> On lui attribut un <ID>
@@ -103,6 +106,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
 
     /***** Cellule <td> + bouton ajouter ourson *****/
     let tdAddOrRemove = document.createElement ("td");                                                              //=> Création d'une balise <td>
+    tdAddOrRemove.setAttribute("id","tdAddOrRemove");                                                               //=> On lui attribut un <ID>
     trBody.appendChild (tdAddOrRemove);                                                                             //=> On lui déclare son parent
         let btnAddTeddie = document.createElement ("btn");                                                          //=> Création d'une balise <btn>
         tdAddOrRemove.appendChild (btnAddTeddie);                                                                   //=> On lui déclare son parent
@@ -124,6 +128,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
 
     /***** Cellule <td> + bouton supprimer la ligne de l'ourson *****/
     let tdDelete = document.createElement ("td");                                                                   //=> Création d'une balise <td>
+    tdDelete.setAttribute("id","tdDelete");                                                                         //=> On lui attribut un <ID>
     trBody.appendChild(tdDelete);                                                                                   //=> On lui déclare son parent 
         let btnDeleteTeddie = document.createElement ("btn");                                                       //=> Création d'une balise <btn>                 
         btnDeleteTeddie.setAttribute("class","btn btn-danger btn-sm");                                              //=> On lui attribut une classe                                          
@@ -351,8 +356,9 @@ function placeOrder () {                                                        
 
 
     /***** Balise <h2> *****/
-    let formTitle = document.createElement ("h2");                                                                  //=> Création d'une balise <h2>
-    formTitle.textContent= "Veuillez remplir ce formulaire pour valider votre commande";                            //=> On lui attrubut un contenu
+    let formTitle = document.createElement ("h2");  
+    formTitle.setAttribute("id","formTitle")                                                                        //=> Création d'une balise <h2>
+    formTitle.textContent= "Merci de remplir ce formulaire pour finaliser votre commande";                          //=> On lui attrubut un contenu
     formContaint.appendChild (formTitle);                                                                           //=> On lui déclare son parent
 
 
@@ -394,7 +400,7 @@ function placeOrder () {                                                        
     /***** Addresse *****/
     let adressForm = document.createElement ("label");                                                              //=> Création d'une balise <label>
     adressForm.setAttribute ("for", "address");                                                                     //=> On lui attribut un "for"
-    adressForm.textContent = " Adresse : ";                                                                         //=> On lui attrubut un contenu
+    adressForm.textContent = " Adresse : ";                                                                         //=> On lui attribut un contenu
     formContaint.appendChild (adressForm);                                                                          //=> On lui déclare son parent
         let inputAdress = document.createElement ("input");                                                         //=> Création d'une balise <input>
         inputAdress.setAttribute ("type" , "text");                                                                 //=> On définit son type
@@ -451,118 +457,127 @@ function placeOrder () {                                                        
     btnValid.addEventListener ("click",validation);                                                                 //=> On défint l'action au click sur lez bouton "valider"
 
 
-    var formValid = true;                                                                                               //=>
+    var formValid = true;                                                                                           //=> Création d'une variable pour le formulaire
 
-    function validation() {                                                                                             //=>
-   
+
+
+/* Fonction pour vérifier les donnée saisies dans le formulaire */
+
+    function validation() {                                                                                         //=> Fonction pour vérifier les donnée saisies dans le formulaire
   
-        //NOM
-        if (lastName.validity.valueMissing  ) {                                                                         //=>
-            missLastName.textContent = "nom manquant";                                                                  //=>
-            missLastName.style.color = "red";                                                                           //=>
-            formValid = false;                                                                                          //=>
+    /***** Nom *****/
+    if (lastName.validity.valueMissing  ) {                                                                         //=> Si la valeur saisie est vide
+                                                                                                                    
+        missLastName.textContent = "nom manquant";                                                                  //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
 
-    } else if (!(/^\D+$/.test(lastName.value))) {                                                                   //=>
+    }else if (!(/^\D+$/.test(lastName.value))) {                                                                    //=> Sinon si les caractère rentrés sont différent de :
 
-        missLastName.textContent = "le nom contient des chiffres";                                                  //=>
-        missLastName.style.color = "red";                                                                           //=>
-        formValid = false;                                                                                          //=>
+        missLastName.textContent = "le nom contient des chiffres";                                                  //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
+                                                                                                                
+    }else{                                                                                                          //=> Sinon
+                                                                                                                    
+        missLastName.textContent ="";                                                                               //=> On lui attrubut un contenu
     }
-    else {                                                                                                          //=>
-        missLastName.textContent ="";                                                                               //=>
-      
-    }
 
 
-    //PRENOM
-    if (firstName.validity.valueMissing) {                                                                          //=>
-        missFirstName.textContent = "prénom manquant";                                                              //=>
-        missFirstName.style.color = "red";                                                                          //=>
-        formValid = false;                                                                                          //=>
+    /***** Prénom *****/
+    if (firstName.validity.valueMissing) {                                                                          //=> Si la valeur saisie est vide
+                                                                                                                    
+        missFirstName.textContent = "prénom manquant";                                                              //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
 
-    } else if (!(/^\D+$/.test(firstName.value))) {                                                                  //=>
+    }else if (!(/^\D+$/.test(firstName.value))) {                                                                   //=> Sinon si les caractère rentrés sont différent de :
 
-        missFirstName.textContent = "le prénom contient des chiffres";                                              //=>
-        missFirstName.style.color = "red";                                                                          //=>
-        formValid = false;                                                                                          //=>
+        missFirstName.textContent = "le prénom contient des chiffres";                                              //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
 
-    } else{                                                                                                         //=>
+    }else{                                                                                                          //=> Sinon
 
-        missFirstName.textContent ="";                                                                              //=>
+        missFirstName.textContent ="";                                                                              //=> On lui attrubut un contenu
     } 
 
-    //ADRESSE
-    if (adress.validity.valueMissing) {                                                                             //=>
-        missAdress.textContent = "Adresse manquant";                                                                //=>
-        missAdress.style.color = "red";                                                                             //=>
-        formValid = false;                                                                                          //=>
 
+    /***** Addresse *****/
+    if (adress.validity.valueMissing) {                                                                             //=> Si la valeur saisie est vide
+                                                                                    
+        missAdress.textContent = "Adresse manquant";                                                                //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
 
-    }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {                                                               //=>
+    }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {                                                               //=> Sinon si les caractère rentrés sont différent de :
 
-        missAdress.textContent = "Vous utiliser des caractère spéciaux";                                            //=>
-        missAdress.style.color = "red";                                                                             //=>
-        formValid = false;                                                                                          //=>
+        missAdress.textContent = "Vous utiliser des caractère spéciaux";                                            //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
 
-    } else {                                                                                                        //=>
-        missAdress.textContent ="";                                                                                 //=>
-       
-    }
-   
-    //VILLE
-    if (city.validity.valueMissing) {                                                                               //=>
-        missCity.textContent = "Ville manquante";                                                                   //=>
-        missCity.style.color = "red";                                                                               //=>
-        formValid = false;                                                                                          //=>
-
-    }else  if (!(/[A-Za-z-']/.test(city.value))) {                                                                  //=>
-
-        missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";                    //=>
-        missCity.style.color = "red";                                                                               //=>
-        formValid = false;                                                                                          //=>
-
-    }else { missCity.textContent ="";                                                                               //=>
-       
-
+    }else{                                                                                                          //=> Sinon
+                                                                                                                    
+        missAdress.textContent ="";                                                                                 //=> On lui attrubut un contenu
     }
 
-    //EMAIL
-    if (mail.validity.valueMissing) {                                                                               //=>
-        missMail.textContent = "Email manquant";                                                                    //=>
-        missMail.style.color = "red";                                                                               //=>
-        formValid = false;                                                                                          //=>
 
-    }else if (!/.+@.+\..+/.test(mail.value)) {                                                                      //=>
-        
-        missMail.textContent = "Format email incorect";                                                             //=>
-        missMail.style.color = "red";                                                                               //=>
-        formValid = false;                                                                                          //=>
+    /***** Ville *****/
+    if (city.validity.valueMissing) {                                                                               //=> Si la valeur saisie est vide
 
-    }else {                                                                                                         //=>
-        missMail.textContent ="";                                                                                   //=>
+        missCity.textContent = "Ville manquante";                                                                   //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
+
+    }else  if (!(/[A-Za-z-']/.test(city.value))) {                                                                  //=> Sinon si les caractère rentrés sont différent de :
+
+        missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";                    //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
+
+    }else{                                                                                                          //=> Sinon
+            
+        missCity.textContent ="";                                                                                   //=> On lui attrubut un contenu
+    }   
+
+
+    /***** Mail *****/
+    if (mail.validity.valueMissing) {                                                                               //=> Si la valeur saisie est vide
+
+        missMail.textContent = "Email manquant";                                                                    //=> Message d'erreur
+        formValid = false;                                                                                          //=> change la variable "formValid"
+
+    }else if (!/.+@.+\..+/.test(mail.value)) {                                                                      //=> Sinon si les caractère rentrés sont différent de :
         
+        missMail.textContent = "Format email incorect";                                                             //=> Message d'erreur
+        missMail.style.color = "red";                                                                               //=>
+        formValid = false;                                                                                          //=> change la variable "formValid"
+
+    } else {                                                                                                        //=> Sinon
+                                                                                                                    
+        missMail.textContent ="";                                                                                   //=> On lui attrubut un contenu   
     };
+
+
+/* Fonction qui crée les éléments pour la page de confirmation si le formulaire est valide */
     
-    if (formValid == true) {                                                                                        //=>
+    if (formValid == true) {                                                                                        //=> Si le formulaire renvoi "true"
          
-         const contact = {                                                                                          //=>
-             lastName: document.getElementById("lastName").value,                                                   //=>
-             firstName: document.getElementById("firstName").value,                                                 //=>
-             address: document.getElementById("adress").value,                                                      //=>
-             city: document.getElementById("city").value,                                                           //=>
-             email: document.getElementById("mail").value                                                           //=>
-         }
-         let panier = []                                                                                            //=>
-         for (let index = 0;index < itemsTeddies.length; index++) {                                                 //=>
-             panier.push(itemsTeddies[index].id);                                                                   //=>
-         }
+        const contact = {                                                                                           //=> Création d'une constante 
+             lastName: document.getElementById("lastName").value,                                                   //=> La valeur du nom 
+             firstName: document.getElementById("firstName").value,                                                 //=> La valeur du prénom
+             address: document.getElementById("adress").value,                                                      //=> La valeur de l' addresse
+             city: document.getElementById("city").value,                                                           //=> La valeur de la ville
+             email: document.getElementById("mail").value                                                           //=> La valeur du mail 
+        }
+
+
+        let panier = []                                                                                             //=> On crée un tableau vide 
+                                                                                                  
+        for (let index = 0;index < itemsTeddies.length; index++) {                                                  //=> Boucle sur itemsTeddies
+
+             panier.push(itemsTeddies[index].id);                                                                   //=> On push dans le tableau vide 
+        }
          
-         var order= {                                                                                               //=>
-             contact: contact,                                                                                      //=>
-             products: panier                                                                                       //=>
+         var order= {                                                                                               //=> On crée une variable
+
+             contact: contact,                                                                                      //=> Contient les coordonnéees de l'utilisateur
+             products: panier                                                                                       //=> Contient le numéro de commande 
          };
  
-         postOfTeddie (order);                                                                                      //=>
+         postOfTeddie (order);                                                                                      //=> Appelle la fonction postOfTeddie
                             
      
      };
