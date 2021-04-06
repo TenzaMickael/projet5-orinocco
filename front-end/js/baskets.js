@@ -98,6 +98,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id);                                         //=> On lui attribut un <ID>
         tdSubTotalTeddie.appendChild (subTotalTeddie);                                                              //=> On lui déclare son parent
          var subTotalOfTeddies = subTotal (tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);           //=> On lui attribut un contenu
+         console.log(subTotalOfTeddies)
 
 
     /***** Cellule <td> + bouton ajouter ourson *****/
@@ -111,13 +112,6 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         btnAddTeddie.textContent= "+";                                                                              //=> On lui attribut un contenu 
 
 
-/* Evènement sur le bouton ajouter un ourson */ 
-    btnAddTeddie.addEventListener ('click', function (event) {                                                      //=> Action si un click se produit sur le bouton "+"
-        event.preventDefault();                                                                                     //=> On désactive le comportement par défaut
-        updateTeddieItem (tablesBasket._id,1);                                                                      //=> On ajoute +1 à l'ourson
-    });
-
-
     /***** Bouton enlever un ourson *****/
     let btnRemoveTeddie = document.createElement ("btn");                                                           //=> Création d'une balise <btn>
     tdAddOrRemove.appendChild (btnRemoveTeddie);                                                                    //=> On lui déclare son parent  
@@ -126,13 +120,6 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         btnRemoveTeddie.setAttribute ("type","button");                                                             //=> On définit son type
         btnRemoveTeddie.setAttribute ("disabled","true");                                                           //=> On le met en désactivé par défaut                                                                                                               
         btnRemoveTeddie.textContent= "-";                                                                           //=> On lui attribut un contenu
-
-
-/* Evènement sur le bouton enlever un ourson */
-    btnRemoveTeddie.addEventListener ('click', function (event) {                                                   //=> Action si un click se produit sur le bouton "-" 
-        event.preventDefault();                                                                                     //=> On désactive le comportement par défaut
-        updateTeddieItem (tablesBasket._id, -1);                                                                    //=> On enlève -1 à l'ourson
-    });
 
 
     /***** Cellule <td> + bouton supprimer la ligne de l'ourson *****/
@@ -144,25 +131,39 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         tdDelete.appendChild(btnDeleteTeddie);                                                                      //=> On lui déclare son parent
         btnDeleteTeddie.dataset.idteddie = tablesBasket._id;                                                        //=> On lui attribut un contenu                                                                                                   
         btnDeleteTeddie.textContent= "X";                                                                           //=> On lui attribut un contenu
+    
+
+/* Evènement de la fonction tablesItems */
+
+    /***** Evènement sur le bouton ajouter un ourson *****/ 
+    btnAddTeddie.addEventListener ('click', function (event) {                                                      //=> Action si un click se produit sur le bouton "+"
+        event.preventDefault();                                                                                     //=> On désactive le comportement par défaut
+        updateTeddieItem (tablesBasket._id,1);                                                                      //=> On ajoute +1 à l'ourson
+    });
 
 
-/* Evènement sur le bouton supprimer la ligne de l'ourson */
+    /***** Evènement sur le bouton enlever un ourson *****/
+    btnRemoveTeddie.addEventListener ('click', function (event) {                                                   //=> Action si un click se produit sur le bouton "-" 
+        event.preventDefault();                                                                                     //=> On désactive le comportement par défaut
+        updateTeddieItem (tablesBasket._id, -1);                                                                    //=> On enlève -1 à l'ourson
+    });
+
+
+    /***** Evènement sur le bouton supprimer la ligne de l'ourson *****/
     btnDeleteTeddie.addEventListener('click', function (event) {                                                    //=> Action si un click se produit sur le bouton "X"
         event.preventDefault();                                                                                     //=> On désactive le comportement par défaut
         deleteTeddie (tablesBasket._id);                                                                            //=> On supprime la quantité de l'ourson sélectionné
     });
-   
 
-/* Remplissage du 2ieme tableau */   
+
+    /* Remplissage du 2ieme tableau */   
 
     /***** Calcul nombre total d'articles *****/
-    numberArticles (itemsTeddies[i].quantity);                                                                      //=> Affiche le nombre total d'articles
-                      
+    numberArticles (itemsTeddies[i].quantity);                                                                      //=> Affiche le nombre total d'articles                   
             
     /***** Calcul prix total des dépenses *****/ 
     totalPriceOfTeddie (subTotalOfTeddies);                                                                         //=> Affiche le prix total 
- 
-   
+
 
     };
 
@@ -197,6 +198,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
            
            deleteTeddie (idTeddie);                                                                                 //=> On appelle le fonction "deleteTeddie"
         }  
+        
     };
 };
 
@@ -246,7 +248,7 @@ function tablesBasket () {                                                      
         trTables.appendChild (thTables);                                                                            //=> On lui déclare son parent
         thTables.textContent = tables[i];                                                                           //=> On lui attrubut un contenu
 
-                        } 
+    } 
 
 
     /***** Balise <tbody> *****/
@@ -310,14 +312,8 @@ function resumeTab (itemsTeddies) {                                             
         placeOrderBasket.textContent = " Commander ";                                                               //=> On lui attrubut un contenu
         tableContent.appendChild (placeOrderBasket);                                                                //=> On lui déclare son parent
 
-        btnOrder.addEventListener("click", function (event) {                                                       //=> Action si un click se produit sur le bouton "Commander"
-            event.preventDefault();                                                                                 //=> On désactive le comportement par défaut
-            if (!document.getElementById("form")) {                                                                 //=> Si le formulairee n'est pas présent 
-                placeOrder();                                                                                       //=> On appelle la fonction "placeOrder"
-            };
-        });
             
-
+        /***** Bouton commander *****/
         let deleteLocalStorage = document.createElement ("btn");                                                    //=> Création d'une balise <btn>
         deleteLocalStorage.setAttribute ("type" , "button");                                                        //=> On définit son type
         deleteLocalStorage.setAttribute ("class" , "btn btn-danger");                                               //=> On lui attribut une classe
@@ -325,227 +321,248 @@ function resumeTab (itemsTeddies) {                                             
         deleteLocalStorage.textContent = " Vider le panier ";                                                       //=> On lui attrubut un contenu
         tableContent.appendChild (deleteLocalStorage);                                                              //=> On lui déclare son parent
        
+
+        /***** Evènement sur le bouton "Vider le panier" *****/
         btnDeleteLocallStorage.addEventListener("click", function (event) {                                         //=> Action si un click se produit sur le bouton "Vider le panier"
             event.preventDefault();                                                                                 //=> On désactive le comportement par défaut
             deleteTeddie (itemsTeddies);                                                                            //=> On appelle la fonction deleteTeddie
             window.location.reload ();                                                                              //=> On recharge la page
         });  
+
+        /***** Evènement sur le bouton "Commander" *****/
+        btnOrder.addEventListener("click", function (event) {                                                       //=> Action si un click se produit sur le bouton "Commander"
+            event.preventDefault();                                                                                 //=> On désactive le comportement par défaut
+            if (!document.getElementById("form")) {                                                                 //=> Si le formulairee n'est pas présent 
+                placeOrder();                                                                                       //=> On appelle la fonction "placeOrder"
+            };
+        });
     }
 };
 
 
-function placeOrder () {//=>
+/* Création du formulaire de contact */
+
+function placeOrder () {                                                                                            //=> Fonction pour le formulaire de commande 
     
-    //=> CONTAINER POUR LE FORMULAIRE
-    let formContaint = document.createElement ("form");//=>
-    formContaint.setAttribute ("id" , "form");//=>
-    basket.appendChild (formContaint);//=>
+    /***** Container pour le formulaire *****/
+    let formContaint = document.createElement ("form");                                                             //=> Création d'une balise <form>
+    formContaint.setAttribute ("id" , "form");                                                                      //=> On lui attribut un <ID>
+    basket.appendChild (formContaint);                                                                              //=> On lui déclare son parent
 
-    let formTitle = document.createElement ("h2");//=>
-    formTitle.textContent= "Veuillez remplir ce formulaire pour valider votre commande";//=>
-    formContaint.appendChild (formTitle);//=>
 
-    //=> NOM
-        let lastNameForm = document.createElement ("label");//=>
-        lastNameForm.setAttribute ("for", "lastName");//=>
-        lastNameForm.textContent = " Nom : ";     //=>
-        formContaint.appendChild (lastNameForm);//=>
-            let inputLastName = document.createElement ("input");//=>
-            inputLastName.setAttribute ("type" , "text");//=>
-            inputLastName.setAttribute ("name" , "nom");//=>
-            inputLastName.setAttribute ("id" , "lastName") ;//=>
-            inputLastName.setAttribute ("placeholder" , "nom"); //=>
-            inputLastName.setAttribute ("required" , "true");//=>
-            lastNameForm.appendChild (inputLastName);//=>
-                let spanLastName = document.createElement ("span");//=>
-                spanLastName.setAttribute ("id", "missLastName");//=>
-                lastNameForm.appendChild (spanLastName);//=>
+    /***** Balise <h2> *****/
+    let formTitle = document.createElement ("h2");                                                                  //=> Création d'une balise <h2>
+    formTitle.textContent= "Veuillez remplir ce formulaire pour valider votre commande";                            //=> On lui attrubut un contenu
+    formContaint.appendChild (formTitle);                                                                           //=> On lui déclare son parent
+
+
+
+    /***** Nom *****/
+    let lastNameForm = document.createElement ("label");                                                            //=> Création d'une balise <label>
+    lastNameForm.setAttribute ("for", "lastName");                                                                  //=> On lui attribut un "for" "lastName"
+    lastNameForm.textContent = " Nom : ";                                                                           //=> On lui attrubut un contenu
+    formContaint.appendChild (lastNameForm);                                                                        //=> On lui déclare son parent
+        let inputLastName = document.createElement ("input");                                                       //=> Création d'une balise <input>
+        inputLastName.setAttribute ("type" , "text");                                                               //=> On définit son type
+        inputLastName.setAttribute ("name" , "nom");                                                                //=> On définit son nom
+        inputLastName.setAttribute ("id" , "lastName");                                                             //=> On lui attribut un <ID>
+        inputLastName.setAttribute ("placeholder" , "nom");                                                         //=> On lui attribut un placeholder
+        inputLastName.setAttribute ("required" , "true");                                                           //=> On lui met un attribut "required"
+        lastNameForm.appendChild (inputLastName);                                                                   //=> On lui déclare son parent
+            let spanLastName = document.createElement ("span");                                                     //=> Création d'une balise <span>
+            spanLastName.setAttribute ("id", "missLastName");                                                       //=> On lui attribut un <ID>
+            lastNameForm.appendChild (spanLastName);                                                                //=> On lui déclare son parent
                 
             
-//=> PRENOM
-        let firstNameForm = document.createElement ("label");//=>
-        firstNameForm.setAttribute ("for", "firstName");//=>
-        firstNameForm.textContent = " Prenom : ";       //=>
-        formContaint.appendChild (firstNameForm);//=>
-            let inputFirstName = document.createElement ("input");//=>
-            inputFirstName.setAttribute ("type" , "text");//=>
-            inputFirstName.setAttribute ("name" , "firstName");//=>
-            inputFirstName.setAttribute ("id" , "firstName") ;//=>
-            inputFirstName.setAttribute ("placeholder" , "prénom"); //=>
-            inputFirstName.setAttribute ("required" , "true");//=>
-            firstNameForm.appendChild (inputFirstName);//=>
-                let spanFirstName = document.createElement ("span");//=>
-                spanFirstName.setAttribute ("id", "missFirstName");//=>
-                firstNameForm.appendChild (spanFirstName);//=>
+    /***** Prénom *****/
+    let firstNameForm = document.createElement ("label");                                                           //=> Création d'une balise <label>
+    firstNameForm.setAttribute ("for", "firstName");                                                                //=> On lui attribut un "for" 
+    firstNameForm.textContent = " Prenom : ";                                                                       //=> On lui attrubut un contenu 
+    formContaint.appendChild (firstNameForm);                                                                       //=> On lui déclare son parent
+        let inputFirstName = document.createElement ("input");                                                      //=> Création d'une balise <input>
+        inputFirstName.setAttribute ("type" , "text");                                                              //=> On définit son type
+        inputFirstName.setAttribute ("name" , "firstName");                                                         //=> On définit son nom
+        inputFirstName.setAttribute ("id" , "firstName") ;                                                          //=> On lui attribut un <ID>
+        inputFirstName.setAttribute ("placeholder" , "prénom");                                                     //=> On lui attribut un placeholder
+        inputFirstName.setAttribute ("required" , "true");                                                          //=> On lui met un attribut "required"
+        firstNameForm.appendChild (inputFirstName);                                                                 //=> On lui déclare son parent
+            let spanFirstName = document.createElement ("span");                                                    //=> Création d'une balise <span>
+            spanFirstName.setAttribute ("id", "missFirstName");                                                     //=> On lui attribut un <ID>
+            firstNameForm.appendChild (spanFirstName);                                                              //=> On lui déclare son parent
 
-//=> ADRESSE
-        let adressForm = document.createElement ("label");//=>
-        adressForm.setAttribute ("for", "address");//=>
-        adressForm.textContent = " Adresse : ";         //=>
-        formContaint.appendChild (adressForm);//=>
-            let inputAdress = document.createElement ("input");//=>
-            inputAdress.setAttribute ("type" , "text");//=>
-            inputAdress.setAttribute ("name" , "adress");//=>
-            inputAdress.setAttribute ("id" , "adress");//=>
-            inputAdress.setAttribute ("placeholder" , "adresse"); //=>
-            inputAdress.setAttribute ("required" , "true");//=>
-            adressForm.appendChild (inputAdress);//=>
-                let spanAdress = document.createElement ("span");//=>
-                spanAdress.setAttribute ("id", "missAdress");//=>
-                adressForm.appendChild (spanAdress);//=>
 
-//=> VILLLE
-        let cityForm = document.createElement ("label");//=>
-        cityForm.setAttribute ("for", "city");//=>
-        cityForm.textContent = " Ville : ";           //=>
-        formContaint.appendChild (cityForm);//=>
-            let inputCity = document.createElement ("input");//=>
-            inputCity.setAttribute ("type" , "text");//=>
-            inputCity.setAttribute ("name" , "city");//=>
-            inputCity.setAttribute ("id" , "city");//=>
-            inputCity.setAttribute ("placeholder" , "ville"); //=>
-            inputCity.setAttribute ("required" , "true");//=>
-            cityForm.appendChild (inputCity);//=>
-                let spanCity = document.createElement ("span");//=>
-                spanCity.setAttribute ("id", "missCity");//=>
-                cityForm.appendChild (spanCity);//=>
+    /***** Addresse *****/
+    let adressForm = document.createElement ("label");                                                              //=> Création d'une balise <label>
+    adressForm.setAttribute ("for", "address");                                                                     //=> On lui attribut un "for"
+    adressForm.textContent = " Adresse : ";                                                                         //=> On lui attrubut un contenu
+    formContaint.appendChild (adressForm);                                                                          //=> On lui déclare son parent
+        let inputAdress = document.createElement ("input");                                                         //=> Création d'une balise <input>
+        inputAdress.setAttribute ("type" , "text");                                                                 //=> On définit son type
+        inputAdress.setAttribute ("name" , "adress");                                                               //=> On définit son nom 
+        inputAdress.setAttribute ("id" , "adress");                                                                 //=> On lui attribut un <ID>
+        inputAdress.setAttribute ("placeholder" , "adresse");                                                       //=> On lui attribut un placeholder
+        inputAdress.setAttribute ("required" , "true");                                                             //=> On lui met un attribut "required"
+        adressForm.appendChild (inputAdress);                                                                       //=> On lui déclare son parent
+            let spanAdress = document.createElement ("span");                                                       //=> Création d'une balise <span>
+            spanAdress.setAttribute ("id", "missAdress");                                                           //=> On lui attribut un <ID>
+            adressForm.appendChild (spanAdress);                                                                    //=> On lui déclare son parent
 
-//=> MAIL
-        let mailForm = document.createElement ("label");//=>
-        mailForm.setAttribute ("for", "mail");//=>
-        mailForm.textContent = " Mail :";           //=>
-        formContaint.appendChild (mailForm);//=>
-            let inputMail = document.createElement ("input");//=>
-            inputMail.setAttribute ("type" , "email");//=>
-            inputMail.setAttribute ("name" , "mail");//=>
-            inputMail.setAttribute ("id" , "mail");//=>
-            inputMail.setAttribute ("placeholder" , "email") ; //=>
-            inputMail.setAttribute ("required" , "true");//=>
-            mailForm.appendChild (inputMail);//=>
-                let spanMail = document.createElement ("span");//=>
-                spanMail.setAttribute ("id", "missMail");//=>
-                mailForm.appendChild (spanMail);//=>
 
-//=> VALIDER
-        let validForm = document.createElement ("input");//=>
-        validForm.setAttribute ("type","submit");//=>
-        validForm.setAttribute ("value" , "valider");//=>
-        validForm.setAttribute ("id","btnValid");//=>
-        formContaint.appendChild (validForm);//=>
-        btnValid.addEventListener ("click",validation);//=>
+    /***** Ville *****/
+    let cityForm = document.createElement ("label");                                                                //=> Création d'une balise <label>
+    cityForm.setAttribute ("for", "city");                                                                          //=> On lui attribut un "for"
+    cityForm.textContent = " Ville : ";                                                                             //=> On lui attrubut un contenu
+    formContaint.appendChild (cityForm);                                                                            //=> On lui déclare son parent
+        let inputCity = document.createElement ("input");                                                           //=> Création d'une balise <input>
+        inputCity.setAttribute ("type" , "text");                                                                   //=> On définit son type
+        inputCity.setAttribute ("name" , "city");                                                                   //=> On définit son nom
+        inputCity.setAttribute ("id" , "city");                                                                     //=> On lui attribut un <ID>
+        inputCity.setAttribute ("placeholder" , "ville");                                                           //=> On lui attribut un placeholder
+        inputCity.setAttribute ("required" , "true");                                                               //=> On lui met un attribut "required"
+        cityForm.appendChild (inputCity);                                                                           //=> On lui déclare son parent
+            let spanCity = document.createElement ("span");                                                         //=> Création d'une balise <span>
+            spanCity.setAttribute ("id", "missCity");                                                               //=> On lui attribut un <ID>
+            cityForm.appendChild (spanCity);                                                                        //=> On lui déclare son parent
 
-var formValid = true;   //=>
 
-function validation() {//=>
+    /***** Mail *****/
+    let mailForm = document.createElement ("label");                                                                //=> Création d'une balise <label>
+    mailForm.setAttribute ("for", "mail");                                                                          //=> On lui attribut un "for"
+    mailForm.textContent = " Mail : ";                                                                              //=> On lui attrubut un contenu
+    formContaint.appendChild (mailForm);                                                                            //=> On lui déclare son parent
+        let inputMail = document.createElement ("input");                                                           //=> Création d'une balise <input>
+        inputMail.setAttribute ("type" , "email");                                                                  //=> On définit son type
+        inputMail.setAttribute ("name" , "mail");                                                                   //=> On lui attribut un <ID>
+        inputMail.setAttribute ("id" , "mail");                                                                     //=> On lui attribut un <ID>
+        inputMail.setAttribute ("placeholder" , "email") ;                                                          //=> On lui attribut un placeholder
+        inputMail.setAttribute ("required" , "true");                                                               //=> On lui met un attribut "required"
+        mailForm.appendChild (inputMail);                                                                           //=> On lui déclare son parent
+            let spanMail = document.createElement ("span");                                                         //=> Création d'une balise <span>
+            spanMail.setAttribute ("id", "missMail");                                                               //=> On lui attribut un <ID>
+            mailForm.appendChild (spanMail);                                                                        //=> On lui déclare son parent
+
+
+    /***** Validation *****/
+    let validForm = document.createElement ("input");                                                               //=> Création d'une balise <input>
+    validForm.setAttribute ("type","submit");                                                                       //=> On définit son type
+    validForm.setAttribute ("value" , "valider");                                                                   //=> On lui attribut une valeur
+    validForm.setAttribute ("id","btnValid");                                                                       //=> On lui attribut un <ID>
+    formContaint.appendChild (validForm);                                                                           //=> On lui déclare son parent
+    btnValid.addEventListener ("click",validation);                                                                 //=> On défint l'action au click sur lez bouton "valider"
+
+
+    var formValid = true;                                                                                               //=>
+
+    function validation() {                                                                                             //=>
    
   
-    //NOM
-    if (lastName.validity.valueMissing  ) {//=>
-        missLastName.textContent = "nom manquant";//=>
-        missLastName.style.color = "red";//=>
-        formValid = false;//=>
+        //NOM
+        if (lastName.validity.valueMissing  ) {                                                                         //=>
+            missLastName.textContent = "nom manquant";                                                                  //=>
+            missLastName.style.color = "red";                                                                           //=>
+            formValid = false;                                                                                          //=>
 
-    } else if (!(/^\D+$/.test(lastName.value))) {//=>
+    } else if (!(/^\D+$/.test(lastName.value))) {                                                                   //=>
 
-        missLastName.textContent = "le nom contient des chiffres";//=>
-        missLastName.style.color = "red";//=>
-        formValid = false;//=>
+        missLastName.textContent = "le nom contient des chiffres";                                                  //=>
+        missLastName.style.color = "red";                                                                           //=>
+        formValid = false;                                                                                          //=>
     }
-    else {
-        missLastName.textContent ="";//=>
+    else {                                                                                                          //=>
+        missLastName.textContent ="";                                                                               //=>
       
     }
 
 
     //PRENOM
-    if (firstName.validity.valueMissing) {    //=>
-        missFirstName.textContent = "prénom manquant";//=>
-        missFirstName.style.color = "red";//=>
-        formValid = false;//=>
+    if (firstName.validity.valueMissing) {                                                                          //=>
+        missFirstName.textContent = "prénom manquant";                                                              //=>
+        missFirstName.style.color = "red";                                                                          //=>
+        formValid = false;                                                                                          //=>
 
-    } else if (!(/^\D+$/.test(firstName.value))) {//=>
+    } else if (!(/^\D+$/.test(firstName.value))) {                                                                  //=>
 
-        missFirstName.textContent = "le prénom contient des chiffres";//=>
-        missFirstName.style.color = "red";//=>
-        formValid = false;//=>
+        missFirstName.textContent = "le prénom contient des chiffres";                                              //=>
+        missFirstName.style.color = "red";                                                                          //=>
+        formValid = false;                                                                                          //=>
 
-    } else{//=>
+    } else{                                                                                                         //=>
 
-        missFirstName.textContent ="";//=>
+        missFirstName.textContent ="";                                                                              //=>
     } 
 
     //ADRESSE
-    if (adress.validity.valueMissing) {//=>
-        missAdress.textContent = "Adresse manquant";//=>
-        missAdress.style.color = "red";//=>
-        formValid = false;//=>
+    if (adress.validity.valueMissing) {                                                                             //=>
+        missAdress.textContent = "Adresse manquant";                                                                //=>
+        missAdress.style.color = "red";                                                                             //=>
+        formValid = false;                                                                                          //=>
 
 
-    }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {//=>
+    }else  if (!(/[A-Za-z0-9]/.test(adress.value))) {                                                               //=>
 
-        missAdress.textContent = "Vous utiliser des caractère spéciaux";//=>
-        missAdress.style.color = "red";//=>
-        formValid = false;//=>
+        missAdress.textContent = "Vous utiliser des caractère spéciaux";                                            //=>
+        missAdress.style.color = "red";                                                                             //=>
+        formValid = false;                                                                                          //=>
 
-    } else {
-        missAdress.textContent ="";//=>
+    } else {                                                                                                        //=>
+        missAdress.textContent ="";                                                                                 //=>
        
     }
    
     //VILLE
-    if (city.validity.valueMissing) { //=>
-        missCity.textContent = "Ville manquante";//=>
-        missCity.style.color = "red";//=>
-        formValid = false;//=>
+    if (city.validity.valueMissing) {                                                                               //=>
+        missCity.textContent = "Ville manquante";                                                                   //=>
+        missCity.style.color = "red";                                                                               //=>
+        formValid = false;                                                                                          //=>
 
-    }else  if (!(/[A-Za-z-']/.test(city.value))) {//=>
+    }else  if (!(/[A-Za-z-']/.test(city.value))) {                                                                  //=>
 
-        missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";//=>
-        missCity.style.color = "red";//=>
-        formValid = false;//=>
+        missCity.textContent = "la ville contient des chiffres ou des caractères non autorisés";                    //=>
+        missCity.style.color = "red";                                                                               //=>
+        formValid = false;                                                                                          //=>
 
-    }else { missCity.textContent ="";//=>
+    }else { missCity.textContent ="";                                                                               //=>
        
 
     }
 
     //EMAIL
-    if (mail.validity.valueMissing) {//=>
-        missMail.textContent = "Email manquant";//=>
-        missMail.style.color = "red";//=>
-        formValid = false;//=>
+    if (mail.validity.valueMissing) {                                                                               //=>
+        missMail.textContent = "Email manquant";                                                                    //=>
+        missMail.style.color = "red";                                                                               //=>
+        formValid = false;                                                                                          //=>
 
-    }else if (!/.+@.+\..+/.test(mail.value)) {//=>
+    }else if (!/.+@.+\..+/.test(mail.value)) {                                                                      //=>
         
-        missMail.textContent = "Format email incorect";//=>
-        missMail.style.color = "red";//=>
-        formValid = false;//=>
+        missMail.textContent = "Format email incorect";                                                             //=>
+        missMail.style.color = "red";                                                                               //=>
+        formValid = false;                                                                                          //=>
 
-    }else {   
-        missMail.textContent ="";//=>
+    }else {                                                                                                         //=>
+        missMail.textContent ="";                                                                                   //=>
         
     };
     
-    if (formValid == true) {//=>
+    if (formValid == true) {                                                                                        //=>
          
-         const contact = {//=>
-             lastName: document.getElementById("lastName").value,//=>
-             firstName: document.getElementById("firstName").value,//=>
-             address: document.getElementById("adress").value,//=>
-             city: document.getElementById("city").value,//=>
-             email: document.getElementById("mail").value//=>
+         const contact = {                                                                                          //=>
+             lastName: document.getElementById("lastName").value,                                                   //=>
+             firstName: document.getElementById("firstName").value,                                                 //=>
+             address: document.getElementById("adress").value,                                                      //=>
+             city: document.getElementById("city").value,                                                           //=>
+             email: document.getElementById("mail").value                                                           //=>
          }
-         let panier = []//=>
-         for (let index = 0;index < itemsTeddies.length; index++) {//=>
-             panier.push(itemsTeddies[index].id); //=>
+         let panier = []                                                                                            //=>
+         for (let index = 0;index < itemsTeddies.length; index++) {                                                 //=>
+             panier.push(itemsTeddies[index].id);                                                                   //=>
          }
          
-         var order= {//=>
-             contact: contact,//=>
-             products: panier //=>
+         var order= {                                                                                               //=>
+             contact: contact,                                                                                      //=>
+             products: panier                                                                                       //=>
          };
  
-         postOfTeddie (order);//=>
+         postOfTeddie (order);                                                                                      //=>
                             
      
      };
@@ -554,7 +571,7 @@ function validation() {//=>
 
 
 
-};  
+    };  
 
 }
 

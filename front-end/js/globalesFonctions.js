@@ -25,7 +25,6 @@ function totalPriceOfTeddie (subTotalTeddie) {
 };
 
 
-
 // => Supprimer un ourson 
 function deleteTeddie (idTeddie){
     let itemsTeddies = JSON.parse(localStorage.getItem("selectTeddies"));
