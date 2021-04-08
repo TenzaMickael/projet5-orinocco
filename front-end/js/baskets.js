@@ -100,8 +100,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         let subTotalTeddie = document.createElement ("p");                                                          //=> Création d'une balise <p>
         subTotalTeddie.setAttribute ("id" , "subTotal_"+ tablesBasket._id);                                         //=> On lui attribut un <ID>
         tdSubTotalTeddie.appendChild (subTotalTeddie);                                                              //=> On lui déclare son parent
-         var subTotalOfTeddies = subTotal (tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);           //=> On lui attribut un contenu
-         console.log(subTotalOfTeddies)
+         var subTotalOfTeddies = subTotal (tablesBasket._id,tablesBasket.price,itemsTeddies[i].quantity);           //=> On alle la fonction "subTotal"
 
 
     /***** Cellule <td> + bouton ajouter ourson *****/
@@ -168,42 +167,6 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
             
     /***** Calcul prix total des dépenses *****/ 
     totalPriceOfTeddie (subTotalOfTeddies);                                                                         //=> Affiche le prix total 
-
-
-    };
-
-
-/* Fonctions pour le 2ième tableau */
-
-    function updateTeddieItem (idTeddie,nQuantity) {                                                                //=> Fonction qui sert a afficher les infos dans le deuxième tableau
- 
-        /***** Ajouter +1 a la quantité de l'ourson sélectionner *****/           
-        var quantityElement = document.getElementById ("quantity_" + idTeddie);                                     //=> On récupère l' ID "quantity" + "idTeddie"
-        var quantity = parseInt (quantityElement.innerHTML)+nQuantity;                                              //=> On transforme "quantityElement" + nQuantity
-        quantityElement.innerHTML = quantity;                                                                       //=> On lui attribut le contenu
-    
-
-        /***** Appeller la fonction pour mettre à jours chaque lignes de l'ourson *****/
-        var priceUnitTeddie = parseInt (document.getElementById ("priceUnit_"+idTeddie) .innerHTML)*100;            //=> On transforme l'ID "priceUnit" + "idTeddie" et on le divise par 100
-        subTotal (idTeddie,priceUnitTeddie,quantity);                                                               //=> On appelle la fonction "subtotal"
-    
-
-        /***** Mettre a jour le prix total *****/    
-        totalPriceOfTeddie (priceUnitTeddie * nQuantity);                                                           //=> On appelle la fonction "totalPriceOfTeddie"
-    
-
-        /***** mettre a jour le nb d'article total *****/
-        numberArticles (nQuantity);                                                                                 //=> On appelle la fonction "numberArticles"
-
-
-        /***** Mettre a jour le localStorage *****/
-        updateStorageTeddie (idTeddie,quantity);                                                                    //=> On appelle la fonction "updateStorageTeddie"
-
-        if (quantity === 0 ) {                                                                                      //=> Si la quantité est à zéro
-           
-           deleteTeddie (idTeddie);                                                                                 //=> On appelle le fonction "deleteTeddie"
-        }  
-        
     };
 };
 
@@ -362,7 +325,6 @@ function placeOrder () {                                                        
     formContaint.appendChild (formTitle);                                                                           //=> On lui déclare son parent
 
 
-
     /***** Nom *****/
     let lastNameForm = document.createElement ("label");                                                            //=> Création d'une balise <label>
     lastNameForm.setAttribute ("for", "lastName");                                                                  //=> On lui attribut un "for" "lastName"
@@ -460,7 +422,6 @@ function placeOrder () {                                                        
     var formValid = true;                                                                                           //=> Création d'une variable pour le formulaire
 
 
-
 /* Fonction pour vérifier les donnée saisies dans le formulaire */
 
     function validation() {                                                                                         //=> Fonction pour vérifier les donnée saisies dans le formulaire
@@ -551,8 +512,13 @@ function placeOrder () {                                                        
     };
 
 
+    btnValid.addEventListener("click",function (event){
+
+        event.preventDefault();
+
+
 /* Fonction qui crée les éléments pour la page de confirmation si le formulaire est valide */
-    
+
     if (formValid == true) {                                                                                        //=> Si le formulaire renvoi "true"
          
         const contact = {                                                                                           //=> Création d'une constante 
@@ -581,13 +547,9 @@ function placeOrder () {                                                        
                             
      
      };
-    
-
-
-
+    })
 
     };  
-
 }
 
 

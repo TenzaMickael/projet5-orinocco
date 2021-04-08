@@ -12,7 +12,7 @@ function getAllTeddies (){
 
             for (let index = 0 ; index < response.length ; index++) {                   //=> On crée une boucle pour récupérer les donnée de l'API
 
-                teddies(response[index]);                                               //=> On met la reponse dans le parametre de la fonction "teddies"
+                teddiesApi(response[index]);                                               //=> On met la reponse dans le parametre de la fonction "teddies"
             }  
         }
     };
@@ -68,7 +68,7 @@ function postOfTeddie (order) {
                 
                 sessionStorage.setItem("resumeCommand",JSON.stringify (confirmOrder));  //=> On crée le sessionStorage avec à l'intérieur les information pour le client 
              
-               window.location = "./confirm.html";                                      //=> On redirige l'utilisateur vers la page de confirmation
+                window.location = "./confirm.html";                                     //=> On redirige l'utilisateur vers la page de confirmation
         }   
     };
 

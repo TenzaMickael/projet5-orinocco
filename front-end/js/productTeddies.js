@@ -105,15 +105,19 @@ function productTeddies (data) {
     detailBtn.dataset.idteddie = data._id   ;                                                    //=> On définit l'action quand on appuis sur le bouton 
     teddiesCheckArticles.appendChild (detailBtn);                                                //=> On lui déclare son parent
     detailBtn.textContent="Ajouter à mon panier";                                                //=> On lui attribut un contenu
-    
-    
-/* Création d'une boucle pour récupérer les couleurs des oursons */
 
+
+/* Création d'une boucle pour récupérer les couleurs des oursons */
+                                                                  
     for (let i = 0;i < data.colors.length; i++) {                                                //=> Boucle sur le tableau de data.colors + incrémentation
 
+        let teddiesDetailSelect = document.getElementById("selects")                             //=> Récupération de l'ID "selects"
+
         let option = document.createElement ("option");                                          //=> Création d'une balise <option>
+
         teddiesDetailSelect.appendChild (option);                                                //=> On lui déclare son parent
-        option.textContent = data.colors[i];                                                     //=> On lui attribut un contenu
+
+        option.textContent = data.colors[i];                                                     //=> On lui attribut un contenu                                                                  
     };
 
 
@@ -125,9 +129,9 @@ function productTeddies (data) {
 
             if(!(data.colors).includes (event.target.value)) {                                   //=> On teste si la couleur sélectionné est bien contenu dans le tableau couleur de l'ourson  
             basketCommand.disabled = true ;                                                      //=> On déclare que le bouton est grisé 
-             
+          
             } else  {                                                                            //=> Sinon
-                                      
+                                   
                 basketCommand.disabled = false;                                                  //=> On active le bouton pour ajouter l'ourson au panier                             
             };                         
     });
@@ -135,7 +139,7 @@ function productTeddies (data) {
 
 /* Evènement sur le bouton "Ajouter au panier" */
 
-    detailBtn.addEventListener ('click', function (event){                                       //=> Action si un click se produit sur le bouton "ajouter au panier"
+        detailBtn.addEventListener ('click', function (event){                                   //=> Action si un click se produit sur le bouton "ajouter au panier"
 
         event.preventDefault();                                                                  //=> On désactive le comportement par défaut 
 
@@ -149,7 +153,6 @@ function productTeddies (data) {
         setTimeout(function () {                                                                 //=> On crée unr fonction pour gérer la disparition du texte 
             message.innerHTML = "";                                                              //=> On met en place un texte vide 
           },2000);                                                                               //=> Durée du texte affiché
-         
     });  
     
 };

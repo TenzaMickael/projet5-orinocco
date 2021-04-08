@@ -11,7 +11,7 @@ getAllTeddies ();
 
 /* Création d'une fonction pour mettre en place les donnée récupérées de l'API */
 
-function teddies (data) {
+function teddiesApi (data) {
 
     /***** Container de la page *****/
     let masterContainer = document.createElement ("div");                               //=> Création d'un container <div> 

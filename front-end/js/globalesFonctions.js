@@ -83,3 +83,38 @@ function findIndexTeddieStorage(idTeddie,itemsTeddies){
 };
 
 
+/* Fonctions pour les tableaux sur la page basket.js*/
+
+function updateTeddieItem (idTeddie,nQuantity) {                                                                        //=> Fonction qui sert a afficher les infos dans le deuxième tableau
+ 
+    /***** Ajouter +1 a la quantité de l'ourson sélectionner *****/           
+    var quantityElement = document.getElementById ("quantity_" + idTeddie);                                             //=> On récupère l' ID "quantity" + "idTeddie"
+    var quantity = parseInt (quantityElement.innerHTML)+nQuantity;                                                      //=> On transforme "quantityElement" + nQuantity
+    quantityElement.innerHTML = quantity;                                                                               //=> On lui attribut le contenu
+
+
+    /***** Appeller la fonction pour mettre à jours chaque lignes de l'ourson *****/
+    var priceUnitTeddie = parseInt (document.getElementById ("priceUnit_"+idTeddie) .innerHTML)*100;                    //=> On transforme l'ID "priceUnit" + "idTeddie" et on le divise par 100
+    subTotal (idTeddie,priceUnitTeddie,quantity);                                                                       //=> On appelle la fonction "subtotal"
+
+
+    /***** Mettre a jour le prix total *****/    
+    totalPriceOfTeddie (priceUnitTeddie * nQuantity);                                                                   //=> On appelle la fonction "totalPriceOfTeddie"
+
+
+    /***** mettre a jour le nb d'article total *****/
+    numberArticles (nQuantity);                                                                                         //=> On appelle la fonction "numberArticles"
+
+
+    /***** Mettre a jour le localStorage *****/
+    updateStorageTeddie (idTeddie,quantity);                                                                            //=> On appelle la fonction "updateStorageTeddie"
+
+    if (quantity === 0 ) {                                                                                              //=> Si la quantité est à zéro
+       
+       deleteTeddie (idTeddie);                                                                                         //=> On appelle le fonction "deleteTeddie"
+    }  
+    
+};
+
+
+
