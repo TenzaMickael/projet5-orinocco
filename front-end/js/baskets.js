@@ -43,7 +43,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         }; 
     }; 
 
-    request.open ("GET" , "http://localhost:3000/api/teddies/"+id);                                                 //=>  On lance la requete sur cette url     
+    request.open ("GET" , "https://ab-p5-api.herokuapp.com/api/teddies/"+id);                                                 //=>  On lance la requete sur cette url     
     request.send();                                                                                                 //=> On donne l'ordre de lance la requete
 
     
@@ -519,7 +519,7 @@ function placeOrder () {                                                        
 
 /* Fonction qui crée les éléments pour la page de confirmation si le formulaire est valide */
 
-    if (formValid == true) {                                                                                        //=> Si le formulaire renvoi "true"
+    if (formValid = true) {                                                                                        //=> Si le formulaire renvoi "true"
          
         const contact = {                                                                                           //=> Création d'une constante 
              lastName: document.getElementById("lastName").value,                                                   //=> La valeur du nom 
