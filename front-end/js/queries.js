@@ -1,4 +1,6 @@
 /* Requette XMLHttpRequest de la page getTeddies.js */
+let urlApi = "http://localhost:3000/api/teddies/";
+
 
 function getAllTeddies (){       
 
@@ -17,7 +19,7 @@ function getAllTeddies (){
         }
     };
 
-    request.open("GET" ,"https://ab-p5-api.herokuapp.com/api/teddies");                           //=> On lance la requete sur cette url 
+    request.open("GET" , urlApi);                           //=> On lance la requete sur cette url 
     request.send();                                                                     //=> On donne l'ordre de lancer la requete
 }
 
@@ -37,7 +39,7 @@ function getOneTeddie (id) {
             productTeddies (response);                                                  //=> On met la reponse dans le parametre de la fonction "productTeddies" 
         };
     };
-    request.open ("GET" , "https://ab-p5-api.herokuapp.com/api/teddies/"+id);                     //=> On lance la requete sur cette url 
+    request.open ("GET" , urlApi+id);                     //=> On lance la requete sur cette url 
     request.send();                                                                     //=> On donne l'ordre de lancer la requete 
 
 }
@@ -72,7 +74,7 @@ function postOfTeddie (order) {
         }   
     };
 
-    request.open("POST" ,"https://ab-p5-api.herokuapp.com/api/teddies/order");                    //=> On lance la requete sur cette url 
+    request.open("POST" ,urlApi + "order");                    //=> On lance la requete sur cette url 
     request.setRequestHeader("Content-Type", "application/json");                       //=> Edite le header de la requete POST
     request.send(JSON.stringify(order));                                                //=> On donne l'ordre de lancer la requete
 }

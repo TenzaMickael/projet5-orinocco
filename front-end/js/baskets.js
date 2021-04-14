@@ -2,12 +2,13 @@
 
 var totalPrice = 0;                                                                                                 //=> Variable qui va contenir le prix total 
 var totalArticles = 0;                                                                                              //=> Variable qui va contenir le nombre total d'articles 
-
+//let urlApi = "http://localhost:3000/api/teddies/";
 
 /***** Récupération de l' ID "basket" *****/
 
 const basket = document.getElementById ("basket");                                                                  //=> Récupération de l'ID "basket"
 
+                                                        
 
 /****** Récupération du localStorage ******/
 
@@ -30,6 +31,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
     var id =  itemsTeddies[i].id;                                                                                   //=> Variable qui contient les "ID" des oursons 
 
 
+
 /* Requete XMLHttpReques */
 
     var request = new XMLHttpRequest();                                                                             //=> Lance une requete XMLHttRequest                                
@@ -43,7 +45,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         }; 
     }; 
 
-    request.open ("GET" , "https://ab-p5-api.herokuapp.com/api/teddies/"+id);                                                 //=>  On lance la requete sur cette url     
+    request.open ("GET" , urlApi+id);                                                 //=>  On lance la requete sur cette url     
     request.send();                                                                                                 //=> On donne l'ordre de lance la requete
 
     
@@ -173,7 +175,6 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
 /* Structure du 1ier tableau */
 
 function tablesBasket () {                                                                                          //=> Structure du 1ier tableau
-
 
     const basket = document.getElementById ("basket");                                                              //=> Récupération de l'ID "basket" 
 
@@ -419,13 +420,14 @@ function placeOrder () {                                                        
     btnValid.addEventListener ("click",validation);                                                                 //=> On défint l'action au click sur lez bouton "valider"
 
 
-    var formValid = true;                                                                                           //=> Création d'une variable pour le formulaire
+                                                                                              //=> Création d'une variable pour le formulaire
 
 
 /* Fonction pour vérifier les donnée saisies dans le formulaire */
 
     function validation() {                                                                                         //=> Fonction pour vérifier les donnée saisies dans le formulaire
   
+        var formValid = true; 
     /***** Nom *****/
     if (lastName.validity.valueMissing  ) {                                                                         //=> Si la valeur saisie est vide
                                                                                                                     
@@ -512,14 +514,13 @@ function placeOrder () {                                                        
     };
 
 
-    btnValid.addEventListener("click",function (event){
 
         event.preventDefault();
 
 
 /* Fonction qui crée les éléments pour la page de confirmation si le formulaire est valide */
 
-    if (formValid = true) {                                                                                        //=> Si le formulaire renvoi "true"
+    if (formValid == true) {                                                                                        //=> Si le formulaire renvoi "true"
          
         const contact = {                                                                                           //=> Création d'une constante 
              lastName: document.getElementById("lastName").value,                                                   //=> La valeur du nom 
@@ -547,9 +548,9 @@ function placeOrder () {                                                        
                             
      
      };
-    })
+    
 
-    };  
+    }; 
 }
 
 
