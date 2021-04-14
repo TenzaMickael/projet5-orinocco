@@ -1,64 +1,80 @@
-//REQUETE DE LA PAGE GETTEDDIES.JS POUR RÉCUPÉRER TOUTE LES DONNÉES DE L'API
-function getAllTeddies (){
-    var request = new XMLHttpRequest();
-request.onreadystatechange = function(){
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
-        const response = JSON.parse(this.responseText);
-        for (let index = 0 ; index < response.length ; index++) {
-            teddies(response[index]);   
-        }  
-    }
-};
-request.open("GET" ,"http://localhost:3000/api/teddies");
-request.send();
-}
+/* Requette XMLHttpRequest de la page getTeddies.js */
+let urlApi = "http://localhost:3000/api/teddies/";
 
 
-//REQUETE POUR RÉCUPÉRER L'ID DE L'OURSON SÉLECTIONNER SUR LA PAGE D'ACCEUIL
-function getOneTeddie (id) {
-    var request = new XMLHttpRequest();                                         //=> Lance une requete XMLHttRequest
+function getAllTeddies (){       
 
-request.onreadystatechange = function () {                                  //=> Au changement de onreadystatechange :
+    var request = new XMLHttpRequest();                                                 //=> Crée une requete XMLHttRequest
 
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {     //=> Si son changement est égal à une requete réussis et un status de 200 :
+    request.onreadystatechange = function(){                                            //=> Au changement de onreadystatechange :
 
-        const response = JSON.parse (this.responseText)                     //=> Créer une constante que l'on parse dans un JSON en string
-        productTeddies (response);                                          //=> ProductTeddies c'est le nom de la futur fonction 
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200){              //=> Si son changement est égal à une requete réussis et un status de 200 :
+
+        const response = JSON.parse(this.responseText);                                 //=> Créer une constante que l'on parse dans un JSON en string
+
+            for (let index = 0 ; index < response.length ; index++) {                   //=> On crée une boucle pour récupérer les donnée de l'API
+
+                teddiesApi(response[index]);                                               //=> On met la reponse dans le parametre de la fonction "teddies"
+            }  
+        }
     };
-};
-request.open ("GET" , "http://localhost:3000/api/teddies/"+id);             //=> On lance la requete sur cette url 
-request.send();                                                             //=> On donne l'ordre de lance la requete 
+
+    request.open("GET" , urlApi);                           //=> On lance la requete sur cette url 
+    request.send();                                                                     //=> On donne l'ordre de lancer la requete
+}
+
+
+/* Requette XMLHttpRequest de la page productTeddies.js */
+
+function getOneTeddie (id) {
+
+    var request = new XMLHttpRequest();                                                 //=> Crée une requete XMLHttRequest
+
+    request.onreadystatechange = function () {                                          //=> Au changement de onreadystatechange :
+
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {             //=> Si son changement est égal à une requete réussis et un status de 200 :
+
+            const response = JSON.parse (this.responseText)                             //=> Créer une constante que l'on parse dans un JSON en string
+
+            productTeddies (response);                                                  //=> On met la reponse dans le parametre de la fonction "productTeddies" 
+        };
+    };
+    request.open ("GET" , urlApi+id);                     //=> On lance la requete sur cette url 
+    request.send();                                                                     //=> On donne l'ordre de lancer la requete 
 
 }
 
+
+/* Requette XMLHttpRequest de la page basket.js */
 
 function postOfTeddie (order) {
-    var request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-          
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
- 
-                const response = JSON.parse(this.responseText);
 
-                var orderId = response.orderId
-                var totalPriceCommand = totalPrice/100
+    var request = new XMLHttpRequest();                                                 //=> Crée une requete XMLHttRequest
+
+    request.onreadystatechange = function () {                                          //=> Au changement de onreadystatechange :
+          
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {           //=> Si son changement est égal à une requete réussis et un status de 201 :
+ 
+                const response = JSON.parse(this.responseText);                         //=> Création d'une constante que l'on parse
+
+                var orderId = response.orderId                                          //=> Création d'une variable qui contient dans la reponse le numéro de commande
+
+                var totalPriceCommand = totalPrice/100                                  //=> On divise par 100 le prix total
                 
-                var confirmOrder = {
-                    orderId ,
-                    totalPriceCommand
+                var confirmOrder = {                                                    //=> Création d'une variable 
+                    orderId ,                                                           //=> Le numéro de commande
+                    totalPriceCommand                                                   //=> Le prix total de la commande
                 }
-                deleteTeddie(itemsTeddies);
+
+                deleteTeddie(itemsTeddies);                                             //=> Appelle de la fonction deleteTeddie
                 
-                sessionStorage.setItem("resumeCommand",JSON.stringify (confirmOrder));
+                sessionStorage.setItem("resumeCommand",JSON.stringify (confirmOrder));  //=> On crée le sessionStorage avec à l'intérieur les information pour le client 
              
-               // order = JSON.parse(sessionStorage.getItem('order'));
-               // console.log(order)
-               window.location = "./confirm.html";
-            }
-           
-       
-};
-request.open("POST" ,"http://localhost:3000/api/teddies/order");
-request.setRequestHeader("Content-Type", "application/json");
-request.send(JSON.stringify(order)); 
+                window.location = "./confirm.html";                                     //=> On redirige l'utilisateur vers la page de confirmation
+        }   
+    };
+
+    request.open("POST" ,urlApi + "order");                    //=> On lance la requete sur cette url 
+    request.setRequestHeader("Content-Type", "application/json");                       //=> Edite le header de la requete POST
+    request.send(JSON.stringify(order));                                                //=> On donne l'ordre de lancer la requete
 }

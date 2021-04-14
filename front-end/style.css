@@ -1,79 +1,53 @@
 
-
-
 /*************** PAGE INDEX ***************/
-@font-face{
+@font-face {
     font-family: "cutecartoons";
     src: url("./fonts/Cute\ Cartoon.ttf");
     font-weight: bold;
 }
 
-@font-face{
+@font-face {
+    font-family: "Letters";
+    src: url("./fonts/Letters\ for\ Learners.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "cursive";
+    src: url("./fonts/Cursive\ standard.ttf");
+    font-weight: bold;
+}
+
+@font-face {
     font-family: "milky";
     src: url("./fonts/MilkyNice.ttf");
     font-weight: bold;
 }
 
-@font-face{
-    font-family: "candypop";
-    src: url("./fonts/Candy_Pop!-demo-font.ttf");
-    font-weight: bold;
-}
-@font-face{
-    font-family: "Letters";
-    src: url("./fonts/Letters\ for\ Learners.ttf");
-    font-weight: bold;
-}
-@font-face{
-    font-family: "myugly";
-    src: url("./fonts/MyUglyHandwriting-Regular.otf");
-    font-weight: bold;
-}
-@font-face{
-    font-family: "cursive";
-    src: url("./fonts/Cursive\ standard.ttf");
-    font-weight: bold;
-}
-@font-face{
-    font-family: "kinder";
-    src: url("./fonts/kindergarten.ttf");
-    font-weight: bold;
-}
-
-
-*
-{
+* {
     list-style-type: none;
     margin:0;
     padding:0;
 }
 
-body
-{
+body {
     background-image: url(./images/papier\ grain.jpg);
     background-size:cover;
     background-attachment:fixed;
 }
 
-.navbar 
-{
+.navbar {
     font-family: "milky";
     display: flex;
     font-size:1.9em;
     background-image: url(./images/osier\ flou\ marron.jpg);
-
-
 }
 
-
-.jumbotron 
-{
+.jumbotron {
     text-align: center;
     background-image: url(./images/coton.jpg);
     background-size: cover;
 }  
-
-
 
 .container h1 {
     color: rgb(15, 158, 110);
@@ -82,7 +56,7 @@ body
     text-align: left;
 }
 
-.container p{ 
+.container p {  
     font-family: "cursive";
     font-style: italic;
     color: rgb(4, 85, 4);
@@ -90,41 +64,34 @@ body
     text-align:left;
 }
 
-#listTeddies  
-{
+#listTeddies  {
     display: flex;
     flex-direction:row;   
     flex-wrap: wrap;  
     justify-content:center;      
 }
 
-.card
-{
+.card {
     margin:30px;
     width: 30rem;
     border-radius: 10px;
-    background-color: rgb(15, 158, 110);
-    
+    background-color: rgb(15, 158, 110);  
 }
 
-.card-img-top
-{
+.card-img-top {
     border:1px solid black;
     border-radius: 10px; 
 }
 
-.card-body
-{
+.card-body {
     width: auto;
     margin: auto;
     border:9px solid rgb(15, 158, 110);
     background-color: rgb(195, 228, 187);
     border-radius: 10px; 
- 
 }
 
-.card-title , h3
-{
+.card-title , h3 {
     text-align: center;
     font-size:2.5em;
     text-transform: capitalize;
@@ -134,42 +101,32 @@ body
     font-family: "letters"
 }
 
-#btnProduct
-{
+#btnProduct {
    width: auto;
     font-weight: bolder; 
    margin:auto;
-   
 }
 
-#btnIndexProduct{
+#btnIndexProduct {
    margin: auto;
    font-size: 1.2em;
-   /*background-image: url(./images/aquarelle\ bleu.jpg);*/
 }
 
-footer
-{
-    
+footer { 
     background-image: url(./images/osier\ flou\ marron.jpg);
     opacity:0.75;
+    position:static;
 }
 
-
-
-.foot
-{
+.foot {
     text-align:center;  
     font-size:1.9em;  
     margin-bottom:0;
     padding-top: 20px;
-    color:yellowgreen;
- 
-   
+    color:yellowgreen; 
 }
 
-.icone
-{
+.icone {
     display: inline-block;
     padding: 10px;
     font-size: 1.5em;   
@@ -177,62 +134,35 @@ footer
 
 /*************** PAGE PRODUITS ***************/
 
-.cardOfProduct
-{
-    width: auto;
+.cardOfProduct {
+    max-width: 900px;
     margin: auto;
     padding:20px;
     font-size:1.2em;
     background-color: #C3E4BB;
-    border:2px solid black;
+    border:1px solid black;
 }
 
-.image__teddies__products
-{
-    
-    width:400px;
+.image__teddies__products {  
+    width:300px;
     margin:auto;
     margin-top:30px;
     display:block;
-    border:3px solid rgb(0, 0, 0);
-}
-@media screen and (max-width: 1100px) {
-    .image__teddies__products{ 
-        margin: auto;
-        width: 200px;
-    }
-}
-  
-@media screen and (max-width: 576px) {
-    .image__teddies__products{ 
-        margin: auto;
-        width: 200px;
-    }
+    border:1px solid rgb(0, 0, 0);
+    border-radius: 10px;
 }
 
-
-.cards__items__body p{
+.cards__items__body p {
     font-size: 1.2em;
     text-align: left;
 }
 
-#contentProductTeddie{
-    border: 3px solid black;
+#contentProductTeddie {
+    max-width: 900px;
+    border: 1px solid black;
     margin: 0px 250px 0px 250px;
     padding:20px;
 }
-@media screen and (max-width: 1100px) {
-    #contentProductTeddie {
-        margin: auto;
-    }
-}
-  
-@media screen and (max-width: 576px) {
-    #contentProductTeddie {
-        margin: auto;
-    }
-}
-
 
 .instruction {
     margin: 70px 0px 50px 0px;
@@ -242,6 +172,176 @@ footer
     color: brown;
     font-size:1.3em;
 }
+
+#message {
+    font-size: 1.7em;
+    text-align: center;
+    color: rgb(101, 165, 42);
+    font-family: "letters"
+}
+
+#selects {
+    margin: auto;
+    font-size:1.5em;
+    height: 50px; 
+    font-size:1em;
+    color:rgba(250, 244, 244, 0.938);
+    background-color: rgb(42, 165, 89);
+    display: block;   
+}
+
+#basketCommand {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 200px;
+    font-size: 1em;
+    border: 1px solid  rgb(101, 165, 42) ; 
+    text-align: center;
+   
+}
+
+/*************** PAGE PANIER ***************/
+
+#trBody , #tdQuantityTeddie , #tdSubTotalTeddie , #tdAddOrRemove , #tdDelete {
+    border:1px solid rgb(45, 87, 5);
+}
+
+.panier {
+    color: rgb(101, 165, 42);
+    font-family: "letters";
+    text-align: center;
+    font-size:3.5em;
+    margin-top:20px;
+    margin-bottom:20px;
+    text-decoration: underline;
+}
+
+#table_1 , #table_2 {  
+    margin: auto;
+    margin-bottom: 50px;
+    max-width: 1000px;
+    max-height: 200px;
+    background-color:rgba(42, 165, 89, 0.44) ;
+    border: 2mm ridge rgb(101, 165, 42); ;  
+}
+
+.responsive-table-line p , #table_2 p {
+    text-align: center;
+    font-size: 1.5em;
+    margin:5px;
+    margin-top: 20px;
+}
+
+.image__teddies__product {
+    margin-top:30px;
+    width:100px;
+    border: 3px solid rgb(101, 165, 42);;  
+}
+
+#basket {
+    margin: auto;
+    width: auto;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+#btnAdd , #btnRemove {
+   width: 60px;
+   margin:auto ;
+   margin-top: 30px;
+   margin-right: 10px;
+   text-align: center;
+}
+
+#btnContinueShopping,#btnOrder,#btnDeleteLocallStorage {
+    width: 200px;
+    margin:10px;
+}
+
+#formTitle{
+    font-size:2em;
+    font-family: letters ;
+    text-align: center;
+    margin:30px auto 30px auto;
+    font-weight: 100;
+}
+
+#form { 
+    margin: auto;
+    border: 2mm ridge rgb(101, 165, 42);
+    background-color:rgba(42, 165, 89, 0.44);
+    max-width: 400px;
+    text-align: center;
+    margin-bottom:20px;
+}
+
+#form label {
+    margin:10px auto 10px auto;
+  
+}
+
+#missLastName{
+    color:green;
+}
+
+#btnValid {
+    width: 200px;
+    margin:10px; 
+}
+
+/********** PAGE CONFIRMATION **********/
+
+.confirmTitle {
+    color: rgb(101, 165, 42);
+    font-family: "letters";
+    text-align: center;
+    font-size:3.5em;
+    margin-top:50px;
+    margin-bottom:20px;
+    text-decoration: underline; 
+}
+
+article {
+    background-color:rgba(42, 165, 89, 0.44) ;
+    max-width: 900px;
+    width: auto;
+    padding:20px;
+    border:2mm ridge rgb(101, 165, 42);
+    text-align: center;
+    font-size:1.5em;
+    margin: 100px auto 102px auto;  
+}
+
+/****** MEDIAS QUERIES *******/
+
+@media screen and (max-width: 1100px) {
+    .image__teddies__products{ 
+        margin: auto;
+        width: 200px;
+    }
+}
+  
+@media screen and (max-width: 576px) {
+    .image__teddies__products{ 
+        margin: auto;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    #contentProductTeddie {
+        margin: auto;
+    }
+}
+  
+@media screen and (max-width: 576px) {
+    #contentProductTeddie {
+        margin: auto;
+    }
+}
+
 @media screen and (max-width: 1100px) {
     .instruction {
         font-size: 1.2em;
@@ -254,90 +354,31 @@ footer
     }
 }
 
-#message{
-    font-size: 1.7em;
-    text-align: center;
-    color: #9B6D3D;
-
+@media screen and (max-width: 1100px) {
+    .image__teddies__product{
+        width: 50px;
+    }
 }
-#selects
-{
-    margin: auto;
-    font-size:1.5em;
-    height: 50px; 
-    font-size:1em;
-    color:rgba(250, 244, 244, 0.938);
-    background-color: rgb(42, 165, 89);
-    display: block; 
-   
-}
-
-#basketCommand{
-    display: block;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    width: 200px;
-    font-size: 1em;
-    border: 2px solid brown ; 
-    text-align: center;
-}
-
-/*************** PAGE PANIER ***************/
-
-#tableContent, .cards__item__thumb__1{
-    max-width: 200px;
-    height: auto;
-    margin: auto;
   
-}
-.panier{
-    font-size: 2.5em;
-    text-align: center;
-    margin:20px 0px 20px 0px ;
-}
-
-#tHead{
-    font-size:1.5em;
-    text-align: center;
-    font-style: normal;
+@media screen and (max-width: 576px) {
+    .image__teddies__product {
+        width: 50px;
+    }
 }
 
-.image__teddies__product{
-
-    width:100px;
-    display: block;
-   margin: auto;
-   border: 1px solid brown;  
+@media screen and (max-width: 1100px) {
+    #btnAdd , #btnRemove{
+        margin-top:20px;
+    }
 }
-
-#basket
-{
-   
-    margin: auto;
-    padding: 10px;
-    width: auto;
-    font-size: 0.8em;
-    text-align: center;
-}
-
-td p{
-    text-align: center;
-    margin: auto;
-    padding: 15px;
-    color:brown;
-}
-
-#btnAdd , #btnRemove
-{
-   width: 50px;
-   margin: auto;
-   margin-right:50px;
-   text-align: center;
+  
+@media screen and (max-width: 576px) {
+    #btnAdd , #btnRemove {
+        margin-top:20px;
+    }
 }
 
 
 
-/* **********************************/
 
 
