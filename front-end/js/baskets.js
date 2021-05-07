@@ -45,7 +45,7 @@ for (let i = 0;i < itemsTeddies.length; i++) {                                  
         }; 
     }; 
 
-    request.open ("GET" , urlApi+id);                                                 //=>  On lance la requete sur cette url     
+    request.open ("GET" , urlApi+id);                                                                               //=>  On lance la requete sur cette url     
     request.send();                                                                                                 //=> On donne l'ordre de lance la requete
 
     
@@ -418,9 +418,6 @@ function placeOrder () {                                                        
     validForm.setAttribute ("id","btnValid");                                                                       //=> On lui attribut un <ID>
     formContaint.appendChild (validForm);                                                                           //=> On lui déclare son parent
     btnValid.addEventListener ("click",validation);                                                                 //=> On défint l'action au click sur lez bouton "valider"
-
-
-                                                                                              //=> Création d'une variable pour le formulaire
 
 
 /* Fonction pour vérifier les donnée saisies dans le formulaire */

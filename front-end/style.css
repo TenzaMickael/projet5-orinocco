@@ -282,14 +282,16 @@ footer {
   
 }
 
-#missLastName{
-    color:green;
+#missLastName , #missFirstName , #missAdress , #missCity , #missMail{
+    color:red;
+    margin-left:20px;
 }
 
 #btnValid {
     width: 200px;
     margin:10px; 
 }
+
 
 /********** PAGE CONFIRMATION **********/
 
@@ -312,6 +314,7 @@ article {
     text-align: center;
     font-size:1.5em;
     margin: 100px auto 102px auto;  
+    height: auto;
 }
 
 /****** MEDIAS QUERIES *******/
