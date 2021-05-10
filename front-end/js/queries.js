@@ -14,12 +14,12 @@ function getAllTeddies (){
 
             for (let index = 0 ; index < response.length ; index++) {                   //=> On crée une boucle pour récupérer les donnée de l'API
 
-                teddiesApi(response[index]);                                               //=> On met la reponse dans le parametre de la fonction "teddies"
+                teddiesApi(response[index]);                                            //=> On met la reponse dans le parametre de la fonction "teddies"
             }  
         }
     };
 
-    request.open("GET" , urlApi);                           //=> On lance la requete sur cette url 
+    request.open("GET" , urlApi);                                                       //=> On lance la requete sur cette url 
     request.send();                                                                     //=> On donne l'ordre de lancer la requete
 }
 
@@ -39,7 +39,7 @@ function getOneTeddie (id) {
             productTeddies (response);                                                  //=> On met la reponse dans le parametre de la fonction "productTeddies" 
         };
     };
-    request.open ("GET" , urlApi+id);                     //=> On lance la requete sur cette url 
+    request.open ("GET" , urlApi+id);                                                   //=> On lance la requete sur cette url 
     request.send();                                                                     //=> On donne l'ordre de lancer la requete 
 
 }
@@ -74,7 +74,7 @@ function postOfTeddie (order) {
         }   
     };
 
-    request.open("POST" ,urlApi + "order");                    //=> On lance la requete sur cette url 
+    request.open("POST" ,urlApi + "order");                                             //=> On lance la requete sur cette url 
     request.setRequestHeader("Content-Type", "application/json");                       //=> Edite le header de la requete POST
     request.send(JSON.stringify(order));                                                //=> On donne l'ordre de lancer la requete
 }
