@@ -174,7 +174,7 @@ function productBasket (idteddie) {                                             
      
             var teddiesTab =  JSON.parse (localStorage.getItem("selectTeddies"));                //=> on récupère le tableau "selectTeddies" 
  
-            if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idteddie)) {    //=> On test si l'ourson sélectionner est présent dans le          tableau                                                      
+            if  (!teddiesTab.map(function(selectTeddies) { return selectTeddies.id; }).includes(idteddie)) {    //=> On test si l'ourson sélectionner est présent dans le tableau                                                      
                 teddiesTab.push({id:id , quantity:1});                                           //=> On push l'ID et la quantité dans teddiesTab
         
             }else{                                                                               //=> Sinon
